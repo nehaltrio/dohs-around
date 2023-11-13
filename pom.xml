@@ -131,28 +131,14 @@
                             <manifest>
 
                                 <mainClass>com.ecom.dohsaround.DohsAroundApplication</mainClass>
-                            </manifest>
-<addClasspath>true</addClasspath>
+                                <addClasspath>true</addClasspath>
                     <classpathPrefix>lib/</classpathPrefix>
+                            </manifest>
+
                         </archive>
                     </configuration>
                 </plugin>
-<plugin>
-        <groupid>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-            <execution>
-                <id>copy-dependencies</id>
-                <phase>package</phase>
-                <goals>
-                    <goal>copy-dependencies</goal>
-                </goals>
-                <configuration>
-                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </configuration>
-            </execution>
-        </executions>
-    </plugin>
+
 
 
 
