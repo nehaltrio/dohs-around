@@ -44,13 +44,13 @@ public class AdminConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( author ->
                         author.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/**", "/js/**", "/css/**", "/images/**", "/webfonts/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .requestMatchers("/forgot-password", "/register", "/register-new").permitAll()
                                 .anyRequest().authenticated()
-
                 )
                 .formLogin(login ->
-                        login.loginPage("/adminlogin")
+                        login.loginPage("/admin")
                                 .loginProcessingUrl("/admin-login")
                                 .defaultSuccessUrl("/dashboard", true)
                                 .permitAll()

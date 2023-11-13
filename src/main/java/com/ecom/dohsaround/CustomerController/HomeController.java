@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 
 @Controller
-@RequestMapping("/customer")
 public class HomeController {
     @Autowired
     private CustomerService customerService;
