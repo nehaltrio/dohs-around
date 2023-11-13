@@ -9,6 +9,7 @@
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
+    <packaging>jar</packaging>
     <groupId>com.ecom</groupId>
     <artifactId>dohs-around</artifactId>
     <version>0.0.1-SNAPSHOT</version>
