@@ -87,7 +87,7 @@
             <scope>test</scope>
         </dependency>
 
-       
+
     </dependencies>
 
 
@@ -119,33 +119,24 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>com.microsoft.azure</groupId>
-                    <artifactId>azure-webapp-maven-plugin</artifactId>
-                    <version>2.9.0</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.2.4</version>
                     <configuration>
-                        <subscriptionId>401731f9-b042-405d-bcda-ca2a1f5403dc</subscriptionId>
-                        <resourceGroup>dohs-around-ecom</resourceGroup>
-                        <appName>dohs-around</appName>
-                        <pricingTier>B2</pricingTier>
-                        <region>eastus</region>
-                        <runtime>
-                            <os>Linux</os>
-                            <webContainer>Java SE</webContainer>
-                            <javaVersion>Java 17</javaVersion>
-                        </runtime>
-                        <deployment>
-                            <resources>
-
-                                <resource>
-                                    <type>jar</type>
-                                    <directory>${project.basedir}/target</directory>
-                                    <includes>
-                                        <include>*.jar</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </deployment>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>com.ecom.dohsaround.DohsAroundApplication</mainClass>
+                            </transformer>
+                        </transformers>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
 

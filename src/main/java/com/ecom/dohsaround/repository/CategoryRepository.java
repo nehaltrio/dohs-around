@@ -18,7 +18,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
 
     /*Customer*/
-    @Query("select new com.ecommerce.library.dto.CategoryDto(c.id, c.name, count(p.category.id)) from Category c inner join Product p on p.category.id = c.id " +
+    @Query("select new com.ecom.dohsaround.dto.CategoryDto(c.id, c.name, count(p.category.id)) from Category c inner join Product p on p.category.id = c.id " +
             " where c.is_activated = true and c.is_deleted = false and p.is_activated=true and c.shop.shopName=?1 group by c.id")
     List<CategoryDto> getCategoryAndProduct(String shopName);
 
