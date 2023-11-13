@@ -87,11 +87,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.ecommerce.library</groupId>
-            <artifactId>Library</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+       
     </dependencies>
 
 
