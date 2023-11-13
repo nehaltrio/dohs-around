@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class ShopDto {

@@ -21,7 +21,7 @@ import com.ecom.dohsaround.model.ShopCategories;
 import com.ecom.dohsaround.repository.ShopRepository;
 import com.ecom.dohsaround.service.impl.ShopServiceImpl;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.security.Principal;
 
 import java.util.stream.Collectors;
