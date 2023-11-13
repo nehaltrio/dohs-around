@@ -3,7 +3,7 @@ package com.ecom.dohsaround.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter
 @Setter

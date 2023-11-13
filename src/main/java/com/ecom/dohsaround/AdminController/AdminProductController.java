@@ -16,7 +16,7 @@ import com.ecom.dohsaround.service.CategoryService;
 import com.ecom.dohsaround.service.ProductService;
 import com.ecom.dohsaround.service.ShopService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 

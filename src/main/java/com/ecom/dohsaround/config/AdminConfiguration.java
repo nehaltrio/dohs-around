@@ -1,11 +1,14 @@
 package com.ecom.dohsaround.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -37,24 +40,32 @@ public class AdminConfiguration {
 
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
-        http
-                .authorizeHttpRequests()
-                .antMatchers("/**", "/js/**", "/css/**", "/images/**", "/webfonts/**").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin(login -> login
-                        .loginPage("/adminlogin")
-                        .loginProcessingUrl("/admin-login")
-                        .defaultSuccessUrl("/dashboard", true)
-                        .permitAll())
-                .logout(logout -> logout
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/admin-login?logout")
-                        .permitAll())
+         http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests( author ->
+                        author.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                .requestMatchers("/forgot-password", "/register", "/register-new").permitAll()
+                                .anyRequest().authenticated()
+
+                )
+                .formLogin(login ->
+                        login.loginPage("/adminlogin")
+                                .loginProcessingUrl("/admin-login")
+                                .defaultSuccessUrl("/dashboard", true)
+                                .permitAll()
+                )
+                .logout(logout ->
+                        logout.invalidateHttpSession(true)
+                                .clearAuthentication(true)
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutSuccessUrl("/adminlogin?logout")
+                                .permitAll()
+                )
                 .authenticationManager(authenticationManager)
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                )
         ;
         return http.build();
     }

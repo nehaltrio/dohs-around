@@ -16,8 +16,8 @@ import com.ecom.dohsaround.model.ShoppingCart;
 import com.ecom.dohsaround.repository.ShopRepository;
 import com.ecom.dohsaround.service.CustomerService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;

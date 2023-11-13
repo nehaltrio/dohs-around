@@ -1,6 +1,6 @@
 package com.ecom.dohsaround.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class FileInfo {

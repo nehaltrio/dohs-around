@@ -1,11 +1,13 @@
 package com.ecom.dohsaround.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,24 +41,29 @@ public class CustomerConfiguration {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
         http
-                .authorizeHttpRequests()
-                .antMatchers("/**", "/js/**", "/css/**", "/images/**", "/webfonts/**").permitAll()
-                .antMatchers("/customer/**").hasAuthority("CUSTOMER")
-                .and()
-                .formLogin(login -> login
-                        .loginPage("/customerlogin")
-                        .loginProcessingUrl("/customer-login")
-                        .defaultSuccessUrl("/products/0", true)
-                        .permitAll())
-                .logout(logout -> logout
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/customer-login?logout")
-                        .permitAll())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests( author ->
+                        author.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                                .requestMatchers("/*", "/product-detail/**").permitAll()
+                                .requestMatchers("/customer/**", "/find-products/**").hasAuthority("CUSTOMER")
+                )
+                .formLogin(login ->
+                        login.loginPage("/customerlogin")
+                                .loginProcessingUrl("/customer-login")
+                                .defaultSuccessUrl("/products/0", true)
+                                .permitAll()
+                )
+                .logout(logout ->
+                        logout.invalidateHttpSession(true)
+                                .clearAuthentication(true)
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutSuccessUrl("/customerlogin?logout")
+                                .permitAll()
+                )
                 .authenticationManager(authenticationManager)
-                .sessionManagement(management -> management
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                )
         ;
         return http.build();
     }

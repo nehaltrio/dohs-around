@@ -20,7 +20,7 @@ import com.ecom.dohsaround.service.CustomerService;
 import com.ecom.dohsaround.service.FreeListCategoryService;
 import com.ecom.dohsaround.service.FreeListService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 

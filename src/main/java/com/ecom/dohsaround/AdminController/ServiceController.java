@@ -13,7 +13,7 @@ import com.ecom.dohsaround.model.Shop;
 import com.ecom.dohsaround.service.ShopService;
 import com.ecom.dohsaround.service.serviceService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
