@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.ecom</groupId>
+  <artifactId>dohs-around</artifactId>
+  <versioning>
+    <lastUpdated>20231113131136</lastUpdated>
+    <snapshot>
+      <timestamp>20231113.131136</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.0.1-20231113.131136-1</value>
+        <updated>20231113131136</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.0.1-20231113.131136-1</value>
+        <updated>20231113131136</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+  <version>0.0.1-SNAPSHOT</version>
+</metadata>
