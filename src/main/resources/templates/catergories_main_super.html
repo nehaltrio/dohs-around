@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link th:href="@{/css/sb-shop-2.min.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/style_main.css}">
+
+	<style>
+		a{
+			text-decoration: none;
+			color: white;
+		}
+
+		a:hover{
+			text-decoration: none;
+			color: white;
+		}
+	</style>
+
+	<!-- Custom styles for this template-->
+
+	<title>Marketplace | Admin</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-cart-alt' ></i>
+			<span class="text">Super Admin</span>
+		</a>
+		<ul class="side-menu top">
+			<li >
+				<a th:href="@{/dashboard}">
+					<i class='bx bxs-dashboard'></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/marketplace-list/0}">
+					<i class='bx bxs-shopping-bag-alt'></i>
+					<span class="text">Marketplaces</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/customer-list/0}">
+					<i class='bx bxs-doughnut-chart'></i>
+					<span class="text">Customers</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/product-list/0}">
+					<i class='bx bxs-message-dots'></i>
+					<span class="text">Products</span>
+				</a>
+			</li>
+			<li class="active">
+				<a th:href="@{/categoriesFreeList}">
+					<i class='bx bxs-message-dots'></i>
+					<span class="text">Categories</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a th:href="@{/logout}" class="logout">
+					<i class='bx bxs-log-out-circle'></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu pos' ></i>
+			<!-- <a href="#" class="nav-link">Categories</a> -->
+			<!-- <form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form> -->
+			
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<!-- <a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a> -->
+			<a href="#" class="profile">
+				<img th:src="@{/images/1.png}" alt="profile_img">
+			</a>
+			<p th:text="${shop.getFirstName()} + ' ' + ${shop.getLastName()}"></p>
+
+			
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Categories</h1>
+					<ul class="breadcrumbs">
+						<li>
+							<a href="#">Category</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">List</a>
+						</li>
+					</ul>
+				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Category</span>
+				</a>
+			</div>
+
+			
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Category List</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th >Category Index</th>
+								<th >Category Name</th>
+								<th >Edit Category Name</th>
+								<th >Action</th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr th:each="category : ${categories}">
+							<th scope="row" th:text="${category.id}"></th>
+							<td th:text="${category.name}"></td>
+							<td>
+								<a id="editButton" th:href="@{/findByIdCat/(id = ${category.id})}" class="button-green">Update</a>
+							</td>
+							<td>
+								<a th:if = "${category.is_activated} == true" th:href="@{/delete-freeListCategory/(id = ${category.id})}" class="button-red">Disable</a>
+								<a th:if = "${category.is_activated} == false" th:href="@{/enable-freeListCategory/(id = ${category.id})}" class="button-green">Enable</a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<form th:action="@{/add-freeListCategory}" method="post" th:object="${categoryNew}">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+					</div>
+					<div class="modal-body">
+
+						<div class="form-group">
+							<label for="recipient-name" class="col-form-label">Name:</label>
+							<input type="text" class="form-control" th:field = "*{name}" id="recipient-name">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalExample" aria-hidden="true">
+		<form th:action="@{/update-freeListCategory}" method="put">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Edit Category</h5>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="idEdit" class="col-form-label">Id:</label>
+							<input type="text" class="form-control"  id="idEdit" name="id" readonly>
+						</div>
+						<div class="form-group">
+							<label for="nameEdit" class="col-form-label">Name:</label>
+							<input type="text" class="form-control"  id="nameEdit" name="name">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<div th:replace="fragments :: script"></div>
+	<script th:src="@{/js/categories.js}"></script>
+	<script th:src="@{/js/script_main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!-- <!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .prod_card {
+            height: 125px;
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 2%;
+            text-align: justify;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .prod_card img {
+            width: 100%;
+            max-width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            background-color: white;
+            margin: 10px;
+        }
+
+        .prod_card-text {
+            width: 200px;
+            padding: 20px;
+        }
+
+        .prod_card-text h5 {
+            margin: 0;
+            padding-top: 15px;
+            font-size: 17px;
+            color: var(--theme);
+        }
+
+        .prod_card-text p {
+            padding-top: 5px;
+            font-size: 15px;
+        }
+
+        .prod_card_cont {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            padding-left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" th:each="product : ${products}">
+        <div class="prod_card_cont">
+            <div class="prod_card">
+                <img th:src="@{'data:image/jpeg;base64,' + ${product.image}}" alt="prod_img">
+                <div class="prod_card-text">
+                    <h5 th:text="${product.name}"></h5>
+                    <p th:text="'BDT ' + ${product.costPrice}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html> -->

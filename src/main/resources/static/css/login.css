@@ -1,0 +1,171 @@
+@import url(//db.onlinewebfonts.com/c/c36a75c5ada59665e225bbf5e38efd34?family=Averta);
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Averta";
+    overflow: hidden;
+    background-color: rgb(249, 249, 249);
+}
+
+form {
+    height: 520px;
+    width: 400px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 70%;
+    border-radius: 10px;
+    padding: 50px 35px;
+}
+form * {
+    font-family: "Averta";
+    color: #000000;
+    letter-spacing: 0.5px;
+    outline: none;
+}
+form p {
+    font-size: 22px;
+    font-weight: 500;
+
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+}
+input {
+    display: block;
+    height: 40px;
+    width: 80%;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    background-color: #ededed;
+    border: none;
+}
+
+button {
+    width: 85%;
+    background-color: #8ad4f2;
+    color: #ffffff;
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn_google {
+    margin: 0;
+    background-color: white;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+    display: inline-flex;
+    height: 45px;
+    margin-left: 2.5%;
+}
+
+.btn_google p {
+    float: left;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    width: 55%;
+    margin-top: 12px;
+}
+
+.btn_google img {
+    float: left;
+    margin-left: 10%;
+    width: 45px;
+    transform: scale(0.6);
+    text-align: center;
+}
+
+/* .btn_google {
+  background-color: white;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  display: inline-flex;
+  height: 45px;
+  margin-left: 2.5%;
+}
+
+.btn_google p {
+  float: left;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  width: 40%;
+}
+
+.btn_google img {
+  float: left;
+  margin-left: 23%;
+  width: 45px;
+  transform: scale(0.6);
+  text-align: center;
+} */
+
+.content {
+    background-color: #8ad4f2;
+    background-image: url(../images/reg_cont.jpg);
+    width: 600px;
+    height: 100vh;
+    background-size: cover;
+    position: absolute;
+    background-position: 25% 75%;
+}
+
+.content h1 {
+    text-align: start;
+    margin-top: 15%;
+    margin-left: 30%;
+    color: white;
+}
+
+.or {
+    background-color: rgb(96, 96, 96);
+    width: 30%;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 0.2px;
+    float: left;
+    margin-top: 10%;
+}
+
+.or_grid {
+    display: flex;
+    margin-left: 5%;
+}
+
+form .or_grid p {
+    font-size: 15px;
+    color: #686868;
+}
+
+.pass_forgot p {
+    font-size: 12px;
+    color: #27bffb;
+    margin-left: 55%;
+}
+
+.top_corner p{
+    font-size: 12px;
+    margin-left: 17%;
+}

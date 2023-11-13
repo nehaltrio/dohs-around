@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace | Profile</title>
+
+    <link rel="stylesheet" th:href="@{/css/shop_home_main.css}">
+</head>
+<body>
+
+<div class="cover_page">
+    <img src="https://img.freepik.com/premium-photo/restaurant_23-2148014999.jpg?w=1060" alt="">
+
+    <h1>Cloud Kitchen</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum, aut fugit voluptates corporis sint iusto omnis
+        quam voluptatum.</p>
+
+    <ul>
+        <li><a href="">Facebook</a></li>
+        <li><a href="">Instagram</a></li>
+        <li><a href="">Twitter</a></li>
+    </ul>
+
+</div>
+
+
+<div class="search_cont">
+    <form th:action="@{/search-result/0}" method="get" clasS="search-bar">
+        <input type="text" placeholder="What you are looking for?" name="keyword">
+        <button type="submit"><img src="images/search.png"></button>
+    </form>
+</div>
+
+<div data-children=".sub-men" th:each="category : ${categories}">
+    <a th:href = "@{/products-in-category/{id}(id = ${category.categoryId})}" class="list-group-item list-group-item-action">[[${category.categoryName}]] <small class="text-muted">([[${category.numberOfProduct}]])</small></a>
+</div>
+
+<div class="nav_secB">
+
+    <div class="container page-wrapper">
+        <div class="page-inner">
+            <div class="row">
+                <div class="el-wrapper" th:each="product : ${products}">
+                    <form th:action="@{/add-to-cart}" method="post">
+                        <a th:href="@{/find-product/{id}(id = ${product.id})}" data-toggle="tooltip"
+                           data-placement="right"
+                           title="View">
+                            <div class="box-up">
+                                <img class="img"
+                                     th:src="@{'data:image/jpeg;base64,' + ${product.image}}"
+                                     alt="product_image">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name" th:text="${product.name}"></span>
+                                        <span class="p-company">Yeezy</span>
+                                    </div>
+                                    <div class="a-size" th:text="${product.description}"></div>
+                                </div>
+                            </div>
+                        </a>
+                        <input type="hidden" th:value="${product.id}" name="id">
+                        <div class="box-down">
+                            <div class="h-bg">
+                                <div class="h-bg-inner"></div>
+                            </div>
+
+                            <a class="cart" href="#">
+                                <span class="price" th:text="'$' + ${product.costPrice}"></span>
+                                <span class="add-to-cart">
+                                    <input type="submit" class="txt">Add in cart</input>
+                                </span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li th:if = "${currentPage != 0}" class="page-item">
+            <a th:href="@{'/products/' + ${currentPage - 1}}" class="page-link" href="#">Previous</a>
+        </li>
+        <li th:each = "i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+            <a th:href="@{'/products/' + ${i - 1}}" class="page-link" href="#"><span th:text = "${i}"></span></a>
+        </li>
+        <li th:if = "${currentPage + 1 != totalPages}" class="page-item">
+            <a th:href="@{'/products/' + ${currentPage + 1}}" class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+
+
+</body>
+</html>

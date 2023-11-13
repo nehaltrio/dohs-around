@@ -1,0 +1,123 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in & Sign up Form</title>
+    <link rel="stylesheet" th:href="@{/css/login_css_main.css}" />
+    <link rel="stylesheet" th:href="@{/css/errorM.css}" />
+    <script src="https://kit.fontawesome.com/baedbdb1a3.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div th:if="${error}">
+        <div class="toast active">
+            <div class="toast-content">
+                <i class="fa-solid fa-exclamation check error"></i>
+
+
+                <div class="message">
+                    <span class="text text-1">Error</span>
+                    <span class="text text-2" th:text="${error}"></span>
+                </div>
+
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+
+            <div class="progress active"></div>
+        </div>
+    </div>
+
+    <div th:if="${success}">
+        <div class="toast active">
+            <div class="toast-content">
+                <i class="fa-solid fa-check check success"></i>
+               
+    
+                <div class="message">
+                    <span class="text text-1">Success</span>
+                    <span class="text text-2" th:text="${success}"></span>
+                </div>
+    
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+    
+            <!-- Remove 'active' class, this is just to show in Codepen thumbnail -->
+            <div class="progress active"></div>
+        </div>
+    </div>
+
+<main>
+    <div class="box">
+        <div class="inner-box">
+            <div class="forms-wrap">
+                <form th:action="@{/do-register}" method="post" th:object="${customerDto}" class="sign-in-form">
+             
+                    <div class="logo">
+                        <img th:src="@{/images/shopping-cart.png}" alt="cart">
+                        <h4>Customer Register</h4>
+                    </div>
+
+                    <!-- <div class="heading">
+                        <h2>Register Now</h2>
+                    </div> -->
+
+                    <div class="actual-form">
+                        <div class="input-wrap">
+                            <input type="text" th:field = "*{firstName}" placeholder="First Name" name="" class="input-field" required>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="text" th:field = "*{lastName}" placeholder="Last Name" name="" class="input-field" required>
+                        </div>
+
+                        <div class="input-wrap">
+                            <input type="email" th:field = "*{username}" placeholder="Username" name="" class="input-field" required>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="password" th:field = "*{password}" placeholder="Password" name="" class="input-field" required>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="password" th:field = "*{repeatPassword}" placeholder="Verify password" class="input-field" name="" required>
+                        </div>
+
+                        <input type="submit" value="Sign In" class="sign-btn" />
+
+                        <p class="text">
+                            <h6>Already registered?</h6>
+                        <a th:href="@{/login}" class="toggle"> <u>Sign in Now</u></a>
+                        </p>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="carousel">
+                <div class="images-wrapper">
+                    <img th:src="@{/images/reg_cont.jpg}" class="image img-1 show" alt="" />
+                </div>
+
+                <div class="text-slider">
+                    <div class="text-wrap">
+                        <div class="text-group">
+<!--                            <h2>Marketplace Shop</h2>-->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Javascript file -->
+<script th:src="@{/js/errorM.js}"></script>
+
+</body>
+</html>

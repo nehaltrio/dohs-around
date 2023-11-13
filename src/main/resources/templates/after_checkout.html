@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace | ShopName</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.usebootstrap.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+    <script src="https://cdn.usebootstrap.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" th:href="@{/css/cart_main.css}">
+
+
+    <style>
+        .checkout {
+
+            margin-top: 10%;
+            margin-bottom: 8%;
+            text-align: center;
+        }
+
+        .checkout h1 {
+            font-size: 30px;
+            padding: 5px;
+            padding-top: 15px;
+        }
+
+        .checkout p {
+            font-size: 15px;
+            padding: 5px;
+        }
+
+        .checkout a {
+            margin-top: 2%;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <!-- header section starts  -->
+
+    <header class="header">
+
+        <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span>DOHS Around</span> </a>
+
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a th:href="@{/all_shop}">Marketplaces</a>
+            <a th:href="@{/products/0}">Freelist</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+        <form th:action="@{/{shopName}/search-result/0 (shopName=${shopN})}" method="get" class="search-form">
+            <input type="text" id="search-box" name="keyword" placeholder="search here...">
+            <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
+        </form>
+
+        <div class="shopping-cart" th:if="${shoppingCart!=null}">
+            <form th:action="@{/update-cart}" method="post">
+                <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
+                    <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                    <button type="submit" name="action" value="delete" style="background: none"><i
+                            class="fas fa-trash"></i>
+                    </button>
+
+                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                    <div class="content">
+                        <h3 th:text="${cartItem.product.name}"></h3>
+                        <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
+                        <span class="quantity" th:text="${cartItem.quantity}"></span>
+                    </div>
+                </div>
+            </form>
+
+            <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
+            <a th:href="@{/cart}" class="btn">checkout</a>
+        </div>
+
+        <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
+            <h3>login now</h3>
+            <input type="email" placeholder="your email" name="username" class="box">
+            <input type="password" placeholder="your password" name="password" class="box">
+            <p>forget your password <a href="#">click here</a></p>
+            <p>don't have an account <a th:href="@{/register}">create now</a></p>
+            <input type="submit" value="login now" class="btn">
+        </form>
+
+        <div class="login-form" th:if="${principal != null}">
+
+            <div class="head_content" style="text-align: left;">
+                <img th:src="@{/images/profile.png}" alt="" class="profile-image">
+                <div class="name_cont">
+                    <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
+                    <p th:text="${customer.getUsername()}"></p>
+                </div>
+            </div>
+
+            <div class="middle-container">
+                <div class="dollar-div">
+                    <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                </div>
+                <div class="contact_cont">
+                    <span class="current-balance">Contact Number</span>
+                    <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+                </div>
+            </div>
+            <div class="recent-border" style="text-align: left;">
+                <span class="recent-orders" th:text="${customer.getAddress()}"></span>
+            </div>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/account}">
+                    <h3 class="box">Update Account Details</h3>
+                </a>
+            </div>
+
+            <a th:href="@{/logout}" class="btn">Log out</a>
+
+        </div>
+
+    </header>
+
+    <div class="checkout">
+
+        <img th:src="@{/images/checked.png}" width="130px" alt="">
+        <h1>Your Order has been placed!</h1>
+        <p>Sellers will contact you for delivery and further details.</p>
+        <a th:href="@{/return}" class="btn">Back to shopping</a>
+
+    </div>
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> DOHS Around <i class="fas fa-shopping-basket"></i> </h3>
+                <p>A place where you can create your own shop.</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="#" class="links"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
+                <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
+                <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
+                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
+            </div>
+
+            <div class="box">
+                <img th:src="@{/images/logo.png}" width="300px" alt="">
+                <p>Contact us to build your shop!</p>
+                <input type="email" placeholder="Your email" class="email">
+                <input type="submit" value="Contact" class="btn">
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- custom js file link  -->
+    <script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

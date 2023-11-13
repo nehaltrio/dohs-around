@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace | ShopName</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" th:href="@{/css/marketplace_main.css}">
+
+</head>
+
+<body>
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
+
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a th:href="@{/all_shop}">Marketplaces</a>
+        <a th:href="@{/products/0}">Freelist</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-user" id="login-btn"></div>
+    </div>
+
+    <form th:action="@{/{shopName}/search-result/0 (shopName=${shopN})}" method="get" class="search-form">
+        <input type="text" id="search-box" name="keyword" placeholder="search here...">
+        <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
+    </form>
+
+    <div class="shopping-cart" th:if="${shoppingCart!=null}">
+        <form th:action="@{/update-cart}" method="post">
+            <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
+                <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                <button type="submit" name="action" value="delete" style="background: none"><i
+                        class="fas fa-trash"></i>
+                </button>
+
+                <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                <div class="content">
+                    <h3 th:text="${cartItem.product.name}"></h3>
+                    <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
+                    <span class="quantity" th:text="${cartItem.quantity}"></span>
+                </div>
+            </div>
+        </form>
+
+        <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
+        <a th:href="@{/cart}" class="btn">checkout</a>
+    </div>
+
+    <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
+        <h3>login now</h3>
+        <input type="email" placeholder="your email" name="username" class="box">
+        <input type="password" placeholder="your password" name="password" class="box">
+        <p>forget your password <a href="#">click here</a></p>
+        <p>don't have an account <a th:href="@{/register}">create now</a></p>
+        <input type="submit" value="login now" class="btn">
+    </form>
+
+    <div class="login-form" th:if="${principal != null}">
+
+        <div class="head_content" style="text-align: left;">
+            <img th:src="@{/images/profile.png}" alt="" class="profile-image">
+            <div class="name_cont">
+                <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
+                <p th:text="${customer.getUsername()}"></p>
+            </div>
+        </div>
+
+        <div class="middle-container">
+            <div class="dollar-div">
+                <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+            </div>
+            <div class="contact_cont">
+                <span class="current-balance">Contact Number</span>
+                <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+            </div>
+        </div>
+        <div class="recent-border" style="text-align: left;">
+            <span class="recent-orders" th:text="${customer.getAddress()}"></span>
+        </div>
+        <div class="wishlist-border" style="text-align: left;">
+            <a th:href="@{/account}">
+                <h3 class="box">Update Account Details</h3>
+            </a>
+        </div>
+
+        <a th:href="@{/logout}" class="btn">Log out</a>
+
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3 th:text=" ${shopN}"></h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam libero nostrum veniam facere tempore
+            nisi.</p>
+        <a href="#" class="btn">shop now</a>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- List of categories starts -->
+<div class="posCatSort">
+    <nav class="sort">
+        <label for="touch"><span>Sort</span></label>
+        <input type="checkbox" id="touch">
+
+        <ul class="slide">
+            <li><a th:href="@{/{shopName}/products-in-category-sort-low/{id}/0 (shopName=${shopN},id = ${category.id})}">Low Price to High Price</a>
+            </li>
+            <li><a th:href="@{/{shopName}/products-in-category-sort-high/{id}/0 (shopName=${shopN},id = ${category.id})}">High Price to Low Price</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="cat_cont">
+        <h1>All Categories</h1>
+        <div class="list_cat">
+            <ul th:each="category : ${categories}">
+                <li>
+                    <a th:href="@{/{shopName}/products-in-category/{id}/0 (shopName = ${shopN},id = ${category.categoryId})}">[[${category.categoryName}]]
+                        <small>([[${category.numberOfProduct}]])</small></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- products section starts  -->
+</div>
+<section class="products" id="products">
+
+    <h1 class="heading"><span th:text="${category.name}"> </span></h1>
+
+    <div class="product-slider">
+        <div class="product-card" th:each="product : ${products}">
+            <form th:action="@{/add-to-cart}" method="post">
+                <div class="product-tumb" >
+                    <img th:src="'data:image/jpeg;base64,' + ${product.listOfAttachedFiles.get(0).getFile()}" alt="product_image" src="">
+                </div>
+
+                <div class="product-details">
+                    <span class="product-catagory" th:text="${product.category.name}"></span>
+                    <h4><a th:href="@{/find-product/{id}(id = ${product.id})}" data-toggle="tooltip"
+                            data-placement="right"><span th:text="${product.name}"></span></a></h4>
+                    <p th:text="${product.description}"></p>
+                    <div class="product-bottom-details">
+                        <div class="product-price"><span th:text="'BDT ' + ${product.costPrice}"></span></div>
+                        <div class="product-links">
+                            <input type="hidden" th:value="${product.id}" name="id">
+                            <a th:href="@{/find-product/{id}(id = ${product.id})}" data-toggle="tooltip"
+                                data-placement="right"><i class="fa fa-eye"></i></a>
+                            <button type="submit"><i class="fa fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</section>
+
+<!-- products section ends -->
+<!--/products-in-category/{id}/{pageNo}-->
+
+<div class="pagination">
+    <ul>
+        <li th:if="${currentPage != 0}" class="page-item">
+            <a th:href="@{'/'+ ${shop} +'/products-in-category-sort-high/'+ ${category.id}+'/' + ${currentPage - 1}}"
+               class="page-link" href="#">Previous</a>
+        </li>
+        <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}"
+            class="page-item">
+            <a th:href="@{'/'+ ${shop} +'/products-in-category-sort-high/'+ ${category.id}+'/' + ${i - 1}}"
+               class="page-link" href="#"><span th:text="${i}"></span></a>
+        </li>
+        <li th:if="${currentPage + 1 != totalPages}" class="page-item">
+            <a th:href="@{'/'+ ${shop} +'/products-in-category-sort-high/' + ${category.id}+'/' + ${currentPage + 1}}"
+               class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</div>
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3> <span th:text="${shop.getShopName()}"></span> <i class="fas fa-shopping-basket"></i></h3>
+            <p th:text="${shop.getShopDesc()}"></p>
+            <div class="share">
+                <a th:if="${shop.getShopFbURL()} != null" th:href="@{${shop.getShopFbURL()}}"
+                    class="fab fa-facebook-f"></a>
+                <a th:if="${shop.getShopInstaURL()} != null" th:href="@{${shop.getShopInstaURL()}}"
+                    class="fab fa-instagram"></a>
+                <a th:if="${shop.getShopGmapURL()} != null" th:href="@{${shop.getShopGmapURL()}}"
+                    class="fa fa-location-arrow" aria-hidden="true"></a>
+
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a th:if="${shop.getShopPhone()} != null" href="#" class="links"> <i class="fas fa-phone"></i> <span
+                    th:text="${shop.getShopPhone()}"></span> </a>
+            <a href="#" class="links"> <i class="fas fa-envelope"></i> <span th:text="${shop.getUsername()}">DOHS
+                    Around</span>
+            </a>
+            <a th:if="${shop.getShopAddress()} != null" href="#" class="links"> <i
+                    class="fas fa-map-marker-alt"></i> <span th:text="${shop.getShopAddress()}"></span> </a>
+        </div>
+
+      
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+            <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
+            <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
+        </div>
+
+        <div class="box">
+            <img th:src="@{/images/logo.png}" width="300px" alt="">
+            <p>Contact us to build your shop!</p>
+            <input type="email" placeholder="Your email" class="email">
+            <input type="submit" value="Contact" class="btn">
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+<!-- footer section ends -->
+
+
+<!--<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>-->
+
+<!-- custom js file link  -->
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>
