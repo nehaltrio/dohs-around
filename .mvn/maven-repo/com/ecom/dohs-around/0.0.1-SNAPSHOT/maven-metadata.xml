@@ -3,21 +3,21 @@
   <groupId>com.ecom</groupId>
   <artifactId>dohs-around</artifactId>
   <versioning>
-    <lastUpdated>20231113135229</lastUpdated>
+    <lastUpdated>20231113141604</lastUpdated>
     <snapshot>
-      <timestamp>20231113.135229</timestamp>
-      <buildNumber>3</buildNumber>
+      <timestamp>20231113.141604</timestamp>
+      <buildNumber>4</buildNumber>
     </snapshot>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>0.0.1-20231113.135229-3</value>
-        <updated>20231113135229</updated>
+        <value>0.0.1-20231113.141604-4</value>
+        <updated>20231113141604</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.0.1-20231113.135229-3</value>
-        <updated>20231113135229</updated>
+        <value>0.0.1-20231113.141604-4</value>
+        <updated>20231113141604</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

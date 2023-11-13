@@ -116,22 +116,9 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.2</version>
                 </plugin>
+                
 
-                <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <mainClass>com.ecom.dohsaround.DohsAroundApplication</mainClass>
-                            </manifest>
-                        </archive>
-                        <descriptorRefs>
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                        </descriptorRefs>
-                    </configuration>
-                </plugin>
-
-
+            
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -140,32 +127,14 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>com.ecom.dohsaround.DohsAroundApplication</mainClass>
+                                <mainClass>DohsAroundApplication</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
                 </plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.2.4</version>
-                    <configuration>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.ecom.dohsaround.DohsAroundApplication</mainClass>
-                            </transformer>
-                        </transformers>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+               
+               
 
 
             </plugins>
