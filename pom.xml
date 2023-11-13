@@ -129,8 +129,11 @@
                     <configuration>
                         <archive>
                             <manifest>
+
                                 <mainClass>com.ecom.dohsaround.DohsAroundApplication</mainClass>
                             </manifest>
+<addClasspath>true</addClasspath>
+                    <classpathPrefix>lib/</classpathPrefix>
                         </archive>
                     </configuration>
                 </plugin>
