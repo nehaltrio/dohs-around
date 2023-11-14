@@ -33,7 +33,7 @@ public class AuthController implements AuthenticationFailureHandler {
     private CustomerService customerService;
 
     @Autowired
-    @Qualifier("passwordEncoderCustomer")
+    @Qualifier("passwordEncoderAdmin")
     private BCryptPasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/customerlogin", method = RequestMethod.GET)
