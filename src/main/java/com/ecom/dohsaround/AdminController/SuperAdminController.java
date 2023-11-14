@@ -1,8 +1,11 @@
 package com.ecom.dohsaround.AdminController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,8 @@ import com.ecom.dohsaround.dto.FreeListProductDto;
 import com.ecom.dohsaround.dto.ShopDto;
 import com.ecom.dohsaround.model.FreeListCategory;
 import com.ecom.dohsaround.model.Shop;
+import com.ecom.dohsaround.repository.RoleRepository;
+import com.ecom.dohsaround.repository.ShopRepository;
 import com.ecom.dohsaround.service.CustomerService;
 import com.ecom.dohsaround.service.FreeListCategoryService;
 import com.ecom.dohsaround.service.FreeListService;
@@ -20,13 +25,12 @@ import com.ecom.dohsaround.service.ShopService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class SuperAdminController {
-
-    
 
     @Autowired
     private ShopService shopService;
@@ -34,15 +38,21 @@ public class SuperAdminController {
     @Autowired
     private CustomerService customerService;
 
-
-
     @Autowired
     private FreeListCategoryService freeListCategoryService;
 
-   
+    @Autowired
+    private ShopRepository shopRepository;
 
     @Autowired
     private FreeListService freeListService;
+
+    @Autowired
+    @Qualifier("passwordEncoderAdmin")
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping("/SuperAdmin")
     public String superAdmin(Principal principal, Model model) {
@@ -60,12 +70,11 @@ public class SuperAdminController {
 
     @GetMapping("/marketplace-list/{pageNo}")
     public String showAllMarketPlaces(Model model, @PathVariable("pageNo") int pageNo,
-                                      Principal principal) {
+            Principal principal) {
 
         Page<ShopDto> adminList = shopService.pageShops(pageNo);
         Shop shop = shopService.findByUsername(principal.getName());
         model.addAttribute("shop", shop);
-
 
         model.addAttribute("shopList", adminList);
 
@@ -78,11 +87,10 @@ public class SuperAdminController {
 
     @GetMapping("/customer-list/{pageNo}")
     public String showAllCustomers(Model model, @PathVariable("pageNo") int pageNo,
-                                   Principal principal) {
+            Principal principal) {
         Page<CustomerDto> customerList = customerService.pageCustomers(pageNo);
         Shop shop = shopService.findByUsername(principal.getName());
         model.addAttribute("shop", shop);
-
 
         model.addAttribute("customerList", customerList);
 
@@ -95,12 +103,11 @@ public class SuperAdminController {
 
     @GetMapping("/product-list/{pageNo}")
     public String showAllProducts(Model model, @PathVariable int pageNo,
-                                  Principal principal) {
+            Principal principal) {
 
         Page<FreeListProductDto> freeListProductDtos = freeListService.pageProducts(pageNo);
         Shop shop = shopService.findByUsername(principal.getName());
         model.addAttribute("shop", shop);
-
 
         model.addAttribute("freeListProduct", freeListProductDtos);
 
@@ -108,15 +115,14 @@ public class SuperAdminController {
         model.addAttribute("totalPages", freeListProductDtos.getTotalPages());
         model.addAttribute("currentPage", pageNo);
 
-
         return "productList_main";
     }
 
     /* Customer Controls */
 
-    @RequestMapping(value = "/enable-customer/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/enable-customer/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
     public String enabledCustomer(@PathVariable("id") Long id, RedirectAttributes attributes,
-                                  HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         try {
             customerService.setCustomerActive(id);
             attributes.addFlashAttribute("success", "Enabled successfully!");
@@ -127,10 +133,9 @@ public class SuperAdminController {
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
-
-    @RequestMapping(value = "/disable-customer/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/disable-customer/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
     public String disableCustomer(@PathVariable("id") Long id, RedirectAttributes attributes,
-                                  HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         try {
             customerService.setCustomerDeactivate(id);
             attributes.addFlashAttribute("success", "Enabled successfully!");
@@ -143,9 +148,9 @@ public class SuperAdminController {
 
     /* MarketPlace Controls */
 
-    @RequestMapping(value = "/enable-shop/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/enable-shop/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
     public String enableShop(@PathVariable("id") Long id, RedirectAttributes attributes,
-                             HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         try {
             shopService.setAdminActive(id);
             attributes.addFlashAttribute("success", "Enabled successfully!");
@@ -156,9 +161,9 @@ public class SuperAdminController {
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
-    @RequestMapping(value = "/disable-shop/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/disable-shop/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
     public String disableShop(@PathVariable("id") Long id, RedirectAttributes attributes,
-                              HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         try {
             shopService.setAdminDeactive(id);
             attributes.addFlashAttribute("success", "Disabled successfully!");
@@ -169,12 +174,11 @@ public class SuperAdminController {
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
-
     /* Product Controls */
 
-    @RequestMapping(value = "/disable-freelistProd/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/disable-freelistProd/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
     public String disableProduct(@PathVariable("id") Long id, RedirectAttributes attributes,
-                              HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         try {
             freeListService.deleteById(id);
             attributes.addFlashAttribute("success", "Disabled successfully!");
@@ -185,9 +189,9 @@ public class SuperAdminController {
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
-    @RequestMapping(value = "/enable-freelistProd/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/enable-freelistProd/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
     public String enableProduct(@PathVariable("id") Long id, RedirectAttributes attributes,
-                                 HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest) {
         try {
             freeListService.enableById(id);
             attributes.addFlashAttribute("success", "Enabled successfully!");
@@ -198,11 +202,11 @@ public class SuperAdminController {
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
-    /*  Category Controls */
+    /* Category Controls */
 
     @GetMapping("/categoriesFreeList")
-    public String categories(Model model, Principal principal){
-        if(principal == null){
+    public String categories(Model model, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
 
@@ -219,15 +223,14 @@ public class SuperAdminController {
 
     @PostMapping("/add-freeListCategory")
     public String addCategory(@ModelAttribute("categoryNew") FreeListCategory category,
-                      RedirectAttributes attributes, Principal principal){
+            RedirectAttributes attributes, Principal principal) {
         try {
             freeListCategoryService.save(category);
             attributes.addFlashAttribute("success", "Added successfully");
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Failed to add because duplicate name");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Error server");
         }
@@ -235,55 +238,73 @@ public class SuperAdminController {
 
     }
 
-
-    @RequestMapping(value = "/findByIdCat", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/findByIdCat", method = { RequestMethod.PUT, RequestMethod.GET })
     @ResponseBody
-    public FreeListCategory findById(Long id){
+    public FreeListCategory findById(Long id) {
         return freeListCategoryService.findById(id);
     }
 
-
     @GetMapping("/update-freeListCategory")
-    public String update(FreeListCategory category, RedirectAttributes attributes){
+    public String update(FreeListCategory category, RedirectAttributes attributes) {
         try {
             freeListCategoryService.update(category);
-            attributes.addFlashAttribute("success","Updated successfully");
-        }catch (DataIntegrityViolationException e){
+            attributes.addFlashAttribute("success", "Updated successfully");
+        } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Failed to update because duplicate name");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Error server");
         }
         return "redirect:/categoriesFreeList";
     }
 
-    @RequestMapping(value = "/delete-freeListCategory", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String delete(Long id, RedirectAttributes attributes){
+    @RequestMapping(value = "/delete-freeListCategory", method = { RequestMethod.PUT, RequestMethod.GET })
+    public String delete(Long id, RedirectAttributes attributes) {
         try {
             freeListCategoryService.deleteById(id);
             attributes.addFlashAttribute("success", "Deleted successfully");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Failed to deleted");
         }
         return "redirect:/categoriesFreeList";
     }
 
-    @RequestMapping(value = "/enable-freeListCategory", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String enable(Long id, RedirectAttributes attributes){
+    @RequestMapping(value = "/enable-freeListCategory", method = { RequestMethod.PUT, RequestMethod.GET })
+    public String enable(Long id, RedirectAttributes attributes) {
         try {
             freeListCategoryService.enabledById(id);
             attributes.addFlashAttribute("success", "Enabled successfully");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Failed to enabled");
         }
         return "redirect:/categoriesFreeList";
     }
 
+    @RequestMapping("/create_super")
+    private String createSuperAdmin() {
 
+        if (shopRepository.findByUsername("ahmed@gmail.com") == null) {
+            Shop shop = new Shop();
+            shop.setFirstName("Super");
+            shop.setLastName("Admin");
+            shop.setUsername("ahmed@gmail.com");
+            shop.setPassword(passwordEncoder.encode("12345"));
+            shop.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
+            shop.setShopName("SUPER");
+            shop.setActive(false);
+            shop.setShopCategory(null);
+            shop.setDeliveryLocation(null);
 
+            shopRepository.save(shop);
+
+            System.out.println("superadmin created successfully");
+        }
+
+        return "redirect:/adminlogin";
+    }
 
     private boolean validation(Principal principal) {
         return principal.getName().equals("ahmed@gmail.com");

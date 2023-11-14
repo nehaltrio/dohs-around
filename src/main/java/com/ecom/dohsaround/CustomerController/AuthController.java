@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/customer")
+// @RequestMapping("/customer")
 public class AuthController implements AuthenticationFailureHandler {
 
     @Autowired
