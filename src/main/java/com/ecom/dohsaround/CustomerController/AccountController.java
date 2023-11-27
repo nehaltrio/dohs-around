@@ -16,7 +16,6 @@ import java.security.Principal;
 
 
 @Controller
-@RequestMapping("/customer")
 public class AccountController {
 
     @Autowired

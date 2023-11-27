@@ -29,7 +29,6 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/customer")
 public class CustomerProductController {
 
     @Autowired

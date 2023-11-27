@@ -23,7 +23,6 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/customer")
 public class OrderController {
 
     @Autowired

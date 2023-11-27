@@ -15,6 +15,6 @@ public class AuthenticationFailureHandlerClass implements AuthenticationFailureH
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.sendRedirect("/customer-login?loginError=true");
+        response.sendRedirect("/login?error=true");
     }
 }

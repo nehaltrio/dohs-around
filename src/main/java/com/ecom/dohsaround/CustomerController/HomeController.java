@@ -1,6 +1,5 @@
 package com.ecom.dohsaround.CustomerController;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,24 +49,33 @@ public class HomeController {
     @GetMapping("/all_shop")
     public String allShop(Model model, Principal principal) {
 
-         List<Shop> shops = shopRepository.findAllShops();
+        List<Shop> shops = shopRepository.findAllShops();
 
-    //    HashSet<Shop> shops =  shopRepository.searchByShop("m");
+        // HashSet<Shop> shops = shopRepository.searchByShop("m");
         model.addAttribute("shops", shops);
 
-      //  List<Product> productList = shopRepository.searchByProduct("m");
+        // List<Product> productList = shopRepository.searchByProduct("m");
 
-     
-
-      //  model.addAttribute("products", productList);
-
+        // model.addAttribute("products", productList);
 
         if (principal != null) {
 
             String username = principal.getName();
+            ShoppingCart shoppingCart;
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
+
+            if (customer != null) {
+                shoppingCart = customer.getShoppingCart();
+            } else {
+                shoppingCart = null;
+            }
+
+            if (customer == null) {
+                return "redirect:/login";
+                
+            }
+
             model.addAttribute("customer", customer);
 
             if (shoppingCart == null) {
@@ -77,27 +85,21 @@ public class HomeController {
             model.addAttribute("shoppingCart", shoppingCart);
 
         }
-
 
         model.addAttribute("principal", principal);
 
         return "all_shops";
     }
 
-
-
     @GetMapping("/searchAll")
     public String marketplaceSeaarchResult(Model model, Principal principal, @RequestParam("keyword") String keyword) {
 
-        HashSet<Shop> shops =  shopRepository.searchByShop(keyword);
+        HashSet<Shop> shops = shopRepository.searchByShop(keyword);
         model.addAttribute("shops", shops);
 
         List<Product> productList = shopRepository.searchByProduct(keyword);
 
-     
-
         model.addAttribute("products", productList);
-
 
         if (principal != null) {
 
@@ -114,13 +116,11 @@ public class HomeController {
             model.addAttribute("shoppingCart", shoppingCart);
 
         }
-        
 
         model.addAttribute("principal", principal);
 
         return "all_search";
     }
-
 
     @GetMapping("/return")
     public String goSame(HttpServletRequest request) {

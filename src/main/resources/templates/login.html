@@ -11,11 +11,10 @@
 </head>
 <body>
 
-    <div th:if="${param.loginError}">
+    <div th:if="${param.error}">
         <div class="toast active">
             <div class="toast-content">
                 <i class="fa-solid fa-exclamation check error"></i>
-               
     
                 <div class="message">
                     <span class="text text-1">Error</span>
@@ -25,7 +24,6 @@
             </div>
             <i class="fa-solid fa-xmark close"></i>
     
-            <!-- Remove 'active' class, this is just to show in Codepen thumbnail -->
             <div class="progress active"></div>
         </div>
     </div>
@@ -34,16 +32,16 @@
     <div class="box">
         <div class="inner-box">
             <div class="forms-wrap">
-                <form th:action="@{/admin-login}" autocomplete="off" method="post" class="sign-in-form">
+                <form th:action="@{/do-login}" autocomplete="off" method="post" class="sign-in-form">
                     <div class="logo">
                         <img th:src="@{/images/shopping-cart.png}" alt="cart">
-                        <h4>Marketplace Admin</h4>
+                        <h4>DOHS Around</h4>
                     </div>
 
                     <div class="heading">
                         <h2>Welcome Back</h2>
                         <h6>Not registred yet?</h6>
-                        <a href="#" class="toggle">Contact us to build your shop!</a>
+                        <a th:href="@{/customer_register}" class="toggle">Register now!</a>
                     </div>
 
                     <div class="actual-form">

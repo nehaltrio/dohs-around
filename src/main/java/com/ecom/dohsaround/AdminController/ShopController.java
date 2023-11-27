@@ -96,7 +96,17 @@ public class ShopController {
     @GetMapping("/dashboard")
     public String showDashboard(Principal principal, Model model) {
 
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
         Shop shop = shopService.findByUsername(principal.getName());
+
+
+
+        if (shop == null) {
+                return "redirect:/login";
+        }
 
         int productCount = productRepository.countProductByAdmin_Id(shop.getId());
         int categoryCount = categoryRepository.countCategoryByAdmin_Id(shop.getId());

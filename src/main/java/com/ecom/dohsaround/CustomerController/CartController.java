@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/customer")
 public class CartController {
     @Autowired
     private CustomerService customerService;

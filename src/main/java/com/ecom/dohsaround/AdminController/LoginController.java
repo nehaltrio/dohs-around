@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
-@RequestMapping("/admin")
 public class LoginController {
     @Autowired
     private ShopServiceImpl adminService;
@@ -40,10 +39,10 @@ public class LoginController {
     @Autowired
     private ShopRepository shopRepository;
 
-    @GetMapping("/adminlogin")
+    @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("title", "Login");
-        return "adminlogin";
+        return "login";
     }
 
     @RequestMapping("/index")
@@ -55,7 +54,7 @@ public class LoginController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "redirect:/adminlogin";
+            return "redirect:/login";
         }
         return "index";
     }
@@ -64,7 +63,7 @@ public class LoginController {
     public String register(Model model, Principal principal) {
 
         if (principal == null) {
-            return "redirect:/adminlogin";
+            return "redirect:/login";
         }
 
         Shop shop = shopRepository.findByUsername(principal.getName());

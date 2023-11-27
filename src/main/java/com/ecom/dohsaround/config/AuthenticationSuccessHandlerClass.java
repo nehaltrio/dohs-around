@@ -44,7 +44,7 @@ public class AuthenticationSuccessHandlerClass implements AuthenticationSuccessH
         System.out.println(user);
 
         if ("CUSTOMER".equals(user)) {
-            return "/customer/products/0";
+            return "/products/0";
         } else if ("ADMIN".equals(user)) {
             return "/admin/dashboard";
         }

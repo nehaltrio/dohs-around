@@ -26,7 +26,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
-// @RequestMapping("/customer")
 public class AuthController implements AuthenticationFailureHandler {
 
     @Autowired
@@ -36,11 +35,6 @@ public class AuthController implements AuthenticationFailureHandler {
     @Qualifier("passwordEncoderAdmin")
     private BCryptPasswordEncoder passwordEncoder;
 
-    @RequestMapping(value = "/customerlogin", method = RequestMethod.GET)
-    public String login() {
-
-        return "customerlogin";
-    }
 
     @GetMapping("/customer_register")
     public String register(Model model) {
@@ -67,7 +61,7 @@ public class AuthController implements AuthenticationFailureHandler {
                 customerDto.setPassword(passwordEncoder.encode(customerDto.getPassword()));
                 customerService.save(customerDto);
                 model.addAttribute("success", "Register successfully");
-                return "/customerlogin";
+                return "/login";
             } else {
                 model.addAttribute("error", "Password is not same");
                 model.addAttribute("customerDto", customerDto);
@@ -95,7 +89,7 @@ public class AuthController implements AuthenticationFailureHandler {
         } // Add more conditions as per your requirements
 
         request.getSession().setAttribute("error", errorMessage);
-        response.sendRedirect("/customerlogin"); // Redirect back to the login page
+        response.sendRedirect("/login"); // Redirect back to the login page
     }
 
 }
