@@ -183,6 +183,7 @@
                 <li><a th:href="@{/{shopName}/low-price/0 (shopName = ${shopN})}">Low Price to High Price</a></li>
                 <li><a th:href="@{/{shopName}/high-price/0 (shopName = ${shopN})}">High Price to Low Price</a></li>
             </ul>
+
         </nav>
 
         <div class="cat_cont">
@@ -194,12 +195,13 @@
                             th:href="@{/{shopName}/products-in-category/{id}/0 (shopName = ${shopN},id = ${category.categoryId})}">[[${category.categoryName}]]
                             <small>([[${category.numberOfProduct}]])</small></a>
                     </li>
+                   
                 </ul>
             </div>
         </div>
         <!-- products section starts  -->
     </div>
-    <section class="products" id="products">
+    <div class="products" id="products">
 
         <div class="product-slider">
             <div class="product-card" th:each="product : ${products}">
@@ -249,7 +251,7 @@
         </div>
 
 
-    </section>
+    </div>
 
     <!-- products section ends -->
 
