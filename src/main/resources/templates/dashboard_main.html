@@ -149,7 +149,7 @@
                     <tbody>
                     <tr th:each="order : ${orders}">
                         <td>
-                            <img src="" th:src="*{'data:image/jpeg;base64,' + {order.getProduct().listOfAttachedFiles.get(0).getFile()}}"
+                            <img src="" th:src="'data:image/jpeg;base64,' + ${order.getProduct().listOfAttachedFiles.get(0).getFile()}"
                                  alt="product_image">
                             <p th:text="${order.getProduct().getName()}"></p>
                         </td>

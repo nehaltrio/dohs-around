@@ -1,6 +1,5 @@
 package com.ecom.dohsaround.AdminController;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -66,6 +65,11 @@ public class ShopController {
 
     @GetMapping("OrderList")
     public String showShopOrder(Principal principal, Model model) {
+
+        if(principal == null){
+            return "redirect:/login";
+        }
+
         Shop shop = shopService.findByUsername(principal.getName());
 
         List<Order> orderList = orderRepository.findOrderByShopId(shop.getId());
@@ -102,10 +106,8 @@ public class ShopController {
 
         Shop shop = shopService.findByUsername(principal.getName());
 
-
-
         if (shop == null) {
-                return "redirect:/login";
+            return "redirect:/login";
         }
 
         int productCount = productRepository.countProductByAdmin_Id(shop.getId());
