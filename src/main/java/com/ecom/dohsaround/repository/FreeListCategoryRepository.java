@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface FreeListCategoryRepository extends JpaRepository<FreeListCategory, Long> {
 
-    @Query("select c from Category c where c.is_activated = true and c.is_deleted = false")
+    @Query("select c from FreeListCategory c where c.is_activated = true and c.is_deleted = false")
     List<FreeListCategory> findAllByActivated();
 
     @Query("select new com.ecom.dohsaround.dto.FreeListCategoryDto(c.id, c.name, count(p.category.id)) from FreeListCategory c inner join FreeListProduct p on p.category.id = c.id " +

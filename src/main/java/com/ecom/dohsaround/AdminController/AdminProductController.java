@@ -71,7 +71,7 @@ public class AdminProductController {
         List<Category> categories = categoryService.findAllByShopActivated(shop);
         model.addAttribute("categories", categories);
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("url","/products/");
+        model.addAttribute("url","/admin/products/");
 
         return "product_main";
     }
@@ -98,7 +98,7 @@ public class AdminProductController {
         List<Category> categories = categoryService.findAllByShopActivated(shop);
         model.addAttribute("categories", categories);
         model.addAttribute("product", new ProductDto());
-        model.addAttribute("url","/search-result/");
+        model.addAttribute("url","/admin/search-result/");
         return "product_main";
     }
 
@@ -133,7 +133,7 @@ public class AdminProductController {
 
        
 
-        return "redirect:/products/0";
+        return "redirect:/admin/products/0";
     }
 
     @GetMapping("/update-product/{id}")
@@ -165,7 +165,7 @@ public class AdminProductController {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to update!");
         }
-        return "redirect:/products/0";
+        return "redirect:/admin/products/0";
 
     }
 

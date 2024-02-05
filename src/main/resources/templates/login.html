@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,13 +10,14 @@
     <link rel="stylesheet" th:href="@{/css/errorM.css}" />
     <script src="https://kit.fontawesome.com/baedbdb1a3.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
     <div th:if="${param.error}">
         <div class="toast active">
             <div class="toast-content">
                 <i class="fa-solid fa-exclamation check error"></i>
-    
+
                 <div class="message">
                     <span class="text text-1">Error</span>
                     <span class="text text-2">Invalid email or password!</span>
@@ -23,86 +25,75 @@
 
             </div>
             <i class="fa-solid fa-xmark close"></i>
-    
+
             <div class="progress active"></div>
         </div>
     </div>
 
-<main>
-    <div class="box">
-        <div class="inner-box">
-            <div class="forms-wrap">
-                <form th:action="@{/do-login}" autocomplete="off" method="post" class="sign-in-form">
-                    <div class="logo">
-                        <img th:src="@{/images/shopping-cart.png}" alt="cart">
-                        <h4>DOHS Around</h4>
-                    </div>
-
-                    <div class="heading">
-                        <h2>Welcome Back</h2>
-                        <h6>Not registred yet?</h6>
-                        <a th:href="@{/customer_register}" class="toggle">Register now!</a>
-                    </div>
-
-                    <div class="actual-form">
-                        <div class="input-wrap">
-                            <input
-                                    type="email"
-                                    minlength="4"
-                                    class="input-field"
-                                    name="username"
-                                    autocomplete="off" placeholder="Email"
-                                    required
-                            />
-
+    <main>
+        <div class="box">
+            <div class="inner-box">
+                <div class="forms-wrap">
+                    <form th:action="@{/do-login}" autocomplete="off" method="post" class="sign-in-form">
+                        <div class="logo">
+                            <img th:src="@{/images/shopping-cart.png}" alt="cart">
+                            <h4>DOHS Around</h4>
                         </div>
 
-
-                        <div class="input-wrap">
-                            <input
-                                    type="password"
-                                    name="password"
-                                    minlength="4"
-                                    class="input-field"
-                                    autocomplete="off" placeholder="Password"
-                                    required
-                            />
-
+                        <div class="heading">
+                            <h2>Welcome Back</h2>
+                            <h6>Not registred yet?</h6>
+                            <a th:href="@{/customer_register}" class="toggle">Register now!</a>
                         </div>
 
-                        <input type="submit" value="Sign In" class="sign-btn" />
+                        <div class="actual-form">
+                            <div class="input-wrap">
+                                <input type="email" minlength="4" class="input-field" name="username" autocomplete="off"
+                                    placeholder="Email" required />
 
-                        <p class="text">
-                            Forgotten your password or you login datails?
-                            <a href="#">Get help</a> signing in
-                        </p>
-                    </div>
-                </form>
+                            </div>
 
 
-            </div>
+                            <div class="input-wrap">
+                                <input type="password" name="password" minlength="4" class="input-field"
+                                    autocomplete="off" placeholder="Password" required />
 
-            <div class="carousel">
-                <div class="images-wrapper">
-                    <img th:src="@{/images/reg_cont.jpg}" class="image img-1 show" alt="" />
+                            </div>
+
+                            <input type="submit" value="Sign In" class="sign-btn" />
+
+                            <p class="text">
+                                Forgotten your password or you login datails?
+                                <a href="#">Get help</a> signing in
+                            </p>
+                        </div>
+                    </form>
+
+
                 </div>
 
-                <div class="text-slider">
-                    <div class="text-wrap">
-                        <div class="text-group">
-<!--                            <h2>Marketplace Shop</h2>-->
-                        </div>
+                <div class="carousel">
+                    <div class="images-wrapper">
+                        <img th:src="@{/images/reg_cont.jpg}" class="image img-1 show" alt="" />
                     </div>
 
+                    <div class="text-slider">
+                        <div class="text-wrap">
+                            <div class="text-group">
+                                 <h2>Sell High, Buy Low</h2>
+                            </div>
+                        </div>
 
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
-<!-- Javascript file -->
-<script th:src="@{/js/errorM.js}"></script>
+    <!-- Javascript file -->
+    <script th:src="@{/js/errorM.js}"></script>
 
 </body>
+
 </html>

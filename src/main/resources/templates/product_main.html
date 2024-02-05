@@ -26,25 +26,25 @@
         </a>
         <ul class="side-menu top">
             <li>
-                <a th:href="@{/dashboard}">
+                <a th:href="@{/admin/dashboard}">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
             <li class="active">
-                <a th:href="@{/products/0}">
+                <a th:href="@{/admin/products/0}">
                     <i class='bx bxs-shopping-bag-alt'></i>
                     <span class="text">Products</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/categories}">
+                <a th:href="@{/admin/categories}">
                     <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Categories</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/OrderList}">
+                <a th:href="@{/admin/OrderList}">
                     <i class='bx bxs-message-dots'></i>
                     <span class="text">Orders</span>
                 </a>
@@ -70,7 +70,7 @@
             <!-- Author: FormBold Team -->
             <!-- Learn More: https://formbold.com -->
             <div class="formbold-form-wrapper">
-                <form th:action="@{/save-product}" method="post" enctype="multipart/form-data" th:object="${product}">
+                <form th:action="@{/admin/save-product}" method="post" enctype="multipart/form-data" th:object="${product}">
                     <div class="formbold-input-flex">
                         <div>
                             <input type="text" th:field="*{name}" name="product_name" id="product_name"
@@ -237,7 +237,7 @@
             <div class="head-title">
                 <div class="left">
                     <h1>Products</h1>
-                    <form th:action="@{/search-result/0}" method="get">
+                    <form th:action="@{/admin/search-result/0}" method="get">
                         <div class="form-input">
                             <input type="search" name="keyword" placeholder="Search product">
                             <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
@@ -305,15 +305,15 @@
                                 <td th:text="${product.category.name}"></td>
                                 <td th:text="${product.costPrice}"></td>
                                 <td th:text="${product.currentQuantity}"></td>
-                                <td><a th:href="@{/update-product/{id} (id = ${product.id})}"
+                                <td><a th:href="@{/admin/update-product/{id} (id = ${product.id})}"
                                         class="button-yellow">Update</a>
                                 </td>
                                 <td>
                                     <a th:if="${product.activated == false}"
-                                        th:href="@{/enable-product/{id} (id = ${product.id})}"
+                                        th:href="@{/admin/enable-product/{id} (id = ${product.id})}"
                                         class="button-green">Enable</a>
                                     <a th:if="${product.deleted == false}"
-                                        th:href="@{/delete-product/{id} (id = ${product.id})}"
+                                        th:href="@{/admin/delete-product/{id} (id = ${product.id})}"
                                         class="button-red">Disable</a>
                                 </td>
                             </tr>

@@ -57,7 +57,7 @@ public class CategoryController {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Error server");
         }
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
 
     }
 
@@ -79,7 +79,7 @@ public class CategoryController {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Error server");
         }
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
     }
 
     @RequestMapping(value = "/delete-category", method = {RequestMethod.PUT, RequestMethod.GET})
@@ -91,7 +91,7 @@ public class CategoryController {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to deleted");
         }
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
     }
 
     @RequestMapping(value = "/enable-category", method = {RequestMethod.PUT, RequestMethod.GET})
@@ -103,7 +103,7 @@ public class CategoryController {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to enabled");
         }
-        return "redirect:/categories";
+        return "redirect:/admin/categories";
     }
 
 

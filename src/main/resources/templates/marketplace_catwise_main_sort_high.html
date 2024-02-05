@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace | ShopName</title>
+    <title th:text=" ${shopN}"></title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
@@ -15,6 +15,34 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" th:href="@{/css/marketplace_main.css}">
 
+    <style>
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* data:image/jpeg;base64 */
+            /* url(data:image/jpeg;base64, [[${base64Image}]]); */
+            background: url(data:image/jpeg;base64,[[${shop.image}]]) no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding-top: 17rem;
+            padding-bottom: 10rem;
+
+        }
+
+        .home .content h3 {
+
+            font-size: 3rem;
+        }
+
+        .home .content p {
+
+            font-size: 1.7rem;
+            padding: 1rem 0;
+            line-height: 1.8;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -23,7 +51,7 @@
 
 <header class="header">
 
-    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
+    <a th:href="@{/{shopName}/products/0 (shopName = ${shopN})}" class="logo"> <i class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
 
     <nav class="navbar">
         <a href="#home">home</a>
@@ -119,7 +147,7 @@
         <h3 th:text=" ${shopN}"></h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam libero nostrum veniam facere tempore
             nisi.</p>
-        <a href="#" class="btn">shop now</a>
+        <a href="#products" class="btn">shop now</a>
     </div>
 
 </section>

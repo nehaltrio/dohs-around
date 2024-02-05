@@ -1,6 +1,5 @@
 package com.ecom.dohsaround.CustomerController;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import com.ecom.dohsaround.model.FreeListCategory;
 import com.ecom.dohsaround.model.FreeListProduct;
 import com.ecom.dohsaround.model.ShoppingCart;
 import com.ecom.dohsaround.repository.CustomerRepository;
+import com.ecom.dohsaround.repository.FreeListProductRepository;
 import com.ecom.dohsaround.service.CustomerService;
 import com.ecom.dohsaround.service.FreeListCategoryService;
 import com.ecom.dohsaround.service.FreeListService;
@@ -33,6 +33,8 @@ public class FreeListController {
     private FreeListService freeListService;
     @Autowired
     private FreeListCategoryService freeListCategoryService;
+    @Autowired
+    private FreeListProductRepository freeListProductRepository;
 
     @Autowired
     private CustomerService customerService;
@@ -59,8 +61,9 @@ public class FreeListController {
     @GetMapping("/post_add")
     public String ViewPostAdPage(Model model, Principal principal) {
         model.addAttribute("product", new FreeListProductDto());
-        List<FreeListCategoryDto> categoryDtoList = freeListCategoryService.getCategoryAndProduct();
-        model.addAttribute("categories", categoryDtoList);
+
+        List<FreeListCategory> categoryList = freeListCategoryService.findAllByActivated();
+        model.addAttribute("categories", categoryList);
 
         if (principal != null) {
 
@@ -192,11 +195,10 @@ public class FreeListController {
             @RequestParam("keyword") String keyword, Principal principal) {
 
         Page<FreeListProductDto> freeListProducts = freeListService.searchFreelist(pageNo, keyword);
-      
+
         List<FreeListCategoryDto> categoryDtoList = freeListCategoryService.getCategoryAndProduct();
 
         model.addAttribute("categories", categoryDtoList);
-
 
         model.addAttribute("products", freeListProducts);
         model.addAttribute("product", new FreeListProductDto());
@@ -400,11 +402,9 @@ public class FreeListController {
     public String findProductById(@PathVariable("id") Long id, Model model, Principal principal) {
         FreeListProduct product = freeListService.getProductById(id);
         Long categoryId = product.getCategory().getId();
-        List<FreeListProduct> products = freeListService.getRelatedProducts(categoryId);
+        List<FreeListProduct> products = freeListProductRepository.getProductsInCategory(categoryId);
         model.addAttribute("product", product);
         model.addAttribute("products", products);
-
-        
 
         if (principal != null) {
 

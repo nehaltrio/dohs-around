@@ -14,7 +14,7 @@ import jakarta.persistence.*;
 public class FreeListCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "freelist_category_id")
     private Long id;
     private String name;
     private boolean is_deleted;

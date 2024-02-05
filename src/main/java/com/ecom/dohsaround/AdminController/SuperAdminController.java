@@ -302,7 +302,7 @@ public class SuperAdminController {
             System.out.println("superadmin created successfully");
         }
 
-        return "redirect:/adminlogin";
+        return "redirect:/login";
     }
 
     private boolean validation(Principal principal) {

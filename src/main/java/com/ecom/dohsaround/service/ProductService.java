@@ -33,7 +33,7 @@ public interface ProductService {
 
     Product getProductById(Long id);
 
-    List<Product> getRelatedProducts(Long categoryId);
+    List<Product> getRelatedProducts(Long categoryId,String shopName);
 
     Page<ProductDto> getProductsInCategory(Long categoryId, int pageNo,String shopName);
 

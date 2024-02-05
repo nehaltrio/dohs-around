@@ -14,6 +14,8 @@ input {
     overflow: hidden;
 }
 
+
+
 main {
     width: 100%;
     min-height: 100vh;
@@ -33,6 +35,8 @@ main {
     background-color: #fff;
     border-radius: 3.3rem;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
+    scale: 0.8;
+    margin-top: -2.5%;
 }
 
 .inner-box {
@@ -86,7 +90,7 @@ form.sign-up-form {
 
 .logo h4 {
     font-size: 1.1rem;
-    margin-top: -9px;
+    margin-top: 2px;
     letter-spacing: -0.5px;
     color: #3c91e6;
 }
@@ -212,7 +216,7 @@ main.sign-up-mode .carousel {
     width: 55%;
     left: 45%;
     top: 0;
-    background-color: #599ce0;
+    background-color: #A9DBF2;
     border-radius: 2rem;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -261,12 +265,10 @@ main.sign-up-mode .carousel {
 
 .text-wrap {
     max-height: 2.2rem;
-    overflow: hidden;
-    margin-bottom: 2.5rem;
 }
 
 .text-group {
-    display: flex;
+   
     flex-direction: column;
     text-align: center;
     transform: translateY(0);
@@ -277,7 +279,10 @@ main.sign-up-mode .carousel {
     line-height: 2.2rem;
     font-weight: 600;
     font-size: 1.6rem;
+    color: white
 }
+
+
 
 .bullets {
     display: flex;

@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -42,25 +43,25 @@
 		</a>
 		<ul class="side-menu top">
 			<li>
-				<a th:href="@{/dashboard}">
+				<a th:href="@{/admin/dashboard}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/products/0}">
+				<a th:href="@{/admin/products/0}">
 					<i class='bx bxs-shopping-bag-alt'></i>
 					<span class="text">Products</span>
 				</a>
 			</li>
 			<li class="active">
-				<a th:href="@{/categories}">
+				<a th:href="@{/admin/categories}">
 					<i class='bx bxs-doughnut-chart'></i>
 					<span class="text">Categories</span>
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/OrderList}">
+				<a th:href="@{/admin/OrderList}">
 					<i class='bx bxs-message-dots'></i>
 					<span class="text">Orders</span>
 				</a>
@@ -153,15 +154,15 @@
 								<th scope="row" th:text="${index.index} + 1"></th>
 								<td th:text="${category.name}"></td>
 								<td>
-									<a id="editButton" th:href="@{/findById/(id = ${category.id})}"
+									<a id="editButton" th:href="@{/admin/findById/(id = ${category.id})}"
 										class="button-green">Update</a>
 								</td>
 								<td>
 									<a th:if="${category.is_activated} == true"
-										th:href="@{/delete-category/(id = ${category.id})}"
+										th:href="@{/admin/delete-category/(id = ${category.id})}"
 										class="button-red">Disable</a>
 									<a th:if="${category.is_activated} == false"
-										th:href="@{/enable-category/(id = ${category.id})}"
+										th:href="@{/admin/enable-category/(id = ${category.id})}"
 										class="button-green">Enable</a>
 								</td>
 							</tr>
@@ -177,7 +178,7 @@
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true">
-		<form th:action="@{/add-category}" method="post" th:object="${categoryNew}">
+		<form th:action="@{/admin/add-category}" method="post" th:object="${categoryNew}">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -202,7 +203,7 @@
 
 	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalExample"
 		aria-hidden="true">
-		<form th:action="@{/update-category}" method="put">
+		<form th:action="@{/admin/update-category}" method="put">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">

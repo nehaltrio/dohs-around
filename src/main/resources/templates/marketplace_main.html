@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace | ShopName</title>
+    <title th:text=" ${shopN}"></title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
@@ -46,7 +46,7 @@
             font-size: 3rem;
         }
 
-       
+
 
         .home .content p {
 
@@ -64,7 +64,7 @@
 
     <header class="header">
 
-        <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
+        <a th:href="@{/{shopName}/products/0 (shopName = ${shopN})}" class="logo"> <i class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
 
         <nav class="navbar">
             <a href="#home">home</a>
@@ -93,7 +93,8 @@
                             class="fas fa-trash"></i>
                     </button>
 
-                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                        alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>
                         <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
@@ -189,13 +190,24 @@
         <div class="cat_cont">
             <h1>All Categories</h1>
             <div class="list_cat">
+                <ul>
+
+                    <a th:href="@{/{shopName}/products/0 (shopName = ${shopN})}">
+                        <li>All</li>
+                    </a>
+
+                </ul>
                 <ul th:each="category : ${categories}">
-                    <li>
-                        <a
-                            th:href="@{/{shopName}/products-in-category/{id}/0 (shopName = ${shopN},id = ${category.categoryId})}">[[${category.categoryName}]]
-                            <small>([[${category.numberOfProduct}]])</small></a>
-                    </li>
-                   
+
+
+                    <a
+                        th:href="@{/{shopName}/products-in-category/{id}/0 (shopName = ${shopN},id = ${category.categoryId})}">
+                        <li>[[${category.categoryName}]]
+                            <small>([[${category.numberOfProduct}]])</small>
+                        </li>
+                    </a>
+
+
                 </ul>
             </div>
         </div>

@@ -4,11 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
-	<link th:href="@{/css/sb-shop-2.min.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/errorM.css}" />
+	<link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/style_main.css}">
+	
+	<script src="https://kit.fontawesome.com/baedbdb1a3.js" crossorigin="anonymous"></script>
+
+
 
 	<style>
 		a{
@@ -37,31 +44,31 @@
 		</a>
 		<ul class="side-menu top">
 			<li >
-				<a th:href="@{/dashboard}">
+				<a th:href="@{/admin/dashboard}">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/marketplace-list/0}">
+				<a th:href="@{/admin/marketplace-list/0}">
 					<i class='bx bxs-shopping-bag-alt'></i>
 					<span class="text">Marketplaces</span>
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/customer-list/0}">
+				<a th:href="@{/admin/customer-list/0}">
 					<i class='bx bxs-doughnut-chart'></i>
 					<span class="text">Customers</span>
 				</a>
 			</li>
 			<li>
-				<a th:href="@{/product-list/0}">
+				<a th:href="@{/admin/product-list/0}">
 					<i class='bx bxs-message-dots'></i>
 					<span class="text">Products</span>
 				</a>
 			</li>
 			<li class="active">
-				<a th:href="@{/categoriesFreeList}">
+				<a th:href="@{/admin/categoriesFreeList}">
 					<i class='bx bxs-message-dots'></i>
 					<span class="text">Categories</span>
 				</a>
@@ -153,11 +160,11 @@
 							<th scope="row" th:text="${category.id}"></th>
 							<td th:text="${category.name}"></td>
 							<td>
-								<a id="editButton" th:href="@{/findByIdCat/(id = ${category.id})}" class="button-green">Update</a>
+								<a id="editButton" th:href="@{/admin/findByIdCat/(id = ${category.id})}" class="button-green">Update</a>
 							</td>
 							<td>
-								<a th:if = "${category.is_activated} == true" th:href="@{/delete-freeListCategory/(id = ${category.id})}" class="button-red">Disable</a>
-								<a th:if = "${category.is_activated} == false" th:href="@{/enable-freeListCategory/(id = ${category.id})}" class="button-green">Enable</a>
+								<a th:if = "${category.is_activated} == true" th:href="@{/admin/delete-freeListCategory/(id = ${category.id})}" class="button-red">Disable</a>
+								<a th:if = "${category.is_activated} == false" th:href="@{/admin/enable-freeListCategory/(id = ${category.id})}" class="button-green">Enable</a>
 							</td>
 						</tr>
 						</tbody>
@@ -171,7 +178,7 @@
 	<!-- CONTENT -->
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/add-freeListCategory}" method="post" th:object="${categoryNew}">
+		<form th:action="@{/admin/add-freeListCategory}" method="post" th:object="${categoryNew}">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -195,7 +202,7 @@
 
 
 	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalExample" aria-hidden="true">
-		<form th:action="@{/update-freeListCategory}" method="put">
+		<form th:action="@{/admin/update-freeListCategory}" method="put">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -221,8 +228,10 @@
 	</div>
 
 
+	<script th:src="@{/js/errorM.js}"></script>
 	<div th:replace="fragments :: script"></div>
 	<script th:src="@{/js/categories.js}"></script>
 	<script th:src="@{/js/script_main.js}"></script>
+
 </body>
 </html>

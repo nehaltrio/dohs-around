@@ -141,7 +141,7 @@ public class CustomerProductController {
     public String findProductById(@PathVariable("id") Long id, Model model, Principal principal) {
         Product product = productService.getProductById(id);
         Long categoryId = product.getCategory().getId();
-        List<Product> products = productService.getRelatedProducts(categoryId);
+        List<Product> products = productService.getRelatedProducts(categoryId, product.getShop().getShopName());
         model.addAttribute("product", product);
         model.addAttribute("products", products);
 

@@ -12,7 +12,7 @@
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <!-- custom css file link  -->
     <link rel="stylesheet" th:href="@{/css/marketplace_main.css}">
 
@@ -22,7 +22,7 @@
             margin-top: 60px;
             margin-bottom: 60px;
             border: none !important;
-            box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+            box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
         }
 
         .blue-text {
@@ -32,17 +32,17 @@
         .form-control-label {
             text-align: left;
             margin-bottom: 0;
-            font-size: 16px;
+            font-size: 14px;
         }
 
-       .list input,
+        .list input,
         textarea {
             padding: 8px 15px;
             border-radius: 5px !important;
             margin: 5px 0px;
             box-sizing: border-box;
             border: 1px solid #ccc;
-            font-size: 18px !important;
+            font-size: 14px !important;
             font-weight: 300;
         }
 
@@ -51,13 +51,14 @@
         }
 
         #form-container button {
+            width: 100%;
             padding: 8px 15px;
             border-radius: 5px !important;
             margin: 25px 5px;
             box-sizing: border-box;
             background-color: var(--theme);
             color: white;
-            font-size: 18px !important;
+            font-size: 14px !important;
             font-weight: 300;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
@@ -68,11 +69,11 @@
             margin: 5px 0px;
             box-sizing: border-box;
             border: 1px solid #ccc;
-            font-size: 18px !important;
+            font-size: 15px !important;
             font-weight: 300;
         }
 
-       .list input:focus,
+        .list input:focus,
         textarea:focus,
         select:focus {
             -moz-box-shadow: none !important;
@@ -85,7 +86,7 @@
 
         .btn-block {
             text-transform: uppercase;
-            font-size: 15px !important;
+            font-size: 13px !important;
             font-weight: 400;
             height: 43px;
             cursor: pointer
@@ -103,9 +104,7 @@
         }
 
 
-        #form-container button {
-            margin-left: 90%;
-        }
+
 
 
         #form-container {
@@ -116,7 +115,7 @@
 
         }
 
-       .list form {
+        .list form {
             background-color: #fff;
             padding: 30px;
             border-radius: 10px;
@@ -128,11 +127,14 @@
         }
 
         .sw_btn {
-            width: 150px;
+            padding: 10px;
+            margin-bottom: 0;
             height: 40px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
-
+            clear: both;
+            display: inline-block;
+            white-space: nowrap;
         }
 
         #form1-btn {
@@ -140,16 +142,24 @@
         }
 
         .switch_btn_resize {
-            margin-top: 5%;
             margin-left: 5%;
+            margin-right: 5%;
+            display: flex;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            column-gap: 30px;
         }
 
-        .post_txt{
-            margin-top: 7%;
-            margin-bottom: 2%;
+        .post_txt {
+            padding-top: 100px;
+            margin-left: 5%;
+            margin-bottom: 3%;
+
         }
 
-        .post_txt span{
+        .post_txt span {
             color: var(--theme);
         }
     </style>
@@ -157,480 +167,491 @@
 
 <body>
 
-<!-- header section starts  -->
+    <!-- header section starts  -->
 
-<header class="header">
+    <header class="header">
 
-    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span >DOHS Around</span> </a>
+        <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span>DOHS Around</span> </a>
 
-    <nav class="navbar">
-        <a href="#home">home</a>
-        <a th:href="@{/all_shop}">Marketplaces</a>
-        <a th:href="@{/products/0}">Freelist</a>
-        <a href="#">Contact</a>
-    </nav>
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a th:href="@{/all_shop}">Marketplaces</a>
+            <a th:href="@{/products/0}">Freelist</a>
+            <a href="#">Contact</a>
+        </nav>
 
-    <div class="icons">
-        <div class="fas fa-bars" id="menu-btn"></div>
-        <div class="fas fa-search" id="search-btn"></div>
-        <div class="fas fa-shopping-cart" id="cart-btn"></div>
-        <div class="fas fa-user" id="login-btn"></div>
-    </div>
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
 
-    <form th:action="@{/search-result/0}" method="get" class="search-form">
-        <input type="text" id="search-box" name="keyword" placeholder="search here...">
-        <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
-    </form>
-
-    <div class="shopping-cart" th:if="${shoppingCart!=null}">
-        <form th:action="@{/update-cart}" method="post">
-            <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
-                <input type="hidden" name="id" th:value="${cartItem.product.id}">
-                <button type="submit" name="action" value="delete" style="background: none"><i
-                        class="fas fa-trash"></i>
-                </button>
-
-                <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
-                <div class="content">
-                    <h3 th:text="${cartItem.product.name}"></h3>
-                    <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
-                    <span class="quantity" th:text="${cartItem.quantity}"></span>
-                </div>
-            </div>
+        <form th:action="@{/search-result/0}" method="get" class="search-form">
+            <input type="text" id="search-box" name="keyword" placeholder="search here...">
+            <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
         </form>
 
-        <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
-        <a th:href="@{/cart}" class="btn">checkout</a>
-    </div>
+        <div class="shopping-cart" th:if="${shoppingCart!=null}">
+            <form th:action="@{/update-cart}" method="post">
+                <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
+                    <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                    <button type="submit" name="action" value="delete" style="background: none"><i
+                            class="fas fa-trash"></i>
+                    </button>
 
-    <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
-        <h3>login now</h3>
-        <input type="email" placeholder="your email" name="username" class="box">
-        <input type="password" placeholder="your password" name="password" class="box">
-        <p>forget your password <a href="#">click here</a></p>
-        <p>don't have an account <a th:href="@{/register}">create now</a></p>
-        <input type="submit" value="login now" class="btn">
-    </form>
+                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                        alt="product_image">
+                    <div class="content">
+                        <h3 th:text="${cartItem.product.name}"></h3>
+                        <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
+                        <span class="quantity" th:text="${cartItem.quantity}"></span>
+                    </div>
+                </div>
+            </form>
 
-    <div class="login-form" th:if="${principal != null}">
+            <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
+            <a th:href="@{/cart}" class="btn">checkout</a>
+        </div>
 
-        <div class="head_content" style="text-align: left;">
-            <img th:src="@{/images/profile.png}" alt="" class="profile-image">
-            <div class="name_cont">
-                <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
-                <p th:text="${customer.getUsername()}"></p>
+        <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
+            <h3>login now</h3>
+            <input type="email" placeholder="your email" name="username" class="box">
+            <input type="password" placeholder="your password" name="password" class="box">
+            <p>forget your password <a href="#">click here</a></p>
+            <p>don't have an account <a th:href="@{/register}">create now</a></p>
+            <input type="submit" value="login now" class="btn">
+        </form>
+
+        <div class="login-form" th:if="${principal != null}">
+
+            <div class="head_content" style="text-align: left;">
+                <img th:src="@{/images/profile.png}" alt="" class="profile-image">
+                <div class="name_cont">
+                    <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
+                    <p th:text="${customer.getUsername()}"></p>
+                </div>
             </div>
-        </div>
 
-        <div class="middle-container">
-            <div class="dollar-div">
-                <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+            <div class="middle-container">
+                <div class="dollar-div">
+                    <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                </div>
+                <div class="contact_cont">
+                    <span class="current-balance">Contact Number</span>
+                    <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+                </div>
             </div>
-            <div class="contact_cont">
-                <span class="current-balance">Contact Number</span>
-                <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+            <div class="recent-border" style="text-align: left;">
+                <span class="recent-orders" th:text="${customer.getAddress()}"></span>
             </div>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/account}">
+                    <h3 class="box">Update Account Details</h3>
+                </a>
+            </div>
+
+            <a th:href="@{/logout}" class="btn">Log out</a>
+
         </div>
-        <div class="recent-border" style="text-align: left;">
-            <span class="recent-orders" th:text="${customer.getAddress()}"></span>
-        </div>
-        <div class="wishlist-border" style="text-align: left;">
-            <a th:href="@{/account}">
-                <h3 class="box">Update Account Details</h3>
-            </a>
-        </div>
 
-        <a th:href="@{/logout}" class="btn">Log out</a>
-
-    </div>
-
-</header>
-
-<div class="switch_btn_resize">
+    </header>
     <h1 class="post_txt">Post <span>AD</span> </h1>
-    <button class="sw_btn" type="button" id="form1-btn">Product</button>
-    <button class="sw_btn" type="button" id="form2-btn">Car Service</button>
-    <button class="sw_btn" type="button" id="form3-btn">Pet</button>
-    <button class="sw_btn" type="button" id="form4-btn">Tutor</button>
-    <button class="sw_btn" type="button" id="form5-btn">Property</button>
-    <button class="sw_btn" type="button" id="form6-btn">Rent</button>
-</div>
+    <div class="switch_btn_resize">
 
-<div id="form-container" class="list">
+        <button class="sw_btn" type="button" id="form1-btn">Product</button>
+        <button class="sw_btn" type="button" id="form2-btn">Car Service</button>
+        <button class="sw_btn" type="button" id="form3-btn">Pet</button>
+        <button class="sw_btn" type="button" id="form4-btn">Tutor</button>
+        <button class="sw_btn" type="button" id="form5-btn">Property</button>
+        <button class="sw_btn" type="button" id="form6-btn">Rent</button>
+    </div>
 
-    <form id="form1" th:action="@{/list-product}" method="post" enctype="multipart/form-data" th:object="${product}">
+    <div id="form-container" class="list">
+
+        <form id="form1" th:action="@{/list-product}" method="post" enctype="multipart/form-data"
+            th:object="${product}">
 
 
 
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Product
-                name<span class="text-danger"> *</span></label> <input th:field = "*{name}" type="text"  name="fname"
-                                                                       onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Product
-                price<span class="text-danger"> *</span></label> <input th:field = "*{costPrice}" type="text"  name="lname"
-                                                                        onblur="validate(2)"> </div>
-        </div>
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Product
-                quantity<span class="text-danger"> *</span></label> <input th:field = "*{currentQuantity}"  type="text" id="job" name="job"
-                                                                           placeholder="" onblur="validate(5)">
-
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Product
+                        name<span class="text-danger"> *</span></label> <input th:field="*{name}" type="text"
+                        name="fname" onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Product
+                        price<span class="text-danger"> *</span></label> <input th:field="*{costPrice}" type="text"
+                        name="lname" onblur="validate(2)"> </div>
             </div>
 
-            <div class="form-group col-sm-6 flex-column d-flex">
-                <label class="form-control-label px-3" for="exampleFormControlSelect1">Category<span
-                        class="text-danger"> *</span></label>
-                <select th:field="*{category}" class="form-control" id="exampleFormControlSelect1" style="padding: 8px;">
-                    <option th:value="null">Select Category</option>
-                    <option th:each="category : ${categories}"
-                            th:value="${category.getCategoryId()}"
-                            th:text="${category.getCategoryName()}">
-                    </option>
-                </select>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Product
+                        quantity<span class="text-danger"> *</span></label> <input th:field="*{currentQuantity}"
+                        type="text" id="job" name="job" placeholder="" onblur="validate(5)">
+
+                </div>
+
+                <div class="form-group col-sm-6 flex-column d-flex">
+                    <label class="form-control-label px-3" for="exampleFormControlSelect1">Category<span
+                            class="text-danger"> *</span></label>
+                    <select th:field="*{category}" class="form-control" id="exampleFormControlSelect1"
+                        style="padding: 8px;">
+                        <option th:value="null">Select Category</option>
+                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+                        </option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-12 flex-column d-flex"> <label
-                    class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
-                    type="text" th:field = "*{description}" name="ans" placeholder="" onblur="validate(6)"> </div>
-        </div>
-        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add product
-            image<span class="text-danger"> *</span></label> <input type="file" name="imageProduct"> </div>
-
-
-
-        <div class="row justify-content-end">
-            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex"> <label
+                        class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
+                        type="text" th:field="*{description}" name="ans" placeholder="" onblur="validate(6)"> </div>
             </div>
-        </div>
-
-    </form>
-    <form id="form2" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data" th:object="${product}">
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Car
-                Service name<span class="text-danger"> *</span></label> <input th:field = "*{name}" type="text"
-                                                                               name="fname" onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Service fee
-                <span class="text-danger"> *</span></label> <input type="text" th:field = "*{costPrice}"  name="lname"
-                                                                   onblur="validate(2)"> </div>
-        </div>
-
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-12 flex-column d-flex"> <label
-                    class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
-                    type="text" th:field = "*{description}" name="ans" placeholder="" onblur="validate(6)"> </div>
-        </div>
-        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
-            image (if needed)</label> <input type="file" name="imageProduct"> </div>
+            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add product
+                    image<span class="text-danger"> *</span></label> <input type="file" name="imageProduct"> </div>
 
 
 
-        <div class="row justify-content-end">
-            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+            <div class="row justify-content-end">
+                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+                </div>
             </div>
-        </div>
 
-    </form>
+        </form>
+        <form id="form2" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data"
+            th:object="${product}">
 
-    <form id="form3" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data" th:object="${product}">
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Pet
-                Breed/type name<span class="text-danger"> *</span></label> <input type="text"
-                                                                                  name="fname" th:field = "*{name}" onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Price
-                <span class="text-danger"> *</span></label> <input type="text" th:field = "*{costPrice}" name="lname"
-                                                                    onblur="validate(2)"> </div>
-        </div>
-
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-12 flex-column d-flex"> <label
-                    class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
-                    type="text" th:field = "*{description}"  name="ans" placeholder="" onblur="validate(6)"> </div>
-        </div>
-        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Pet
-            image <span class="text-danger"> *</span></label> <input type="file" name="imageProduct"> </div>
-
-            <input type="hidden" th:field="*{category}" th:value="${'2'}" >
-
-        <div class="row justify-content-end">
-            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Car
+                        Service name<span class="text-danger"> *</span></label> <input th:field="*{name}" type="text"
+                        name="fname" onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Service fee
+                        <span class="text-danger"> *</span></label> <input type="text" th:field="*{costPrice}"
+                        name="lname" onblur="validate(2)"> </div>
             </div>
-        </div>
-
-    </form>
-
-    <form id="form4" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data" th:object="${product}">
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Subjects
-                name<span class="text-danger"> *</span></label> <input type="text" id="fname"
-                                                                       th:field = "*{name}"   name="fname" onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tution fee
-                <span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname"
-                                                                   th:field = "*{costPrice}" onblur="validate(2)"> </div>
-        </div>
 
 
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-12 flex-column d-flex"> <label
-                    class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
-                    type="text" id="ans" th:field = "*{description}" name="ans" placeholder="" onblur="validate(6)"> </div>
-        </div>
-        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
-            image (if needed)</label> <input type="file" name="imageProduct"> </div>
-
-            <input type="hidden" th:field="*{category}" th:value="${'1'}" >
-            
-
-        <div class="row justify-content-end">
-            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex"> <label
+                        class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
+                        type="text" th:field="*{description}" name="ans" placeholder="" onblur="validate(6)"> </div>
             </div>
-        </div>
-
-    </form>
-    <form id="form5" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data" th:object="${product}">
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Property
-                    Name (Land/Flat)
-                    <span class="text-danger"> *</span></label> <input th:field = "*{name}" type="text" id="fname" name="fname"
-                    onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Property Rate
-                    <span class="text-danger"> *</span></label> <input  th:field = "*{costPrice}" type="text" id="lname" name="lname"
-                    onblur="validate(2)"> </div>
-        </div>
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Location
-                    <span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname"
-                    onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Area (in
-                    Katha/sqft)
-                    <span class="text-danger"> *</span></label> <input th:field = "*{currentQuantity}" type="text" id="lname" name="lname"
-                    onblur="validate(2)"> </div>
-        </div>
-
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-12 flex-column d-flex"> <label
-                    class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
-                    th:field = "*{description}" type="text" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
-        </div>
-        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
-                image (if needed)</label> <input type="file" name="imageProduct"> </div>
+            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
+                    image (if needed)</label> <input type="file" name="imageProduct"> </div>
 
 
 
-        <div class="row justify-content-end">
-            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+            <div class="row justify-content-end">
+                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+                </div>
             </div>
-        </div>
 
-    </form>
+        </form>
 
+        <form id="form3" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data"
+            th:object="${product}">
 
-    <form id="form6" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data" th:object="${product}">
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Property
-                    Name (Land/Flat)
-                    <span class="text-danger"> *</span></label> <input th:field = "*{name}" type="text" id="fname" name="fname"
-                    onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Rent Amont (in BDT)
-                    <span class="text-danger"> *</span></label> <input  th:field = "*{costPrice}" type="text" id="lname" name="lname"
-                    onblur="validate(2)"> </div>
-        </div>
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Location
-                    <span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname"
-                    onblur="validate(1)"> </div>
-            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Area (in
-                    Katha/sqft)
-                    <span class="text-danger"> *</span></label> <input th:field = "*{currentQuantity}" type="text" id="lname" name="lname"
-                    onblur="validate(2)"> </div>
-        </div>
-
-
-        <div class="row justify-content-between text-left">
-            <div class="form-group col-12 flex-column d-flex"> <label
-                    class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
-                    th:field = "*{description}" type="text" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
-        </div>
-        <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
-                image (if needed)</label> <input type="file" name="imageProduct"> </div>
-
-
-
-        <div class="row justify-content-end">
-            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Pet
+                        Breed/type name<span class="text-danger"> *</span></label> <input type="text" name="fname"
+                        th:field="*{name}" onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Price
+                        <span class="text-danger"> *</span></label> <input type="text" th:field="*{costPrice}"
+                        name="lname" onblur="validate(2)"> </div>
             </div>
-        </div>
-
-    </form>
-
-</div>
-
-<script>
-    document.getElementById("form1-btn").addEventListener("click", function () {
-        document.getElementById("form1").style.display = "block";
-        document.getElementById("form2").style.display = "none";
-        document.getElementById("form3").style.display = "none";
-        document.getElementById("form4").style.display = "none";
-        document.getElementById("form5").style.display = "none";
-        document.getElementById("form2-btn").style.backgroundColor = "transparent";
-        document.getElementById("form3-btn").style.backgroundColor = "transparent";
-        document.getElementById("form4-btn").style.backgroundColor = "transparent";
-        document.getElementById("form5-btn").style.backgroundColor = "transparent";
-        document.getElementById("form1-btn").style.backgroundColor = "white";
-
-        document.getElementById("form6").style.display = "none";
-        document.getElementById("form6-btn").style.backgroundColor = "transparent";
-    });
-
-    document.getElementById("form2-btn").addEventListener("click", function () {
-        document.getElementById("form2").style.display = "block";
-        document.getElementById("form1").style.display = "none";
-        document.getElementById("form3").style.display = "none";
-        document.getElementById("form4").style.display = "none";
-        document.getElementById("form5").style.display = "none";
-        document.getElementById("form1-btn").style.backgroundColor = "transparent";
-        document.getElementById("form3-btn").style.backgroundColor = "transparent";
-        document.getElementById("form4-btn").style.backgroundColor = "transparent";
-        document.getElementById("form5-btn").style.backgroundColor = "transparent";
-        document.getElementById("form2-btn").style.backgroundColor = "white";
-
-        document.getElementById("form6").style.display = "none";
-        document.getElementById("form6-btn").style.backgroundColor = "transparent";
-    });
 
 
-    document.getElementById("form3-btn").addEventListener("click", function () {
-        document.getElementById("form3").style.display = "block";
-        document.getElementById("form1").style.display = "none";
-        document.getElementById("form2").style.display = "none";
-        document.getElementById("form4").style.display = "none";
-        document.getElementById("form5").style.display = "none";
-        document.getElementById("form1-btn").style.backgroundColor = "transparent";
-        document.getElementById("form2-btn").style.backgroundColor = "transparent";
-        document.getElementById("form4-btn").style.backgroundColor = "transparent";
-        document.getElementById("form5-btn").style.backgroundColor = "transparent";
-        document.getElementById("form3-btn").style.backgroundColor = "white";
-
-        document.getElementById("form6").style.display = "none";
-        document.getElementById("form6-btn").style.backgroundColor = "transparent";
-    });
-
-    document.getElementById("form4-btn").addEventListener("click", function () {
-        document.getElementById("form4").style.display = "block";
-        document.getElementById("form1").style.display = "none";
-        document.getElementById("form3").style.display = "none";
-        document.getElementById("form2").style.display = "none";
-        document.getElementById("form5").style.display = "none";
-        document.getElementById("form1-btn").style.backgroundColor = "transparent";
-        document.getElementById("form3-btn").style.backgroundColor = "transparent";
-        document.getElementById("form2-btn").style.backgroundColor = "transparent";
-        document.getElementById("form5-btn").style.backgroundColor = "transparent";
-        document.getElementById("form4-btn").style.backgroundColor = "white";
-
-        document.getElementById("form6").style.display = "none";
-        document.getElementById("form6-btn").style.backgroundColor = "transparent";
-    });
-
-    document.getElementById("form5-btn").addEventListener("click", function () {
-        document.getElementById("form5").style.display = "block";
-        document.getElementById("form1").style.display = "none";
-        document.getElementById("form3").style.display = "none";
-        document.getElementById("form2").style.display = "none";
-        document.getElementById("form4").style.display = "none";
-        document.getElementById("form1-btn").style.backgroundColor = "transparent";
-        document.getElementById("form3-btn").style.backgroundColor = "transparent";
-        document.getElementById("form2-btn").style.backgroundColor = "transparent";
-        document.getElementById("form4-btn").style.backgroundColor = "transparent";
-        document.getElementById("form5-btn").style.backgroundColor = "white";
-
-        document.getElementById("form6").style.display = "none";
-        document.getElementById("form6-btn").style.backgroundColor = "transparent";
-    });
-
-    document.getElementById("form6-btn").addEventListener("click", function () {
-        document.getElementById("form6").style.display = "block";
-        document.getElementById("form1").style.display = "none";
-        document.getElementById("form3").style.display = "none";
-        document.getElementById("form2").style.display = "none";
-        document.getElementById("form4").style.display = "none";
-        document.getElementById("form5").style.display = "none";
-        document.getElementById("form1-btn").style.backgroundColor = "transparent";
-        document.getElementById("form3-btn").style.backgroundColor = "transparent";
-        document.getElementById("form2-btn").style.backgroundColor = "transparent";
-        document.getElementById("form4-btn").style.backgroundColor = "transparent";
-        document.getElementById("form5-btn").style.backgroundColor = "transparent";
-        document.getElementById("form6-btn").style.backgroundColor = "white";
-    });
-
-
-
-</script>
-
-
-
-
-
-
-
-
-
-<section class="footer">
-
-    <div class="box-container">
-
-        <div class="box">
-            <h3> DOHS Around <i class="fas fa-shopping-basket"></i> </h3>
-            <p>A place where you can create your own shop.</p>
-            <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex"> <label
+                        class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
+                        type="text" th:field="*{description}" name="ans" placeholder="" onblur="validate(6)"> </div>
             </div>
-        </div>
+            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Pet
+                    image <span class="text-danger"> *</span></label> <input type="file" name="imageProduct"> </div>
 
-        <div class="box">
-            <h3>contact info</h3>
-            <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-            <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-            <a href="#" class="links"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
-            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
-        </div>
+            <input type="hidden" th:field="*{category}" th:value="${'2'}">
 
-        <div class="box">
-            <h3>quick links</h3>
-            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
-            <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
-            <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
-            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
-        </div>
+            <div class="row justify-content-end">
+                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+                </div>
+            </div>
 
-        <div class="box">
-            <img th:src="@{/images/logo.png}" width="300px" alt="">
-            <p>Contact us to build your shop!</p>
-            <input type="email" placeholder="Your email" class="email">
-            <input type="submit" value="Contact" class="btn">
-        </div>
+        </form>
+
+        <form id="form4" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data"
+            th:object="${product}">
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Subjects
+                        name<span class="text-danger"> *</span></label> <input type="text" id="fname" th:field="*{name}"
+                        name="fname" onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Tution fee
+                        <span class="text-danger"> *</span></label> <input type="text" id="lname" name="lname"
+                        th:field="*{costPrice}" onblur="validate(2)"> </div>
+            </div>
+
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex"> <label
+                        class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
+                        type="text" id="ans" th:field="*{description}" name="ans" placeholder="" onblur="validate(6)">
+                </div>
+            </div>
+            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
+                    image (if needed)</label> <input type="file" name="imageProduct"> </div>
+
+            <input type="hidden" th:field="*{category}" th:value="${'1'}">
+
+
+            <div class="row justify-content-end">
+                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+                </div>
+            </div>
+
+        </form>
+        <form id="form5" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data"
+            th:object="${product}">
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Property
+                        Name (Land/Flat)
+                        <span class="text-danger"> *</span></label> <input th:field="*{name}" type="text" id="fname"
+                        name="fname" onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Property
+                        Rate
+                        <span class="text-danger"> *</span></label> <input th:field="*{costPrice}" type="text"
+                        id="lname" name="lname" onblur="validate(2)"> </div>
+            </div>
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Location
+                        <span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname"
+                        onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Area (in
+                        Katha/sqft)
+                        <span class="text-danger"> *</span></label> <input th:field="*{currentQuantity}" type="text"
+                        id="lname" name="lname" onblur="validate(2)"> </div>
+            </div>
+
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex"> <label
+                        class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
+                        th:field="*{description}" type="text" id="ans" name="ans" placeholder="" onblur="validate(6)">
+                </div>
+            </div>
+            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
+                    image (if needed)</label> <input type="file" name="imageProduct"> </div>
+
+
+
+            <div class="row justify-content-end">
+                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+                </div>
+            </div>
+
+        </form>
+
+
+        <form id="form6" style="display: none;" th:action="@{/list-product}" method="post" enctype="multipart/form-data"
+            th:object="${product}">
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Property
+                        Name (Land/Flat)
+                        <span class="text-danger"> *</span></label> <input th:field="*{name}" type="text" id="fname"
+                        name="fname" onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Rent Amont
+                        (in BDT)
+                        <span class="text-danger"> *</span></label> <input th:field="*{costPrice}" type="text"
+                        id="lname" name="lname" onblur="validate(2)"> </div>
+            </div>
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Location
+                        <span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname"
+                        onblur="validate(1)"> </div>
+                <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Area (in
+                        Katha/sqft)
+                        <span class="text-danger"> *</span></label> <input th:field="*{currentQuantity}" type="text"
+                        id="lname" name="lname" onblur="validate(2)"> </div>
+            </div>
+
+
+            <div class="row justify-content-between text-left">
+                <div class="form-group col-12 flex-column d-flex"> <label
+                        class="form-control-label px-3">Description<span class="text-danger"> *</span></label> <input
+                        th:field="*{description}" type="text" id="ans" name="ans" placeholder="" onblur="validate(6)">
+                </div>
+            </div>
+            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Add
+                    image (if needed)</label> <input type="file" name="imageProduct"> </div>
+
+
+
+            <div class="row justify-content-end">
+                <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Post</button>
+                </div>
+            </div>
+
+        </form>
 
     </div>
 
-   
+    <script>
+        document.getElementById("form1-btn").addEventListener("click", function () {
+            document.getElementById("form1").style.display = "block";
+            document.getElementById("form2").style.display = "none";
+            document.getElementById("form3").style.display = "none";
+            document.getElementById("form4").style.display = "none";
+            document.getElementById("form5").style.display = "none";
+            document.getElementById("form2-btn").style.backgroundColor = "transparent";
+            document.getElementById("form3-btn").style.backgroundColor = "transparent";
+            document.getElementById("form4-btn").style.backgroundColor = "transparent";
+            document.getElementById("form5-btn").style.backgroundColor = "transparent";
+            document.getElementById("form1-btn").style.backgroundColor = "white";
 
-</section>
+            document.getElementById("form6").style.display = "none";
+            document.getElementById("form6-btn").style.backgroundColor = "transparent";
+        });
+
+        document.getElementById("form2-btn").addEventListener("click", function () {
+            document.getElementById("form2").style.display = "block";
+            document.getElementById("form1").style.display = "none";
+            document.getElementById("form3").style.display = "none";
+            document.getElementById("form4").style.display = "none";
+            document.getElementById("form5").style.display = "none";
+            document.getElementById("form1-btn").style.backgroundColor = "transparent";
+            document.getElementById("form3-btn").style.backgroundColor = "transparent";
+            document.getElementById("form4-btn").style.backgroundColor = "transparent";
+            document.getElementById("form5-btn").style.backgroundColor = "transparent";
+            document.getElementById("form2-btn").style.backgroundColor = "white";
+
+            document.getElementById("form6").style.display = "none";
+            document.getElementById("form6-btn").style.backgroundColor = "transparent";
+        });
 
 
-<script src="js/script.js"></script>
+        document.getElementById("form3-btn").addEventListener("click", function () {
+            document.getElementById("form3").style.display = "block";
+            document.getElementById("form1").style.display = "none";
+            document.getElementById("form2").style.display = "none";
+            document.getElementById("form4").style.display = "none";
+            document.getElementById("form5").style.display = "none";
+            document.getElementById("form1-btn").style.backgroundColor = "transparent";
+            document.getElementById("form2-btn").style.backgroundColor = "transparent";
+            document.getElementById("form4-btn").style.backgroundColor = "transparent";
+            document.getElementById("form5-btn").style.backgroundColor = "transparent";
+            document.getElementById("form3-btn").style.backgroundColor = "white";
+
+            document.getElementById("form6").style.display = "none";
+            document.getElementById("form6-btn").style.backgroundColor = "transparent";
+        });
+
+        document.getElementById("form4-btn").addEventListener("click", function () {
+            document.getElementById("form4").style.display = "block";
+            document.getElementById("form1").style.display = "none";
+            document.getElementById("form3").style.display = "none";
+            document.getElementById("form2").style.display = "none";
+            document.getElementById("form5").style.display = "none";
+            document.getElementById("form1-btn").style.backgroundColor = "transparent";
+            document.getElementById("form3-btn").style.backgroundColor = "transparent";
+            document.getElementById("form2-btn").style.backgroundColor = "transparent";
+            document.getElementById("form5-btn").style.backgroundColor = "transparent";
+            document.getElementById("form4-btn").style.backgroundColor = "white";
+
+            document.getElementById("form6").style.display = "none";
+            document.getElementById("form6-btn").style.backgroundColor = "transparent";
+        });
+
+        document.getElementById("form5-btn").addEventListener("click", function () {
+            document.getElementById("form5").style.display = "block";
+            document.getElementById("form1").style.display = "none";
+            document.getElementById("form3").style.display = "none";
+            document.getElementById("form2").style.display = "none";
+            document.getElementById("form4").style.display = "none";
+            document.getElementById("form1-btn").style.backgroundColor = "transparent";
+            document.getElementById("form3-btn").style.backgroundColor = "transparent";
+            document.getElementById("form2-btn").style.backgroundColor = "transparent";
+            document.getElementById("form4-btn").style.backgroundColor = "transparent";
+            document.getElementById("form5-btn").style.backgroundColor = "white";
+
+            document.getElementById("form6").style.display = "none";
+            document.getElementById("form6-btn").style.backgroundColor = "transparent";
+        });
+
+        document.getElementById("form6-btn").addEventListener("click", function () {
+            document.getElementById("form6").style.display = "block";
+            document.getElementById("form1").style.display = "none";
+            document.getElementById("form3").style.display = "none";
+            document.getElementById("form2").style.display = "none";
+            document.getElementById("form4").style.display = "none";
+            document.getElementById("form5").style.display = "none";
+            document.getElementById("form1-btn").style.backgroundColor = "transparent";
+            document.getElementById("form3-btn").style.backgroundColor = "transparent";
+            document.getElementById("form2-btn").style.backgroundColor = "transparent";
+            document.getElementById("form4-btn").style.backgroundColor = "transparent";
+            document.getElementById("form5-btn").style.backgroundColor = "transparent";
+            document.getElementById("form6-btn").style.backgroundColor = "white";
+        });
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> DOHS Around <i class="fas fa-shopping-basket"></i> </h3>
+                <p>A place where you can create your own shop.</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+                <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+                <a href="#" class="links"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
+                <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+                <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
+                <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
+                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
+            </div>
+
+            <div class="box">
+                <img th:src="@{/images/logo.png}" width="300px" alt="">
+                <p>Contact us to build your shop!</p>
+                <input type="email" placeholder="Your email" class="email">
+                <input type="submit" value="Contact" class="btn">
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+
+    <script src="js/script.js"></script>
 
 </body>
 

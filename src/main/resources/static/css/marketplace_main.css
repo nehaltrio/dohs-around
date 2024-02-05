@@ -330,7 +330,6 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  
   justify-content: center;
 }
 
@@ -672,6 +671,9 @@ section {
     font-size: 50%;
   }
 
+  .heading {
+    font-size: 2.5rem;
+  }
 
 
   .footer {
@@ -1135,6 +1137,22 @@ section {
   top: 8px;
 
   margin: 0px;
+}
+
+.heading {
+  text-align: center;
+ 
+  padding-bottom: 3rem;
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+.heading span {
+  background: var(--theme);
+  color: #fff;
+  display: inline-block;
+  padding: 0.5rem 3rem;
+  clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
 }
 
 .name_cont p {

@@ -59,7 +59,7 @@
             <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
         </form>
 
-        <div class="shopping-cart" th:if="${shoppingCart!=null}">
+        <!-- <div class="shopping-cart" th:if="${shoppingCart!=null}">
             <form th:action="@{/update-cart}" method="post">
                 <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
                     <input type="hidden" name="id" th:value="${cartItem.product.id}">
@@ -78,7 +78,7 @@
 
             <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
             <a th:href="@{/cart}" class="btn">checkout</a>
-        </div>
+        </div> -->
 
         <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
             <h3>login now</h3>
@@ -153,7 +153,7 @@
     </div>
 
 
-    <section class="products margin" id="products" style="margin-top: 5%;">
+    <div class="products margin" id="products">
 
         <!-- <h1 class="heading"> our <span>products</span> </h1> -->
 
@@ -166,7 +166,7 @@
                     </div>
                     <div class="product-details">
                         <span class="product-catagory" th:text="${product.category.name}"></span>
-                        <h4><a th:href="@{/find-product/{id}(id = ${product.id})}" data-toggle="tooltip"
+                        <h4><a th:href="@{/find-freeList_product/{id}(id = ${product.id})}" data-toggle="tooltip"
                                 data-placement="right"><span th:text="${product.name}"></span></a></h4>
                         <p th:text="${product.description}"></p>
                         <div class="product-bottom-details">
@@ -202,7 +202,7 @@
         </div>
 
 
-    </section>
+    </div>
 
 
     <section class="footer">

@@ -72,8 +72,11 @@
 
         <div class="icons">
             <div class="fas fa-bars" id="menu-btn"></div>
+            <a th:href="@{/post_add}">
+                <div class="fas fa-plus" id="list-btn"></div>
+            </a>
             <div class="fas fa-search" id="search-btn"></div>
-            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <!-- <div class="fas fa-shopping-cart" id="cart-btn"></div> -->
             <div class="fas fa-user" id="login-btn"></div>
         </div>
 
@@ -82,7 +85,7 @@
             <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
         </form>
 
-        <div class="shopping-cart" th:if="${shoppingCart!=null}">
+        <!-- <div class="shopping-cart" th:if="${shoppingCart!=null}">
             <form th:action="@{/update-cart}" method="post">
                 <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
                     <input type="hidden" name="id" th:value="${cartItem.product.id}">
@@ -90,7 +93,9 @@
                             class="fas fa-trash"></i>
                     </button>
 
-                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                 
+
+                    <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>
                         <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
@@ -101,7 +106,7 @@
 
             <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
             <a th:href="@{/cart}" class="btn">checkout</a>
-        </div>
+        </div> -->
 
         <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
             <h3>login now</h3>
@@ -153,9 +158,9 @@
     <div class="mar" style="margin-top: 8%;"></div>
     <form th:action="@{/add-to-cart}" method="post">
         <div class="product_cont">
-
+<!-- th:src="'data:image/jpeg;base64,' + ${product.image}" -->
             <div class="product_img">
-                <img th:src="*{'data:image/jpeg;base64,' + product.image}" alt="">
+                <img th:src="'data:image/jpeg;base64,' + ${product.image}" alt="">
             </div>
             <div class="product_details">
                 <!-- <div class="status">Available</div> -->
@@ -170,7 +175,7 @@
                 <div class="cont_price">
                     <p th:text="'BDT ' + ${product.costPrice}"></p>
                     <input type="hidden" th:value="${product.id}" name="id">
-                    <button type="submit">Add To Cart</button>
+                    <!-- <button type="submit">Add To Cart</button> -->
                 </div>
             </div>
 
@@ -191,7 +196,7 @@
                 <div class="product-card" th:each="product : ${products}">
                     <form th:action="@{/add-to-cart}" method="post">
                         <div class="product-tumb">
-                            <img th:src="@{'data:image/jpeg;base64,' + ${product.image}}" alt="product_image" src="">
+                            <img th:src="'data:image/jpeg;base64,' + ${product.image}" alt="product_image" src="">
                         </div>
                         <div class="product-details">
                             <span class="product-catagory" th:text="${product.category.name}"></span>

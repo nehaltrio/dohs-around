@@ -22,7 +22,7 @@
   .toast {
     position: absolute;
     top: 25px;
-    right: 30px;
+    right: -10px;
     border-radius: 12px;
     background: #fff;
     padding: 20px 35px 20px 25px;
@@ -32,6 +32,7 @@
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
     z-index: 9999;
     font-family: "Poppins", sans-serif;
+    scale: 0.8;
   }
   
   .toast.active {

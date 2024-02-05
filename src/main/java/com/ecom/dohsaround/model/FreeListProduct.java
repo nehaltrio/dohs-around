@@ -27,7 +27,7 @@ public class FreeListProduct {
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JoinColumn(name = "freelist_category_id", referencedColumnName = "freelist_category_id")
     private FreeListCategory category;
     private boolean is_deleted;
     private boolean is_activated;
