@@ -23,7 +23,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 50%;
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 7rem;
@@ -35,6 +35,10 @@ body {
 
 section {
   padding: 2rem 9%;
+}
+
+.tab_head{
+  padding-top: 10px;
 }
 
 .heading {
@@ -565,6 +569,7 @@ section {
   bottom: 0;
   width: 100%;
   padding-bottom: 5rem;
+  
 }
 
 .footer .box-container {
@@ -670,6 +675,10 @@ section {
     font-size: 55%;
   }
 
+  .tab_head{
+    padding-top: 20px;
+  }
+
   .header {
     padding: 2rem;
   }
@@ -682,6 +691,10 @@ section {
 @media (max-width: 768px) {
   #menu-btn {
     display: inline-block;
+  }
+
+  .tab_head{
+    padding-top: 40px;
   }
 
   .header .search-form {
@@ -713,6 +726,10 @@ section {
 @media (max-width: 450px) {
   html {
     font-size: 50%;
+  }
+
+  .tab_head{
+    padding-top: 50px;
   }
 
   .heading {
@@ -886,7 +903,7 @@ section {
 .tab_head h2 {
   margin-top: 7%;
   text-align: center;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   color: var(--black);
 }
@@ -1247,10 +1264,9 @@ section {
 }
 
 .shop_cont {
- 
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-bottom: 2%;
@@ -1301,12 +1317,12 @@ section {
 }
 
 .card-body p {
-  font-size: 15px;
+  font-size: 13px;
   margin: 5px 0 20px;
 }
 
 .card-body h4 {
-  font-size: 18px;
+  font-size: 16px;
   
   color: var(--theme);
 }
@@ -1314,7 +1330,7 @@ section {
 .card-body a {
   display: inline-block;
   padding: 0.8rem 3rem;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   border-radius: 0.5rem;
   border: 0.2rem solid var(--black);
   color: var(--black);

@@ -23,7 +23,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 50%;
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 7rem;
@@ -344,6 +344,10 @@ section {
   outline-offset: -1rem;
   text-align: center;
   box-shadow: var(--box-shadow);
+}
+
+.container{
+  padding-top: 0px;
 }
 
 .features .box-container .box:hover {
@@ -676,6 +680,10 @@ section {
     font-size: 55%;
   }
 
+  .container{
+    padding-top: 20px;
+  }
+
   .header {
     padding: 2rem;
   }
@@ -692,6 +700,10 @@ section {
 
   .header .search-form {
     width: 90%;
+  }
+
+  .container{
+    padding-top: 40px;
   }
 
   .header .navbar {
@@ -719,6 +731,10 @@ section {
 @media (max-width: 450px) {
   html {
     font-size: 50%;
+  }
+
+  .container{
+    padding-top: 50px;
   }
 
   .heading {

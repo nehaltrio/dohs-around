@@ -82,7 +82,8 @@
                             class="fas fa-trash"></i>
                     </button>
 
-                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                    <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                    alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>
                         <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
@@ -175,7 +176,8 @@
                             <tr th:each="cartItem : ${shoppingCart.cartItem}">
                                 <td class="p-4">
                                     <div class="media align-items-center">
-                                        <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                                        
+                                        <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
                                             class="d-block ui-w-40 ui-bordered mr-4" alt="">
                                         <div class="media-body">
                                             <a th:href="@{/find-product/{id}(id = ${cartItem.product.id})}" data-toggle="tooltip"
