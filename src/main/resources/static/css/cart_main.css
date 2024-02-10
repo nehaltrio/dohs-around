@@ -691,6 +691,16 @@ section {
   section {
     padding: 2rem;
   }
+
+  .product_cont {
+    width: 90%;
+    display: block;
+    gap: 0%;
+  }
+  
+
+
+
 }
 
 @media (max-width: 768px) {
@@ -748,6 +758,12 @@ section {
   .footer .box-container .box .payment-img {
     margin: 2rem auto;
   }
+
+  .header .logo {
+    font-size: 2rem;
+   
+  }
+  
 }
 
 .posCatSort {

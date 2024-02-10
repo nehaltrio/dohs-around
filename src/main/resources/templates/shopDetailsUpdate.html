@@ -111,7 +111,7 @@
                 <!-- Author: FormBold Team -->
                 <!-- Learn More: https://formbold.com -->
                 <div class="update_form">
-                    <form th:action="@{/update-shop/{shopName} (shopName = ${shopDto.getShopName()})}" method="post"
+                    <form th:action="@{/admin/update-shop/{shopName} (shopName = ${shopDto.getShopName()})}" method="post"
                         enctype="multipart/form-data" th:object="${shopDto}">
                         <div class="formbold-input-flex">
                             <div>

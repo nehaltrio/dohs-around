@@ -18,7 +18,7 @@
 
     <style>
         .prod_card {
-            height: 125px;
+            height: 100px;
             background-color: white;
             border-radius: 10px;
             margin-bottom: 2%;
@@ -38,10 +38,11 @@
             display: block;
             background-color: white;
             margin: 10px;
+            padding: 10px;
         }
 
         .prod_card-text {
-            width: 200px;
+            width: 250px;
             padding: 20px;
         }
 
@@ -66,6 +67,8 @@
             padding-left: 0px;
         }
 
+
+
         .prod_card-text a {
             display: block;
             padding: 0;
@@ -80,6 +83,42 @@
             background-color: white;
             color: var(--theme);
         }
+
+        @media (max-width: 1100px) {
+            .prod_card{
+                width: 100%;
+            }
+        }
+        
+
+        @media (max-width: 580px) {
+            .prod_card-text {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .prod_card-text h5 {
+                font-size: 15px;
+            }
+
+            .prod_card-text p {
+                font-size: 13px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+           
+
+            .prod_card-text h5 {
+                font-size: 12px;
+            }
+
+            .prod_card-text p {
+                font-size: 10px;
+            }
+        }
+
 
 
         /* .card-body a {

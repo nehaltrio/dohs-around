@@ -323,7 +323,6 @@ section {
   align-items: center;
   margin-left: 20%;
   margin-right: 20%;
-  
 }
 
 .product-slider {
@@ -1070,7 +1069,6 @@ section {
 .product-price {
   font-size: 18px;
   color: var(--theme);
-  ;
   font-weight: 600;
 }
 
