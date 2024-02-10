@@ -92,8 +92,8 @@
             <div class="fas fa-user" id="login-btn"></div>
         </div>
 
-        <form th:action="@{/{shopName}/search-result/0 (shopName=${shopN})}" method="get" class="search-form">
-            <input type="text" id="search-box" name="keyword" placeholder="search here...">
+        <form th:action="@{/searchAll}" method="get" class="search-form">
+            <input type="text" id="search-box" name="keyword" placeholder="search for products across marketplaces...">
             <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
         </form>
 
@@ -104,7 +104,6 @@
                     <button type="submit" name="action" value="delete" style="background: none"><i
                             class="fas fa-trash"></i>
                     </button>
-<!-- th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}" -->
                     <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>

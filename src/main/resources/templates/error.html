@@ -69,8 +69,8 @@
             <div class="fas fa-user" id="login-btn"></div>
         </div>
 
-        <form th:action="@{/{shopName}/search-result/0 (shopName=${shopN})}" method="get" class="search-form">
-            <input type="text" id="search-box" name="keyword" placeholder="search here...">
+        <form th:action="@{/searchAll}" method="get" class="search-form">
+            <input type="text" id="search-box" name="keyword" placeholder="search for products across marketplaces...">
             <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
         </form>
 
@@ -81,7 +81,6 @@
                     <button type="submit" name="action" value="delete" style="background: none"><i
                             class="fas fa-trash"></i>
                     </button>
-<!-- th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}" -->
                     <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>
@@ -104,12 +103,42 @@
             <input type="submit" value="login now" class="btn">
         </form>
 
+        
         <div class="login-form" th:if="${principal != null}">
-            <h3 th:text="${customer.getFirstName()+' '+customer.getLastName()}" class="box"></h3>
-            <a th:href="@{/account}">
-                <h3 class="box">Account Details</h3>
-            </a>
+
+            <div class="head_content" style="text-align: left;">
+                <img th:src="@{/images/profile.png}" alt="" class="profile-image">
+                <div class="name_cont">
+                    <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
+                    <p th:text="${customer.getUsername()}"></p>
+                </div>
+            </div>
+
+            <div class="middle-container">
+                <div class="dollar-div">
+                    <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                </div>
+                <div class="contact_cont">
+                    <span class="current-balance">Contact Number</span>
+                    <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+                </div>
+            </div>
+            <div class="recent-border" style="text-align: left;">
+                <span class="recent-orders" th:text="${customer.getAddress()}"></span>
+            </div>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/account}">
+                    <h3 class="box">Update Account Details</h3>
+                </a>
+            </div>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/customerProductList}">
+                    <h3 class="box">Uploaded Ads</h3>
+                </a>
+            </div>
+
             <a th:href="@{/logout}" class="btn">Log out</a>
+
         </div>
 
     </header>

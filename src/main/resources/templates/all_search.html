@@ -144,7 +144,7 @@
 
     <!-- header section starts  -->
 
-    <header class="header">
+        <header class="header">
 
         <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span>DOHS Around</span> </a>
 
@@ -174,8 +174,7 @@
                     <button type="submit" name="action" value="delete" style="background: none"><i
                             class="fas fa-trash"></i>
                     </button>
-
-                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                    <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>
                         <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
@@ -197,7 +196,7 @@
             <input type="submit" value="login now" class="btn">
         </form>
 
-
+        
         <div class="login-form" th:if="${principal != null}">
 
             <div class="head_content" style="text-align: left;">
@@ -223,6 +222,11 @@
             <div class="wishlist-border" style="text-align: left;">
                 <a th:href="@{/account}">
                     <h3 class="box">Update Account Details</h3>
+                </a>
+            </div>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/customerProductList}">
+                    <h3 class="box">Uploaded Ads</h3>
                 </a>
             </div>
 
