@@ -59,7 +59,7 @@
             <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
         </form>
 
-        <!-- <div class="shopping-cart" th:if="${shoppingCart!=null}">
+        <div class="shopping-cart" th:if="${shoppingCart!=null}">
             <form th:action="@{/update-cart}" method="post">
                 <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
                     <input type="hidden" name="id" th:value="${cartItem.product.id}">
@@ -67,7 +67,8 @@
                             class="fas fa-trash"></i>
                     </button>
 
-                    <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                    <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                        alt="product_image">
                     <div class="content">
                         <h3 th:text="${cartItem.product.name}"></h3>
                         <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
@@ -78,7 +79,7 @@
 
             <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
             <a th:href="@{/cart}" class="btn">checkout</a>
-        </div> -->
+        </div>
 
         <form th:action="@{/do-login}" th:if="${principal == null}" method="post" class="login-form">
             <h3>login now</h3>
@@ -116,6 +117,12 @@
             <div class="wishlist-border" style="text-align: left;">
                 <a th:href="@{/account}">
                     <h3 class="box">Update Account Details</h3>
+                </a>
+            </div>
+
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/customerProductList}">
+                    <h3 class="box">Uploaded Ads</h3>
                 </a>
             </div>
 

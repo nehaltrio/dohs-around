@@ -23,7 +23,7 @@
 
 <header class="header">
 
-    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span>DOHS Around</span> </a>
 
     <nav class="navbar">
         <a href="#home">home</a>
@@ -34,6 +34,9 @@
 
     <div class="icons">
         <div class="fas fa-bars" id="menu-btn"></div>
+        <a th:href="@{/post_add}">
+            <div class="fas fa-plus" id="list-btn"></div>
+        </a>
         <div class="fas fa-search" id="search-btn"></div>
         <div class="fas fa-shopping-cart" id="cart-btn"></div>
         <div class="fas fa-user" id="login-btn"></div>
@@ -52,7 +55,8 @@
                         class="fas fa-trash"></i>
                 </button>
 
-                <img th:src="*{'data:image/jpeg;base64,' + cartItem.product.listOfAttachedFiles.get(0).getFile()}" alt="product_image">
+                <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                    alt="product_image">
                 <div class="content">
                     <h3 th:text="${cartItem.product.name}"></h3>
                     <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
@@ -73,6 +77,8 @@
         <p>don't have an account <a th:href="@{/register}">create now</a></p>
         <input type="submit" value="login now" class="btn">
     </form>
+
+ 
 
     <div class="login-form" th:if="${principal != null}">
 
@@ -102,9 +108,16 @@
             </a>
         </div>
 
+        <div class="wishlist-border" style="text-align: left;">
+            <a th:href="@{/customerProductList}">
+                <h3 class="box">Uploaded Ads</h3>
+            </a>
+        </div>
+
         <a th:href="@{/logout}" class="btn">Log out</a>
 
     </div>
+
 </header>
 
 <!-- header section ends -->
