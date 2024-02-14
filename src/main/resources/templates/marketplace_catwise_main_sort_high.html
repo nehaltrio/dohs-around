@@ -147,12 +147,11 @@
 <!-- home section starts  -->
 
 
-<section class="home" id="home">
+<section class="home contrast-bg" id="home">
 
-    <div class="content">
+    <div class="content contrast-el">
         <h3 th:text=" ${shopN}"></h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam libero nostrum veniam facere tempore
-            nisi.</p>
+        <p th:text="${shop.getShopDesc()}"></p>
         <a href="#products" class="btn">shop now</a>
     </div>
 
@@ -222,19 +221,22 @@
 <!-- products section ends -->
 <!--/products-in-category/{id}/{pageNo}-->
 
+
+<!--  -->
+
 <div class="pagination">
     <ul>
         <li th:if="${currentPage != 0}" class="page-item">
-            <a th:href="@{'/'+ ${shop} +'/products-in-category-sort-high/'+ ${category.id}+'/' + ${currentPage - 1}}"
+            <a th:href="@{'/'+ ${shopN} +'/products-in-category-sort-high/'+ ${category.id}+'/' + ${currentPage - 1}}"
                class="page-link" href="#">Previous</a>
         </li>
         <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}"
             class="page-item">
-            <a th:href="@{'/'+ ${shop} +'/products-in-category-sort-high/'+ ${category.id}+'/' + ${i - 1}}"
+            <a th:href="@{'/'+ ${shopN} +'/products-in-category-sort-high/'+ ${category.id}+'/' + ${i - 1}}"
                class="page-link" href="#"><span th:text="${i}"></span></a>
         </li>
         <li th:if="${currentPage + 1 != totalPages}" class="page-item">
-            <a th:href="@{'/'+ ${shop} +'/products-in-category-sort-high/' + ${category.id}+'/' + ${currentPage + 1}}"
+            <a th:href="@{'/'+ ${shopN} +'/products-in-category-sort-high/' + ${category.id}+'/' + ${currentPage + 1}}"
                class="page-link" href="#">Next</a>
         </li>
     </ul>

@@ -668,6 +668,10 @@ section {
 
 }
 
+.links span{
+  text-transform: lowercase;
+}
+
 @media (max-width: 600px) {
   html {
     font-size: 50%;
