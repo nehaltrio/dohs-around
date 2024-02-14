@@ -33,7 +33,7 @@
             width: 100%;
             max-width: 100px;
             height: 100px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 10px;
             display: block;
             background-color: white;
@@ -63,11 +63,8 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            padding: 20px;
-            padding-left: 0px;
+            padding-bottom: 20px;
         }
-
-
 
         .prod_card-text a {
             display: block;
@@ -244,8 +241,8 @@
     <div class="shop_cont">
         <div class="card" th:each="shopL : ${shops}" th:if="${shopL.getShopName()}">
             <div class="card-header">
-                <img src="https://img.freepik.com/free-vector/women-buying-clothes-apparel-store-dress-lady-accessory-flat-vector-illustration-fashion-shopping_74855-13291.jpg?w=740&t=st=1683643090~exp=1683643690~hmac=c50d17c77259b1a953cc2b6580f77464cbfafedaacaa74d8f3b945097a2fdbb7"
-                    alt="rover" />
+                <img th:src="'data:image/jpeg;base64,' + ${shopL.image}"
+                alt="shop_cover" />
             </div>
             <div class="card-body">
                 <!-- <span class="tag tag-teal">Technology</span> -->
