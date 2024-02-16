@@ -22,7 +22,12 @@
     </thead>
     <tbody>
     <tr th:each="order : ${orders}">
-        <td th:text="${order.getProduct().getName()}"></td>
+        <td>
+            <img src=""
+                th:src="'data:image/jpeg;base64,' + ${order.getProduct().listOfAttachedFiles.get(0).getFile()}"
+                alt="product_image">
+            <p th:text="${order.getProduct().getName()}"></p>
+        </td>
         <td th:text="${order.getQuantity()}"></td>
         <td th:text="${order.getTotalPrice()}"></td>
         <td th:text="${order.getCustomer().getFirstName()}"></td>
@@ -33,6 +38,48 @@
     </tr>
     </tbody>
 </table>
+
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const darkModeCheckbox = document.getElementById('switch-mode');
+            const body = document.body;
+
+            // Check if the user has a preference stored in local storage
+            const darkMode = localStorage.getItem('darkMode');
+
+            // Function to enable dark mode
+            function enableDarkMode() {
+                body.classList.add('dark');
+                darkModeCheckbox.checked = true;
+                localStorage.setItem('darkMode', 'enabled');
+            }
+
+            // Function to disable dark mode
+            function disableDarkMode() {
+                body.classList.remove('dark');
+                darkModeCheckbox.checked = false;
+                localStorage.setItem('darkMode', 'disabled');
+            }
+
+            // Toggle dark mode based on the user's preference
+            if (darkMode === 'enabled') {
+                enableDarkMode();
+            }
+
+            // Set the initial state of the checkbox
+            darkModeCheckbox.checked = body.classList.contains('dark');
+
+            // Event listener for the dark mode checkbox change
+            darkModeCheckbox.addEventListener('change', function () {
+                if (darkModeCheckbox.checked) {
+                    enableDarkMode();
+                } else {
+                    disableDarkMode();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

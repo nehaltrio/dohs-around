@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,181 +12,227 @@
 
     <title>Marketplace | Admin</title>
 </head>
+
 <body>
 
 
-<!-- SIDEBAR -->
-<section id="sidebar">
-    <a href="#" class="brand">
-        <i class='bx bxs-cart-alt' ></i>
-        <span class="text" th:text="${shop.getShopName()}"></span>
-    </a>
-    <ul class="side-menu top">
-        <li class="active">
-            <a th:href="@{/dashboard}">
-                <i class='bx bxs-dashboard'></i>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/products/0}">
-                <i class='bx bxs-shopping-bag-alt'></i>
-                <span class="text">Products</span>
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/categories}">
-                <i class='bx bxs-doughnut-chart'></i>
-                <span class="text">Categories</span>
-            </a>
-        </li>
-        <li>
-            <a th:href="@{/OrderList}">
-                <i class='bx bxs-message-dots'></i>
-                <span class="text">Orders</span>
-            </a>
-        </li>
-    </ul>
-    <ul class="side-menu">
-        <li>
-            <a th:href="@{/logout}" class="logout">
-                <i class='bx bxs-log-out-circle'></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-    </ul>
-
-
-</section>
-<!-- SIDEBAR -->
-
-
-<!-- CONTENT -->
-<section id="content">
-    <!-- NAVBAR -->
-    <nav>
-        <i class='bx bx-menu pos'></i>
-        <!-- <a href="#" class="nav-link">Categories</a> -->
-        <!-- <form action="#">
-            <div class="form-input">
-                <input type="search" placeholder="Search...">
-                <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-            </div>
-        </form> -->
-
-        <input type="checkbox" id="switch-mode" hidden>
-        <label for="switch-mode" class="switch-mode"></label>
-        <!-- <a href="#" class="notification">
-            <i class='bx bxs-bell' ></i>
-            <span class="num">8</span>
-        </a> -->
-        <a href="#" class="profile">
-            <img th:src="@{/images/1.png}" alt="profile_img">
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-cart-alt'></i>
+            <span class="text" th:text="${shop.getShopName()}"></span>
         </a>
-        <p th:text="${shop.getFirstName()} + ' ' + ${shop.getLastName()}"></p>
-
-
-    </nav>
-    <!-- NAVBAR -->
-
-    <!-- MAIN -->
-    <main>
-        <div class="head-title">
-            <div class="left">
-                <h1>Dashboard</h1>
-                <ul class="breadcrumbs">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
-                    <li>
-                        <a class="active" href="#">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <ul class="box-info">
-            <li>
-                <i class='bx bxs-calendar-check'></i>
-                <span class="text">
-						<h3 th:text="${orderCount}"></h3>
-						<p>Order</p>
-					</span>
+        <ul class="side-menu top">
+            <li class="active">
+                <a th:href="@{/admin/dashboard}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
             </li>
             <li>
-                <i class='bx bxs-group'></i>
-                <span class="text">
-						<h3 th:text="${productCount}"></h3>
-						<p>Product</p>
-					</span>
+                <a th:href="@{/admin/products/0}">
+                    <i class='bx bxs-package'></i>
+                    <span class="text">Products</span>
+                </a>
             </li>
             <li>
-                <i class='bx bxs-dollar-circle'></i>
-                <span class="text">
-						<h3 th:text="${catCount}"></h3>
-						<p>Category</p>
-					</span>
+                <a th:href="@{/admin/categories}">
+                    <i class='bx bxs-layout'></i>
+                    <span class="text">Categories</span>
+                </a>
             </li>
-
-
+            <li>
+                <a th:href="@{/admin/OrderList}">
+                    <i class='bx bxs-basket'></i>
+                    <span class="text">Orders</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/update-shop/{shopName} (shopName = ${shop.getShopName()})}">
+                    <i class='bx bxs-edit'></i>
+                    <span class="text">Update Shop</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a th:href="@{/logout}" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
         </ul>
 
 
-        <div class="table-data">
-            <div class="order">
-                <div class="head">
-                    <h3>Recent Orders</h3>
-                    <a th:href="@{/OrderList}" class="viewOrder">View All</a>
+    </section>
+    <!-- SIDEBAR -->
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu pos'></i>
+
+
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+
+
+            <a href="#" class="profile">
+                <img th:src="@{/images/1.png}" alt="profile_img">
+            </a>
+            <p th:text="${shop.getFirstName()}"></p>
+
+
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumbs">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">Home</a>
+                        </li>
+                    </ul>
                 </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Order Date</th>
-                        <th>Order Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="order : ${orders}">
-                        <td>
-                            <img src="" th:src="'data:image/jpeg;base64,' + ${order.getProduct().listOfAttachedFiles.get(0).getFile()}"
-                                 alt="product_image">
-                            <p th:text="${order.getProduct().getName()}"></p>
-                        </td>
-                        <td th:text="${order.getOrderDate()}"></td>
-                        <td><span th:if="${order.isOrderStatus()==false}" class="status pending">Pending</span>
-                            <span th:if="${order.isOrderStatus()==true}" class="status completed">Accepted</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
-            <div class="todo">
-                <div class="head">
-                    <h3>Shop</h3>
-                    <i class='bx bx-plus' ></i>
-                    <i class='bx bx-filter' ></i>
+
+            <ul class="box-info">
+                <li>
+                    <i class='bx bxs-basket'></i>
+                    <span class="text">
+                        <h3 th:text="${orderCount}"></h3>
+                        <p>Orders</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-package'></i>
+                    <span class="text">
+                        <h3 th:text="${productCount}"></h3>
+                        <p>Products</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-layout'></i>
+                    <span class="text">
+                        <h3 th:text="${catCount}"></h3>
+                        <p>Categories</p>
+                    </span>
+                </li>
+
+
+            </ul>
+
+
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Recent Orders</h3>
+                        <a th:href="@{/OrderList}" class="viewOrder">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Order Date</th>
+                                <th>Order Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="order : ${orders}">
+                                <td>
+                                    <img src=""
+                                        th:src="'data:image/jpeg;base64,' + ${order.getProduct().listOfAttachedFiles.get(0).getFile()}"
+                                        alt="product_image">
+                                    <p th:text="${order.getProduct().getName()}"></p>
+                                </td>
+                                <td th:text="${order.getOrderDate()}"></td>
+                                <td><span th:if="${order.isOrderStatus()==false}" class="status pending">Pending</span>
+                                    <span th:if="${order.isOrderStatus()==true}"
+                                        class="status completed">Accepted</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div class="todo">
+                    <div class="head">
+                        <h3>Shop</h3>
+                       
+                    </div>
 
-                <p>Change your shop's color theme : </p>
+                    <p>Change your shop's color theme : </p>
 
-                <form th:action="@{/setThemeColor}">
-                    <input type="color" name="color" value="" id="stl">
-                    <input type="submit" value="Set">
-                </form>
+                    <form th:action="@{/admin/setThemeColor}">
+                        <input type="color" name="color" value="" id="stl">
+                        <input type="submit" value="Set">
+                    </form>
 
-                <a href="" class="visit_shop_btn">Visit Shop</a>
-                <a th:href="@{/update-shop/{shopName} (shopName=${shop.getShopName()})}" class="visit_shop_btn">Update Shop</a>
+                    <div class="dash_btn">
+                        <a href="" class="visit_shop_btn">Visit Shop</a>
+                        <a th:href="@{/update-shop/{shopName} (shopName=${shop.getShopName()})}"
+                            class="visit_shop_btn">Update Shop</a>
+                    </div>
 
+                </div>
             </div>
-        </div>
-    </main>
-    <!-- MAIN -->
-</section>
-<!-- CONTENT -->
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
 
 
-<script th:src="@{/js/script_main.js}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const darkModeCheckbox = document.getElementById('switch-mode');
+            const body = document.body;
+
+            // Check if the user has a preference stored in local storage
+            const darkMode = localStorage.getItem('darkMode');
+
+            // Function to enable dark mode
+            function enableDarkMode() {
+                body.classList.add('dark');
+                darkModeCheckbox.checked = true;
+                localStorage.setItem('darkMode', 'enabled');
+            }
+
+            // Function to disable dark mode
+            function disableDarkMode() {
+                body.classList.remove('dark');
+                darkModeCheckbox.checked = false;
+                localStorage.setItem('darkMode', 'disabled');
+            }
+
+            // Toggle dark mode based on the user's preference
+            if (darkMode === 'enabled') {
+                enableDarkMode();
+            }
+
+            // Set the initial state of the checkbox
+            darkModeCheckbox.checked = body.classList.contains('dark');
+
+            // Event listener for the dark mode checkbox change
+            darkModeCheckbox.addEventListener('change', function () {
+                if (darkModeCheckbox.checked) {
+                    enableDarkMode();
+                } else {
+                    disableDarkMode();
+                }
+            });
+        });
+    </script>
+
+
+    <script th:src="@{/js/script_main.js}"></script>
 </body>
+
 </html>

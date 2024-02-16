@@ -98,8 +98,7 @@ h6 {
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 1rem
+   
 }
 
 abbr[data-original-title],
@@ -240,7 +239,7 @@ th {
 
 label {
     display: inline-block;
-    margin-bottom: .5rem
+ 
 }
 
 button {
@@ -2128,8 +2127,8 @@ pre code {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #6e707e;
-    background-color: #fff;
+    color: var(--dark);
+    background-color: var(--light);
     background-clip: padding-box;
     border: 1px solid #d1d3e2;
     border-radius: .35rem;
@@ -2216,7 +2215,8 @@ select.form-control:focus::-ms-value {
     padding-bottom: calc(.375rem + 1px);
     margin-bottom: 0;
     font-size: inherit;
-    line-height: 1.5
+    line-height: 1.5;
+    color: var(--dark);
 }
 
 .col-form-label-lg {
@@ -6306,7 +6306,7 @@ a.close.disabled {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #fff;
+    background-color: var(--light);
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: .3rem;
@@ -6338,7 +6338,8 @@ a.close.disabled {
     padding: 1rem 1rem;
     border-bottom: 1px solid #e3e6f0;
     border-top-left-radius: calc(.3rem - 1px);
-    border-top-right-radius: calc(.3rem - 1px)
+    border-top-right-radius: calc(.3rem - 1px);
+    color: var(--dark);
 }
 
 .modal-header .close {

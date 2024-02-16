@@ -180,6 +180,7 @@ body {
 	top: 0;
 	left: 0;
 	z-index: 1000;
+	color: var(--dark);
 }
 #content nav::before {
 	content: "";
@@ -442,6 +443,7 @@ body {
 	align-items: center;
 	grid-gap: 12px;
 	padding-left: 6px;
+	padding-top: 25px;
 }
 #content main .table-data .order table td img {
 	width: 36px;
@@ -653,7 +655,7 @@ body {
 	margin: 0 auto;
 	width: 100%;
 	padding: 40px;
-	background: white;
+	background: var(--light);
 	border-radius: 10px;
 }
 
@@ -662,7 +664,7 @@ body {
 	margin: 0 auto;
 	width: 650px;
 	padding: 40px;
-	background: white;
+	background: var(--light);
 	border-radius: 10px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
@@ -688,10 +690,10 @@ body {
 	padding-bottom: 10px;
 	border: none;
 	border-bottom: 1px solid #dde3ec;
-	background: #ffffff;
+	background: var(--light);
 	font-weight: 500;
 	font-size: 16px;
-	color: #07074d;
+	color: var(--dark);
 	outline: none;
 	resize: none;
 	font-family: var(--lato);
@@ -703,7 +705,7 @@ body {
 	border-color: var(--blue);
 }
 .formbold-form-label {
-	color: #ffffff;
+	color: var(--dark);
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 24px;
@@ -729,6 +731,7 @@ body {
 	gap: 10px;
 	position: relative;
 	cursor: pointer;
+	color: var(--dark);
 }
 
 .formbold-filename-wrapper {
@@ -756,7 +759,7 @@ body {
 	border: none;
 	font-weight: 500;
 	background-color: var(--blue);
-	color: white;
+	color: var(--light);
 	cursor: pointer;
 	margin-top: 25px;
 }
@@ -848,7 +851,7 @@ input[type="color"] {
 	width: 30%;
 	height: 52px;
 	border-radius: 10px;
-	margin-top: 2%;
+	margin-top: 12px;
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: bold;
@@ -868,4 +871,16 @@ input[type="color"] {
 	margin-top: 5%;
 	max-width: 250px;
 	right: 0;
+}
+
+.dash_btn{
+	display: flex;
+	width: 100%;
+	gap: 5%;
+	align-items: center;
+	justify-content: center;
+}
+
+.dash_btn a{
+	width: 100%;
 }

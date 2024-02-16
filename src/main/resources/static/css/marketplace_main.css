@@ -791,13 +791,15 @@ section {
   background-color: white;
   transition: height 0.4s ease;
   border-radius: 5px;
+  position: absolute;
+ 
 }
 
 .sort .slide li {
   font-size: 18px;
   list-style: none;
   margin: 2%;
-  width: 310px;
+
   height: 50px;
   padding: 10px;
   display: flex;
@@ -987,7 +989,7 @@ section {
 
 .product-card {
   width: 280px;
-  position: relative;
+
   box-shadow: 0 2px 7px #dfdfdf;
   margin: auto;
   background: #fafafa;

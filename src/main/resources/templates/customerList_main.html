@@ -127,7 +127,11 @@
                     </thead>
                     <tbody>
                     <tr th:each="customer : ${customerList}">
-                        <td th:text="${customer.getFirstName()}"></td>
+                        <td>
+                            <img th:src="@{/images/1.png}" alt="profile_img">
+                            <p th:text="${customer.getFirstName()}  + ' ' + ${customer.getLastName()}"></p>
+                        </td>
+                        
                         <td th:text="${customer.getUsername()}"></td>
                         <td th:text="${customer.getPhoneNumber()}"></td>
                         <td th:text="${customer.getAddress()}"></td>
