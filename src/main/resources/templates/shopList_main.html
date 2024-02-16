@@ -153,7 +153,7 @@
                         <td><a th:if="${shop.isActive()==false}" th:href="@{/enable-shop/{id} (id = ${shop.getId()})}" class="button-green">Activate</a>
                             <a th:if="${shop.isActive()==true}" th:href="@{/disable-shop/{id} (id = ${shop.getId()})}" class="button-red">Deactivate</a>
                         </td>
-                        <td><a th:href="@{/}" class="button-primary">Visit</a></td>
+                        <td><a th:href="@{/{shopName}/products/0 (shopName=${shop.getShopName()})}" class="button-primary">Visit</a></td>
                     </tr>
 
 

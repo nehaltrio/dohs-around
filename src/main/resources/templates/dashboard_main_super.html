@@ -169,7 +169,7 @@
                                 <td><span th:if="${shop.isActive()==false}" class="status pending">In Active</span>
                                     <span th:if="${shop.isActive()==true}" class="status completed">Active</span>
                                 </td>
-                                <td><a href="" class="button-primary">Visit</a></td>
+                                <td><a th:href="@{/{shopName}/products/0 (shopName=${shop.getShopName()})}" class="button-primary">Visit</a></td>
                             </tr>
                         </tbody>
                     </table>

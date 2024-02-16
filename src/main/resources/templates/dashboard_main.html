@@ -177,7 +177,8 @@
                     </form>
 
                     <div class="dash_btn">
-                        <a href="" class="visit_shop_btn">Visit Shop</a>
+                        <a th:href="@{/{shopName}/products/0 (shopName=${shop.getShopName()})}"
+                            class="visit_shop_btn">Visit Shop</a>
                         <a th:href="@{/update-shop/{shopName} (shopName=${shop.getShopName()})}"
                             class="visit_shop_btn">Update Shop</a>
                     </div>
