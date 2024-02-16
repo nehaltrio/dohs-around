@@ -71,10 +71,7 @@ public class HomeController {
                 shoppingCart = null;
             }
 
-            if (customer == null) {
-                return "redirect:/login";
-                
-            }
+          
 
             model.addAttribute("customer", customer);
 
@@ -106,6 +103,7 @@ public class HomeController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -114,7 +112,7 @@ public class HomeController {
             }
 
             model.addAttribute("shoppingCart", shoppingCart);
-
+        }
         }
 
         model.addAttribute("principal", principal);
