@@ -115,7 +115,7 @@
             </div>
 
 
-            <div class="formbold-main-wrapper">
+           
                 <!-- Author: FormBold Team -->
                 <!-- Learn More: https://formbold.com -->
                 <div class="update_form">
@@ -228,7 +228,7 @@
                         </button>
                     </form>
                 </div>
-            </div>
+          
 
 
         </main>
@@ -276,6 +276,26 @@
             });
         });
     </script>
+
+<script>
+    // Function to check screen size and add/remove the "hide" class
+    function updateVisibility() {
+        const sidebar = document.getElementById('sidebar');
+        const isSmallScreen = window.innerWidth <= 768; // Adjust the breakpoint as needed
+
+        if (isSmallScreen) {
+            sidebar.classList.add('hide');
+        } else {
+            sidebar.classList.remove('hide');
+        }
+    }
+
+    // Initial check on page load
+    document.addEventListener('DOMContentLoaded', updateVisibility);
+
+    // Check on window resize
+    window.addEventListener('resize', updateVisibility);
+</script>
 
 
     <script th:src="@{/js/script_main.js}"></script>

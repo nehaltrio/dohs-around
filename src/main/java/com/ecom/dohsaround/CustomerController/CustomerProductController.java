@@ -27,7 +27,6 @@ import com.ecom.dohsaround.service.serviceService;
 import java.security.Principal;
 import java.util.List;
 
-
 @Controller
 public class CustomerProductController {
 
@@ -80,14 +79,15 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         if (shop.getShopCategory().equals(ShopCategories.CAR_SERVICE.toString())) {
@@ -121,17 +121,18 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "marketplace_main";
@@ -154,6 +155,7 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -162,7 +164,7 @@ public class CustomerProductController {
             }
 
             model.addAttribute("shoppingCart", shoppingCart);
-
+        }
         }
 
         return "product-detail_main";
@@ -194,6 +196,7 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -204,7 +207,7 @@ public class CustomerProductController {
             model.addAttribute("principal", principal);
 
             model.addAttribute("shoppingCart", shoppingCart);
-
+        }
         }
 
         return "marketplace_catwise_main";
@@ -235,6 +238,7 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -245,7 +249,7 @@ public class CustomerProductController {
             model.addAttribute("principal", principal);
 
             model.addAttribute("shoppingCart", shoppingCart);
-
+        }
         }
 
         return "marketplace_high_to_low_main";
@@ -276,6 +280,7 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -286,7 +291,7 @@ public class CustomerProductController {
             model.addAttribute("principal", principal);
 
             model.addAttribute("shoppingCart", shoppingCart);
-
+        }
         }
 
         return "marketplace_low_to_high_main";
@@ -318,6 +323,7 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -328,7 +334,7 @@ public class CustomerProductController {
             model.addAttribute("principal", principal);
 
             model.addAttribute("shoppingCart", shoppingCart);
-
+        }
         }
 
         return "marketplace_catwise_main_sort_high";
@@ -360,6 +366,7 @@ public class CustomerProductController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
+            if (customer != null) {
             ShoppingCart shoppingCart = customer.getShoppingCart();
             model.addAttribute("customer", customer);
 
@@ -370,6 +377,7 @@ public class CustomerProductController {
             model.addAttribute("principal", principal);
 
             model.addAttribute("shoppingCart", shoppingCart);
+        }
 
         }
 

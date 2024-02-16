@@ -49,8 +49,12 @@ public class FreeListController {
         }
         try {
             Customer customer = customerRepository.findByUsername(principal.getName());
-            freeListService.save(imageProduct, customer, productDto);
-            attributes.addFlashAttribute("success", "Add successfully!");
+            if (customer != null) {
+                freeListService.save(imageProduct, customer, productDto);
+                attributes.addFlashAttribute("success", "Add successfully!");
+            } else {
+                return "redirect:/login";
+            }
         } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to add!");
@@ -70,17 +74,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "freelistPost";
@@ -105,17 +110,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "freelist";
@@ -140,17 +146,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "marketplace_high_to_low_main_freeList";
@@ -174,17 +181,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "marketplace_low_to_high_main_freeList";
@@ -212,17 +220,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "freelist_search";
@@ -249,17 +258,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "marketplace_catwise_main_freelist";
@@ -286,17 +296,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "freelist_catwise_main_sort_high";
@@ -323,17 +334,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "freelist_catwise_main_sort_low";
@@ -343,27 +355,22 @@ public class FreeListController {
     private String showCustomerProductList(Principal principal, Model model) {
         if (principal != null) {
             Customer customer = customerRepository.findByUsername(principal.getName());
-            List<FreeListProduct> products = freeListService.getProductsCustomerUploadedByCustomer(customer);
+            if (customer != null) {
+                List<FreeListProduct> products = freeListService.getProductsCustomerUploadedByCustomer(customer);
 
-            model.addAttribute("customerProductList", products);
-        }
+                model.addAttribute("customerProductList", products);
 
-        if (principal != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            String username = principal.getName();
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
 
-            Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                model.addAttribute("principal", principal);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "customer_products_main";
@@ -411,17 +418,18 @@ public class FreeListController {
             String username = principal.getName();
 
             Customer customer = customerService.findByUsername(username);
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+            if (customer != null) {
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-
         }
 
         return "product-detail_main_freelist";

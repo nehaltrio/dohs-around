@@ -166,7 +166,7 @@
                 <div class="todo">
                     <div class="head">
                         <h3>Shop</h3>
-                       
+
                     </div>
 
                     <p>Change your shop's color theme : </p>
@@ -229,6 +229,28 @@
                 }
             });
         });
+    </script>
+
+
+
+    <script>
+        // Function to check screen size and add/remove the "hide" class
+        function updateVisibility() {
+            const sidebar = document.getElementById('sidebar');
+            const isSmallScreen = window.innerWidth <= 768; // Adjust the breakpoint as needed
+
+            if (isSmallScreen) {
+                sidebar.classList.add('hide');
+            } else {
+                sidebar.classList.remove('hide');
+            }
+        }
+
+        // Initial check on page load
+        document.addEventListener('DOMContentLoaded', updateVisibility);
+
+        // Check on window resize
+        window.addEventListener('resize', updateVisibility);
     </script>
 
 

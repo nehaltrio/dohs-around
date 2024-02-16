@@ -17,38 +17,44 @@
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="#" class="brand">
-        <i class='bx bxs-cart-alt' ></i>
-        <span class="text" >Super Admin</span>
+        <i class='bx bxs-cart-alt'></i>
+        <span class="text">Super Admin</span>
     </a>
     <ul class="side-menu top">
         <li >
-            <a th:href="@{/dashboard}">
+            <a th:href="@{/admin/dashboard}">
                 <i class='bx bxs-dashboard'></i>
                 <span class="text">Dashboard</span>
             </a>
         </li>
         <li class="active">
-            <a th:href="@{/marketplace-list/0}">
+            <a th:href="@{/admin/marketplace-list/0}">
                 <i class='bx bxs-shopping-bag-alt'></i>
                 <span class="text">Marketplaces</span>
             </a>
         </li>
-        <li>
-            <a th:href="@{/customer-list/0}">
-                <i class='bx bxs-doughnut-chart'></i>
+        <li >
+            <a th:href="@{/admin/customer-list/0}">
+                <i class='bx bxs-group'></i>
                 <span class="text">Customers</span>
             </a>
         </li>
-        <li >
-            <a th:href="@{/product-list/0}">
-                <i class='bx bxs-message-dots'></i>
+        <li>
+            <a th:href="@{/admin/product-list/0}">
+                <i class='bx bxs-package'></i>
                 <span class="text">Products</span>
             </a>
         </li>
         <li>
-            <a th:href="@{/categoriesFreeList}">
-                <i class='bx bxs-message-dots'></i>
+            <a th:href="@{/admin/categoriesFreeList}">
+                <i class='bx bxs-layout'></i>
                 <span class="text">Categories</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin_register}">
+                <i class='bx bxs-edit'></i>
+                <span class="text">Create Shop</span>
             </a>
         </li>
     </ul>
@@ -60,6 +66,7 @@
             </a>
         </li>
     </ul>
+
 </section>
 <!-- SIDEBAR -->
 
@@ -126,6 +133,7 @@
                         <th scope="col">Shop</th>
                         <th scope="col">Shop Admin</th>
                         <th scope="col">Shop Admin Email</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                         <th scope="col">Visit Shop</th>
@@ -137,6 +145,7 @@
                         <td th:text="${shop.getShopName()}"></td>
                         <td th:text="${shop.getFirstName()}"></td>
                         <td th:text="${shop.getUsername()}"></td>
+                        <td th:text="${shop.shopCategory}"></td>
 
                         <td><span th:if="${shop.isActive()==false}" class="status pending">Deactivated</span>
                             <span th:if="${shop.isActive()==true}"  class="status completed">Activated</span>
@@ -144,7 +153,7 @@
                         <td><a th:if="${shop.isActive()==false}" th:href="@{/enable-shop/{id} (id = ${shop.getId()})}" class="button-green">Activate</a>
                             <a th:if="${shop.isActive()==true}" th:href="@{/disable-shop/{id} (id = ${shop.getId()})}" class="button-red">Deactivate</a>
                         </td>
-                        <td><a href="" class="button-primary">Visit</a></td>
+                        <td><a th:href="@{/}" class="button-primary">Visit</a></td>
                     </tr>
 
 
@@ -173,6 +182,70 @@
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const darkModeCheckbox = document.getElementById('switch-mode');
+        const body = document.body;
+
+        // Check if the user has a preference stored in local storage
+        const darkMode = localStorage.getItem('darkMode');
+
+        // Function to enable dark mode
+        function enableDarkMode() {
+            body.classList.add('dark');
+            darkModeCheckbox.checked = true;
+            localStorage.setItem('darkMode', 'enabled');
+        }
+
+        // Function to disable dark mode
+        function disableDarkMode() {
+            body.classList.remove('dark');
+            darkModeCheckbox.checked = false;
+            localStorage.setItem('darkMode', 'disabled');
+        }
+
+        // Toggle dark mode based on the user's preference
+        if (darkMode === 'enabled') {
+            enableDarkMode();
+        }
+
+        // Set the initial state of the checkbox
+        darkModeCheckbox.checked = body.classList.contains('dark');
+
+        // Event listener for the dark mode checkbox change
+        darkModeCheckbox.addEventListener('change', function () {
+            if (darkModeCheckbox.checked) {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        });
+    });
+</script>
+
+
+
+<script>
+    // Function to check screen size and add/remove the "hide" class
+    function updateVisibility() {
+        const sidebar = document.getElementById('sidebar');
+        const isSmallScreen = window.innerWidth <= 768; // Adjust the breakpoint as needed
+
+        if (isSmallScreen) {
+            sidebar.classList.add('hide');
+        } else {
+            sidebar.classList.remove('hide');
+        }
+    }
+
+    // Initial check on page load
+    document.addEventListener('DOMContentLoaded', updateVisibility);
+
+    // Check on window resize
+    window.addEventListener('resize', updateVisibility);
+</script>
+
 
 
 <script th:src="@{/js/script_main.js}"></script>

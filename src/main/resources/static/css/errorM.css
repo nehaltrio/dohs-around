@@ -24,7 +24,7 @@
     top: 25px;
     right: -10px;
     border-radius: 12px;
-    background: #fff;
+    background: var(--light);
     padding: 20px 35px 20px 25px;
     box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -50,7 +50,7 @@
     justify-content: center;
     height: 35px;
     min-width: 35px;
-    color: #fff;
+    color: white;
     font-size: 20px;
     border-radius: 50%;
   }
@@ -64,12 +64,12 @@
   .message .text {
     font-size: 16px;
     font-weight: 400;
-    color: #666666;
+    color: var(--dark);
   }
   
   .message .text.text-1 {
     font-weight: 600;
-    color: #333;
+    color: var(--dark);
   }
   
   .toast .close {

@@ -289,8 +289,7 @@
                 <div class="order">
                     <div class="head">
                         <h3>Product List</h3>
-                        <i class='bx bx-search'></i>
-                        <i class='bx bx-filter'></i>
+                       
                     </div>
                     <table>
                         <thead>
@@ -396,6 +395,25 @@
         });
         </script>
 
+<script>
+    // Function to check screen size and add/remove the "hide" class
+    function updateVisibility() {
+        const sidebar = document.getElementById('sidebar');
+        const isSmallScreen = window.innerWidth <= 768; // Adjust the breakpoint as needed
+
+        if (isSmallScreen) {
+            sidebar.classList.add('hide');
+        } else {
+            sidebar.classList.remove('hide');
+        }
+    }
+
+    // Initial check on page load
+    document.addEventListener('DOMContentLoaded', updateVisibility);
+
+    // Check on window resize
+    window.addEventListener('resize', updateVisibility);
+</script>
     <script th:src="@{/js/categories.js}"></script>
     <script th:src="@{/js/script_main.js}"></script>
     <script th:src="@{/js/errorM.js}"></script>

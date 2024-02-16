@@ -6245,7 +6245,15 @@ a.close.disabled {
 }
 
 .modal.show .modal-dialog {
-    transform: none
+    transform: none;
+}
+
+@media (max-width:600px) {
+    .modal-dialog {
+        scale: 0.8;
+        margin-left: 16%;
+    }
+
 }
 
 .modal.modal-static .modal-dialog {
