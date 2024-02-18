@@ -1,407 +1,261 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HOME</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOME</title>
 
-  <link rel="stylesheet" th:href="@{/css/card.css}">
-  <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
+        integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" th:href="@{/css/card_index.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+    <style>
+        .category a {
+            text-decoration: none;
+            color: black;
+            width: 100%;
+            display: flex;
+        }
+    </style>
 
 <body>
 
-  <div class="back"></div>
+    <div class="back"></div>
 
 
-  <nav class="navbar">
-    <ul class="nav1">
-      <li><a href=""><img src="images/search.png" width="25px" alt=""></a></li>
-      <li>
-        <div id="show" class="change">Marketplace <i class="fa-sharp fa-solid fa-caret-down"></i></div>
-      </li>
-    </ul>
 
-    <ul class="nav2">
-      <li><a th:href="@{/register}">Sign up</a></li>
-      <li><a th:href="@{/login}">Sign in</a></li>
-      <span></span>
-      <li><a href="">
-          <img src="images/cart.png" width="25px" alt="cart"></a></li>
-      <a th:href="@{/products/0}" style="color: black;">
-        <li class="list">List an Item</li>
-      </a>
-    </ul>
-  </nav>
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+            <div class="nav-title">
+                <div id="show" class="change">Marketplace <i class="fa-sharp fa-solid fa-caret-down"></i></div>
+            </div>
+        </div>
+        <div class="nav-btn">
+            <label for="nav-check">
+                <i class="bx bx-menu menu_icon"></i>
+            </label>
+        </div>
 
+        <div class="nav-links">
+            <a th:href="@{/login}" style="display: flex; align-items: center;">
+                <i class="bx bx-user" style="color: black; padding-right: 10px; "></i>
+                Sign in</a>
+            <a th:href="@{/customer_register}" style="display: flex; align-items: center;">
+                <i class="bx bx-user-plus" style="color: black; padding-right: 10px; "></i>
+                Sign up</a>
+            <a th:href="@{/post_add}" style="display: flex; align-items: center;">
+                <i class="bx bx-plus-circle" style="color: black; padding-right: 10px; "></i>
+                List Item</a>
 
-  <div class="headtxt">
-    <h1>Shop your favourite items on low cost, Have fun!</h1>
+        </div>
+    </div>
 
-    <div class="search_cont">
-      <form th:action="@{/searchAll}" method="get" class="search-bar">
-        <input type="text" placeholder="What you are looking for?" name="keyword" id="show_search_cat">
-        <button type="submit"> <img src="images/search.png"></button>
-      </form>
+    <div class="headtxt">
+        <h1>Shop your favourite items on low cost, Have fun!</h1>
+
+        <div class="search_cont">
+            <form th:action="@{/searchAll}" method="" class="search-bar">
+                <input type="text" placeholder="What you are looking for?" name="keyword" id="show_search_cat">
+                <button type="submit"> <img src="images/search.png"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="category">
+
+        <h2>What are you looking for?</h2>
+
+        <div class="row">
+            <a th:href="@{/searchAll(keyword=Mobiles)}">
+                <div class="col">
+                    <div class="div1"> <img src="images/mobile.png" alt=""> </div>
+                    <div class="div2">
+                        <h4>Mobiles</h5>
+                    </div>
+                    <div class="div3">
+                        <p>25,000 ads</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="contain_ad">
+
+        <div class="parent">
+
+            <div class="div1"><img src="images/ad_money.jpg" alt=""> </div>
+
+            <div class="div2">
+                <h2>Post your Ad, And Start Making Money!</h2>
+            </div>
+
+            <div class="div3">
+                <p>Do you have something to sell?
+                    Post your first ad and start making money! Order online and enjoy our Buyer Protection program,
+                    which means
+                    that we’ll replace the item for FREE if it’s not as described in the ad!</p>
+            </div>
+
+            <div class="div4"> <a th:href="@{/post_add}">
+                    <div class="btn_post">
+                        <img src="images/post.png" alt="">
+                        Post your Ad now
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="topCat">
+        <h2 class="card_head">Our top browsed categories</h2>
+        <div class="card_cont">
+            <div class="row1-container">
+                <div class="box box-down cyan">
+                    <h2>Mobile</h2>
+                    <p>Monitors activity to identify project roadblocks</p>
+                    <img src="images/mobile.png" width="65px" alt="">
+                </div>
+
+                <div class="box box-down red">
+                    <h2>Electronics</h2>
+                    <p>Scans our talent network to create the optimal team for your project</p>
+                    <img src="images/electronics.png" width="65px" alt="">
+                </div>
+
+                <div class="box box-down blue">
+                    <h2>Services</h2>
+                    <p>Uses data from past projects to provide better delivery estimates</p>
+                    <img src="images/customer-service.png" width="65px" alt="">
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    <!-- <form action="">
-      <input type="text" placeholder="Discover new items" required>
-    </form> -->
 
-  </div>
+    <div class="footer_cont">
 
-  <div class="banner_cont">
+        <footer class="footer">
+            <div class="footer__addr">
+                <h1 class="footer__logo">DOHS Around</h1>
 
-    <div class="banner_text">
-      <h2>Discover ADs</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo facere id cum,</p>
-    </div>
+                <h2>Contact</h2>
 
-    <div class="banner_text">
-      <h2>Post ADs</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo facere id cum,</p>
-    </div>
+                <address>
+                    5534 Somewhere In. The World 22193-10212<br>
+                    <br>
+                    <a class="footer__btn" href="mailto:example@gmail.com">Email Us</a>
+                </address>
+            </div>
 
-    <div class="banner_text">
-      <h2>Shop Now</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo facere id cum,</p>
-    </div>
+            <ul class="footer__nav">
+                <li class="nav__item">
+                    <h2 class="nav__title">Navigate</h2>
 
+                    <ul class="nav__ul">
+                        <li>
+                            <a th:href="@{/login}">Sign in</a>
+                        </li>
 
-  </div>
+                        <li>
+                            <a th:href="@{/customer_register}">Sign up</a>
+                        </li>
 
-  <div class="category">
+                        
+                    </ul>
+                </li>
+                <li class="nav__item">
+                    <h2 class="nav__title">Shop Now</h2>
 
-    <h2>What are you looking for?</h2>
+                    <ul class="nav__ul">
+                        <li>
+                            <a th:href="@{/all_shop}">Marketplaces</a>
 
-    <div class="row">
-      <a th:href="@{/searchAll(keyword=Mobiles)}">
-        <div class="col">
-          <img src="images/mobile.png" alt="">
-          <h4>Mobiles</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/electronics.png" alt="">
-          <h4>Electronics</h4>
-          <p>25,265 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/flat.png" alt="">
-          <h4>Apartments</h4>
-          <p>3,256 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/car.png" alt="">
-          <h4>Vehicles</h4>
-          <p>2,506 ads</p>
-        </div>
-      </a>
-    </div>
+                        </li>
 
-    <div class="row">
-      <a href="">
-        <div class="col">
-          <img src="images/pets.png" alt="">
-          <h4>Pets</h4>
-          <p>7,859 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/house.png" alt="">
-          <h4>Property</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/fashion.png" alt="">
-          <h4>Men's Fashion</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/dress.png" alt="">
-          <h4>Woman's Fashion</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-    </div>
+                        <li>
+                            <a th:href="@{/products/0}">Freelist</a>
+                        </li>
 
-    <div class="row">
-      <a href="">
-        <div class="col">
-          <img src="images/suitcase.png" alt="">
-          <h4>Jobs</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/customer-service.png" alt="">
-          <h4>Services</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/sports.png" alt="">
-          <h4>Sports</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/shopping-bag.png" alt="">
-          <h4>Essentials</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-    </div>
+                        <li>
+                            <a  th:href="@{/post_add}">List Item</a>
+                        </li>
+                    </ul>
+                </li>
 
+                <li class="nav__item">
+                    <h2 class="nav__title">Legal</h2>
 
-    <div class="row">
-      <a href="">
-        <div class="col">
-          <img src="images/sprout.png" alt="">
-          <h4>Agriculture</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/graduation.png" alt="">
-          <h4>Education</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/game-controller.png" alt="">
-          <h4>Games</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-      <a href="">
-        <div class="col">
-          <img src="images/gadgets.png" alt="">
-          <h4>Gadgets</h4>
-          <p>4,506 ads</p>
-        </div>
-      </a>
-    </div>
+                    <ul class="nav__ul">
+                        <li>
+                            <a href="#">Privacy Policy</a>
+                        </li>
 
-  </div>
+                        <li>
+                            <a href="#">Terms of Use</a>
+                        </li>
 
-  <div class="contain_ad">
-    <img src="images/ad_money.jpg" alt="">
-    <h2>Post your Ad, And Start Making Money!</h2>
-    <p>Do you have something to sell?
-      Post your first ad and start making money! Order online and enjoy our Buyer Protection program, which means that
-      we’ll replace the item for FREE if it’s not as described in the ad!</p>
-
-    <a th:href="@{/post_add}">
-      <div class="btn_post">
-        <img src="images/post.png" alt="">
-        Post your Ad now
-      </div>
-    </a>
-  </div>
-
-  <div class="topCat">
-    <h2 class="card_head">Our top browsed categories</h2>
-    <div class="card_cont">
-      <div class="row1-container">
-        <div class="box box-down cyan">
-          <h2>Mobile</h2>
-          <p>Monitors activity to identify project roadblocks</p>
-          <img src="images/mobile.png" width="65px" alt="">
-        </div>
-
-        <div class="box box-down red">
-          <h2>Electronics</h2>
-          <p>Scans our talent network to create the optimal team for your project</p>
-          <img src="images/electronics.png" width="65px" alt="">
-        </div>
-
-        <div class="box box-down blue">
-          <h2>Services</h2>
-          <p>Uses data from past projects to provide better delivery estimates</p>
-          <img src="images/customer-service.png" width="65px" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="footer_cont">
-
-    <footer class="footer">
-      <div class="footer__addr">
-        <h1 class="footer__logo">NAME/LOGO</h1>
-
-        <h2>Contact</h2>
-
-        <address>
-          5534 Somewhere In. The World 22193-10212<br>
-          <br>
-          <a class="footer__btn" href="mailto:example@gmail.com">Email Us</a>
-        </address>
-      </div>
-
-      <ul class="footer__nav">
-        <li class="nav__item">
-          <h2 class="nav__title">Navigate</h2>
-
-          <ul class="nav__ul">
-            <li>
-              <a href="#">Online</a>
-            </li>
-
-            <li>
-              <a href="#">Print</a>
-            </li>
-
-            <li>
-              <a href="#">Alternative Ads</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav__item">
-          <h2 class="nav__title">Shop Now</h2>
-
-          <ul class="nav__ul">
-            <li>
-              <a href="#">Online</a>
-            </li>
-
-            <li>
-              <a href="#">Print</a>
-            </li>
-
-            <li>
-              <a href="#">Alternative Ads</a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav__item">
-          <h2 class="nav__title">Legal</h2>
-
-          <ul class="nav__ul">
-            <li>
-              <a href="#">Privacy Policy</a>
-            </li>
-
-            <li>
-              <a href="#">Terms of Use</a>
-            </li>
-
-            <li>
-              <a href="#">Sitemap</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-      <div class="legal">
-        <p>&copy; 2022 Something. All rights reserved.</p>
-
-        <div class="legal__links">
-
-          <div class="socialbtns">
-            <ul>
-              <li><a href="#" class="fa fa-lg fa-facebook"></a></li>
-              <li><a href="#" class="fa fa-lg fa-twitter"></a></li>
-              <li><a href="#" class="fa fa-lg fa-instagram"></a></li>
-
+                        <li>
+                            <a href="#">Sitemap</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
-          </div>
 
+            <div class="legal">
+                <p>&copy; 2022 Something. All rights reserved.</p>
+
+                <div class="legal__links">
+
+                    <div class="socialbtns">
+                        <ul>
+                            <li><a href="#" class="fa fa-lg fa-facebook"></a></li>
+                            <li><a href="#" class="fa fa-lg fa-twitter"></a></li>
+                            <li><a href="#" class="fa fa-lg fa-instagram"></a></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <div id="hide" class="market_cat">
+
+        <div class="main_market_cat">
+            <ul>
+                <li><a href="">category 1</a></li>
+                <li><a href="">category 2</a></li>
+                <li><a href="">category 3</a></li>
+                <li><a href="">category 4</a></li>
+                <li><a href="">category 5</a></li>
+                <li><a href="">category 6</a></li>
+                <li><a href="">category 7</a></li>
+                <li><a href="">category 8</a></li>
+                <li><a href="">category 9</a></li>
+            </ul>
         </div>
-      </div>
-    </footer>
-  </div>
-
-
-  <div id="hide" class="market_cat">
-
-    <div class="main_market_cat">
-      <ul>
-        <li id="main1"><a href="">category 1</a></li>
-        <li id="main2"><a href="">category 2</a></li>
-        <li><a href="">category 3</a></li>
-        <li><a href="">category 4</a></li>
-        <li><a href="">category 5</a></li>
-        <li><a href="">category 6</a></li>
-        <li><a href="">category 7</a></li>
-        <li><a href="">category 8</a></li>
-        <li><a href="">category 9</a></li>
-      </ul>
     </div>
 
-    <div class="border1"></div>
-
-    <div class="main_market_cat2" id="show1">
-      <ul>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-        <li><a href="">category 1</a></li>
-      </ul>
-    </div>
-
-    <div class="main_market_cat2" id="show2">
-      <ul>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-        <li><a href="">category 2</a></li>
-      </ul>
-    </div>
-
-
-
-  </div>
-
-  <div class="search_cat" id="cat_search">
-    <h4>Popular Searches</h4>
-    <a href="">category1</a>
-    <a href="">category1</a>
-    <a href="">category1</a>
-
-  </div>
-
-  <script th:src="@{/js/market.js}"></script>
+    <script th:src="@{/js/market.js}"></script>
 
 
 </body>
