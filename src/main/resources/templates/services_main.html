@@ -24,15 +24,21 @@
 	</a>
 	<ul class="side-menu top">
 		<li >
-			<a th:href="@{/dashboard}">
+			<a th:href="@{/admin/dashboard}">
 				<i class='bx bxs-dashboard'></i>
 				<span class="text">Dashboard</span>
 			</a>
 		</li>
 		<li class="active">
-			<a th:href="@{/services/0}">
+			<a th:href="@{/admin/services/0}">
 				<i class='bx bxs-shopping-bag-alt'></i>
 				<span class="text">Services</span>
+			</a>
+		</li>
+		<li>
+			<a th:href="@{/admin/update-shop/{shopName} (shopName = ${shop.getShopName()})}">
+				<i class='bx bxs-edit'></i>
+				<span class="text">Update Details</span>
 			</a>
 		</li>
 	</ul>
@@ -110,7 +116,7 @@
 				<h1>Services</h1>
 				<form th:action="@{/search-service/0}" method="get">
 					<div class="form-input">
-						<input type="search" name="keyword" placeholder="Search product">
+						<input type="search" name="keyword" placeholder="Search service">
 						<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
 					</div>
 				</form>

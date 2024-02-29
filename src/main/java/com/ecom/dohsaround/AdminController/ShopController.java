@@ -147,10 +147,10 @@ public class ShopController {
             return "dashboard_main_super";
         }
 
-        if (shop.getShopCategory().equals(ShopCategories.KEY_MAKER.toString())) {
+        if (shop.getShopCategory().equals(ShopCategories.Electric_And_Plumbing.toString())) {
             return "dashboard_main_service";
-        } else if (shop.getShopCategory().equals(ShopCategories.CAR_SERVICE.toString())) {
-            return "dashboard_main_service";
+        // } else if (shop.getShopCategory().equals(ShopCategories.Cloud_kitchen.toString())) {
+        //     return "dashboard_main_service";
             // }else if (shop.getShopCategory().equals(ShopCategories.PET_SHOP.toString())){
             //
             // }else if (shop.getShopCategory().equals(ShopCategories.TUTOR.toString())){

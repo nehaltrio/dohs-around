@@ -90,12 +90,12 @@
                 <form  th:action="@{/update-service/{id} (id = ${serviceDto.id})}" method="post" enctype="multipart/form-data" th:object = "${serviceDto}">
                     <div class="formbold-input-flex">
                         <div>
-                            <input type="text" th:field = "*{serviceName}" name="product_name" id="service_name" placeholder="Product Name"
+                            <input type="text" th:field = "*{serviceName}" name="product_name" id="service_name" placeholder="Service Name"
                                    class="formbold-form-input"/>
                             <label for="service_name" class="formbold-form-label"> Service Name </label>
                         </div>
                         <div>
-                            <input type="text" th:field = "*{serviceFee}" name="product_name" id="service_fee" placeholder="Product Name"
+                            <input type="text" th:field = "*{serviceFee}" name="product_name" id="service_fee" placeholder="Service Fee"
                                    class="formbold-form-input"/>
                             <label for="service_fee" class="formbold-form-label"> Service Fee </label>
                         </div>

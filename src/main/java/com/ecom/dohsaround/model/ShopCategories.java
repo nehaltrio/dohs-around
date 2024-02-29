@@ -1,4 +1,7 @@
 package com.ecom.dohsaround.model;
+
 public enum ShopCategories {
-    CLOUD_KITCHEN, CAR_SERVICE, TUTOR, KEY_MAKER, PET_SHOP, PRODUCT
+    Cloud_kitchen, Fashion_and_Clothing,
+    Doctors_and_chambers, Beauty_and_wellness,
+    Electric_And_Plumbing, Retailer, Tutor
 }

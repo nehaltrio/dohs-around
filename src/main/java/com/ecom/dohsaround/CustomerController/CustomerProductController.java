@@ -52,6 +52,8 @@ public class CustomerProductController {
         Shop shop = shopRepository.getAdminByShopName(shopName);
         List<CategoryDto> categoryDtoList = categoryService.getCategoryAndProduct(shopName);
 
+        
+
         Page<ProductDto> products = productService.pageProductsForCustomer(pageNo, shopName);
         Page<ServiceDto> services = service.pageServices(pageNo, shop);
 
@@ -90,8 +92,8 @@ public class CustomerProductController {
             }
         }
 
-        if (shop.getShopCategory().equals(ShopCategories.CAR_SERVICE.toString())) {
-            return "marketplace_main_service";
+        if (shop.getShopCategory().equals(ShopCategories.Electric_And_Plumbing.toString())) {
+            return "marketplace_main_service_elect_plum";
         }
 
         return "marketplace_main";
