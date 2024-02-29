@@ -61,7 +61,7 @@
 	<div class="formbold-main-wrapper">
 
 		<div class="formbold-form-wrapper">
-			<form  th:action="@{/save-service}" method="post" enctype="multipart/form-data" th:object = "${service}">
+			<form  th:action="@{/admin/save-service}" method="post" enctype="multipart/form-data" th:object = "${service}">
 				<div class="formbold-input-flex">
 					<div>
 						<input type="text" th:field = "*{serviceName}" name="product_name" id="service_name" placeholder="Service Name"
@@ -114,7 +114,7 @@
 		<div class="head-title">
 			<div class="left">
 				<h1>Services</h1>
-				<form th:action="@{/search-service/0}" method="get">
+				<form th:action="@{/admin/search-service/0}" method="get">
 					<div class="form-input">
 						<input type="search" name="keyword" placeholder="Search service">
 						<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>

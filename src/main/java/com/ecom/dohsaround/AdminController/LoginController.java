@@ -97,11 +97,12 @@ public class LoginController {
         String error = null;
         try {
 
-            if (result.hasErrors()) {
-                model.addAttribute("adminDto", shopDto);
-                result.toString();
-                return "shopCreate";
-            }
+            // if (result.hasErrors()) {
+            //     model.addAttribute("adminDto", shopDto);
+            //     result.toString();
+            //     System.out.println("JHAMELA");
+            //     return "shopCreate";
+            // }
             String username = shopDto.getUsername();
             Shop shop = adminService.findByUsername(username);
             model.addAttribute("adminDto", shopDto);
