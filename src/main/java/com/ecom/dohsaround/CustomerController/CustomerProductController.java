@@ -94,6 +94,8 @@ public class CustomerProductController {
 
         if (shop.getShopCategory().equals(ShopCategories.Electric_And_Plumbing.toString())) {
             return "marketplace_main_service_elect_plum";
+        }else if (shop.getShopCategory().equals(ShopCategories.Doctors_and_chambers.toString())) {
+            return "marketplace_main_service_doctor";
         }
 
         return "marketplace_main";
@@ -158,15 +160,15 @@ public class CustomerProductController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
         }
 
         return "product-detail_main";
@@ -199,17 +201,17 @@ public class CustomerProductController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
         }
 
         return "marketplace_catwise_main";
@@ -241,17 +243,17 @@ public class CustomerProductController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
         }
 
         return "marketplace_high_to_low_main";
@@ -283,17 +285,17 @@ public class CustomerProductController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
         }
 
         return "marketplace_low_to_high_main";
@@ -326,17 +328,17 @@ public class CustomerProductController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
         }
 
         return "marketplace_catwise_main_sort_high";
@@ -369,17 +371,17 @@ public class CustomerProductController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("principal", principal);
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("principal", principal);
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
 
         }
 

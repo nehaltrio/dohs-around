@@ -23,7 +23,7 @@
             <span class="text" th:text="${shop.getShopName()}"></span>
         </a>
         <ul class="side-menu top">
-            <li>
+            <li class="active">
                 <a th:href="@{/admin/dashboard}">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
@@ -32,12 +32,14 @@
             <li>
                 <a th:href="@{/admin/services/0}">
                     <i class='bx bxs-package'></i>
-                    <span class="text">Services</span>
+
+                    <span th:if="${shop.getShopCategory() == electric}" class="text">Services</span>
+                    <span th:if="${ shop.getShopCategory() == doctor}" class="text">Sections</span>
                 </a>
             </li>
 
 
-            <li class="active">
+            <li>
                 <a th:href="@{/admin/update-shop/{shopName} (shopName = ${shop.getShopName()})}">
                     <i class='bx bxs-edit'></i>
                     <span class="text">Update Details</span>
@@ -78,9 +80,9 @@
             <span class="num">8</span>
         </a> -->
             <a href="#" class="profile">
-                <img th:src="@{/images/1.png}" alt="profile_img">
+                <img th:src="'data:image/jpeg;base64,' + ${shop.image}" alt="profile_img">
             </a>
-            <p th:text="${shop.getFirstName()} + ' ' + ${shop.getLastName()}"></p>
+            <p th:text="${shop.getFirstName()}"></p>
 
 
         </nav>
@@ -108,7 +110,9 @@
                     <i class='bx bxs-calendar-check'></i>
                     <span class="text">
                         <h3 th:text="${serviceCount}"></h3>
-                        <p>Services</p>
+                        <p th:if="${shop.getShopCategory() == electric}" class="text">Services</p>
+                        <p th:if="${ shop.getShopCategory() == doctor}" class="text">Sections</p>
+
                     </span>
                 </li>
                 <!-- <li>
@@ -133,22 +137,38 @@
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Services</h3>
+                        <h3 th:if="${shop.getShopCategory() == electric}" class="text">Services</h3>
+                        <h3 th:if="${ shop.getShopCategory() == doctor}" class="text">Sections</h3>
                         <a th:href="@{/services/0}" class="viewOrder">View All</a>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Service</th>
-                                <th>Service Fee</th>
+                                <th  th:if="${shop.getShopCategory() == electric}"
+                                    class="text">Services</th>
+                                <th th:if="${ shop.getShopCategory() == doctor}"
+                                    class="text">Sections</th>
+
+                                <th  th:if="${shop.getShopCategory() == electric}"
+                                    class="text">Service Fee</th>
+                                <th th:if="${ shop.getShopCategory() == doctor}"
+                                    class="text">Description</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="service : ${services}">
+                            <tr  th:if="${shop.getShopCategory() == electric}"
+                                th:each="service : ${services}">
                                 <td th:text="${service.serviceName}"></td>
                                 <td th:text="${service.serviceFee}"></td>
-
                             </tr>
+
+                            <tr th:if="${ shop.getShopCategory() == doctor}"
+                                th:each="service : ${services}">
+                                <td th:text="${service.serviceName}"></td>
+                                <td th:utext="${service.description}"></td>
+                            </tr>
+
+
                         </tbody>
                     </table>
                 </div>
@@ -166,7 +186,7 @@
                         <input type="submit" value="Set">
                     </form>
 
-                    <a href="" class="visit_shop_btn">Visit Shop</a>
+                    <a th:href="@{/{shopName}/products/0 (shopName=${shop.getShopName()})}" class="visit_shop_btn">Visit Shop</a>
                     <a th:href="@{/update-shop/{shopName} (shopName=${shop.getShopName()})}"
                         class="visit_shop_btn">Update Shop</a>
 

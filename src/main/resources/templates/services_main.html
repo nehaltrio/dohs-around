@@ -7,8 +7,11 @@
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 	<!-- My CSS -->
 	<link rel="stylesheet" th:href="@{/css/style_main.css}">
+
 
 	<title>Marketplace | Admin</title>
 </head>
@@ -16,204 +19,336 @@
 <body>
 
 
-<!-- SIDEBAR -->
-<section id="sidebar">
-	<a href="#" class="brand">
-		<i class='bx bxs-cart-alt' ></i>
-		<span class="text" th:text="${shop.getShopName()}"></span>
-	</a>
-	<ul class="side-menu top">
-		<li >
-			<a th:href="@{/admin/dashboard}">
-				<i class='bx bxs-dashboard'></i>
-				<span class="text">Dashboard</span>
-			</a>
-		</li>
-		<li class="active">
-			<a th:href="@{/admin/services/0}">
-				<i class='bx bxs-shopping-bag-alt'></i>
-				<span class="text">Services</span>
-			</a>
-		</li>
-		<li>
-			<a th:href="@{/admin/update-shop/{shopName} (shopName = ${shop.getShopName()})}">
-				<i class='bx bxs-edit'></i>
-				<span class="text">Update Details</span>
-			</a>
-		</li>
-	</ul>
-	<ul class="side-menu">
-		<li>
-			<a th:href="@{/logout}" class="logout">
-				<i class='bx bxs-log-out-circle'></i>
-				<span class="text">Logout</span>
-			</a>
-		</li>
-	</ul>
-</section>
-<!-- SIDEBAR -->
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-cart-alt'></i>
+			<span class="text" th:text="${shop.getShopName()}"></span>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a th:href="@{/admin/dashboard}">
+					<i class='bx bxs-dashboard'></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active">
+				<a th:href="@{/admin/services/0}">
+					<i class='bx bxs-shopping-bag-alt'></i>
+					<span th:if="${shop.getShopCategory() == electric}" class="text">Services</span>
+					<span th:if="${ shop.getShopCategory() == doctor}" class="text">Sections</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/admin/update-shop/{shopName} (shopName = ${shop.getShopName()})}">
+					<i class='bx bxs-edit'></i>
+					<span class="text">Update Details</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a th:href="@{/logout}" class="logout">
+					<i class='bx bxs-log-out-circle'></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
 
 
-<!-- Form ulpoad product -->
+	<!-- Form ulpoad product -->
 
-<div class="upload_form" id="show">
+	<div class="upload_form" id="show">
 
-	<div class="formbold-main-wrapper">
+		<div class="formbold-main-wrapper">
 
-		<div class="formbold-form-wrapper">
-			<form  th:action="@{/admin/save-service}" method="post" enctype="multipart/form-data" th:object = "${service}">
-				<div class="formbold-input-flex">
-					<div>
-						<input type="text" th:field = "*{serviceName}" name="product_name" id="service_name" placeholder="Service Name"
-							   class="formbold-form-input"/>
-						<label for="service_name" class="formbold-form-label"> Service Name </label>
+			<div class="formbold-form-wrapper" th:if="${shop.getShopCategory() == electric}">
+				<form th:action="@{/admin/save-service}" method="post" enctype="multipart/form-data"
+					th:object="${service}">
+					<div class="formbold-input-flex">
+						<div>
+							<input type="text" th:field="*{serviceName}" name="product_name" id="service_name"
+								placeholder="Service Name" class="formbold-form-input" />
+							<label for="service_name" class="formbold-form-label"> Service Name </label>
+						</div>
+						<div>
+							<input type="text" th:field="*{serviceFee}" name="product_name" id="service_fee"
+								placeholder="Service Fee" class="formbold-form-input" />
+							<label for="service_fee" class="formbold-form-label"> Service Fee </label>
+						</div>
+
 					</div>
-					<div>
-						<input type="text" th:field = "*{serviceFee}" name="product_name" id="service_fee" placeholder="Service Fee"
-							   class="formbold-form-input"/>
-						<label for="service_fee" class="formbold-form-label"> Service Fee </label>
+
+					<div class="formbold-textarea">
+						<textarea rows="6" th:field="*{description}" name="description" id="message"
+							placeholder="Write your service description" class="formbold-form-input"></textarea>
+						<label for="message" class="formbold-form-label"> Service Description </label>
 					</div>
 
-				</div>
+					<button type="submit" class="formbold-btn">
+						Add Service
+					</button>
+				</form>
+			</div>
 
-				<div class="formbold-textarea">
-                        <textarea rows="6" th:field = "*{description}" name="description" id="message" placeholder="Write your service description"
-								  class="formbold-form-input"></textarea>
-					<label for="message" class="formbold-form-label"> Service Description </label>
-				</div>
 
-				<button type="submit" class="formbold-btn">
-					Add Service
-				</button>
-			</form>
+
+			<div class="formbold-form-wrapper" th:if="${shop.getShopCategory() == doctor}">
+				<form th:action="@{/admin/save-service}" method="post" enctype="multipart/form-data"
+					th:object="${service}">
+					<div class="formbold-input-flex">
+						<div>
+							<input type="text" th:field="*{serviceName}" name="product_name" id="service_name"
+								placeholder="Section Title" class="formbold-form-input" />
+							<label for="service_name" class="formbold-form-label"> Section Title </label>
+						</div>
+					</div>
+
+					<div class="formbold-textarea">
+						<!-- <textarea rows="6" th:field="*{description}" name="description" id="message"
+							placeholder="Write your section description" class="formbold-form-input"></textarea> -->
+
+						<div class="formbold-form-input" name="message" id="editor-container" style="height: 300px;">
+						</div>
+
+						<!-- Hidden input to store Quill content -->
+						<input type="hidden" th:field="*{description}" id="hiddenInput" name="hiddenInput">
+
+						
+
+
+						<label for="message" class="formbold-form-label"> Section Description </label>
+					</div>
+
+					<button id="captureContent" type="submit" class="formbold-btn">
+						Add Section
+					</button>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 
-<!-- CONTENT -->
-<section id="content">
-	<!-- NAVBAR -->
-	<nav>
-		<i class='bx bx-menu pos'></i>
-
-
-		<input type="checkbox" id="switch-mode" hidden>
-		<label for="switch-mode" class="switch-mode"></label>
-
-		<a href="#" class="profile">
-			<img th:src="@{/images/1.png}" alt="profile_img">
-		</a>
-		<p th:text="${shop.getFirstName()} + ' ' + ${shop.getLastName()}"></p>
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu pos'></i>
 
 
-	</nav>
-	<!-- NAVBAR -->
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
 
-	<!-- MAIN -->
-	<main>
-		<div class="head-title">
-			<div class="left">
-				<h1>Services</h1>
-				<form th:action="@{/admin/search-service/0}" method="get">
-					<div class="form-input">
-						<input type="search" name="keyword" placeholder="Search service">
-						<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+			<a href="#" class="profile">
+				<img th:src="'data:image/jpeg;base64,' + ${shop.image}" alt="profile_img">
+			</a>
+			<p th:text="${shop.getFirstName()}"></p>
+
+
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1 th:if="${shop.getShopCategory() == electric}" class="text">Services</h1>
+					<h1 th:if="${shop.getShopCategory() == doctor}" class="text">Sections</h1>
+					<form th:action="@{/admin/search-service/0}" method="get">
+						<div class="form-input">
+							<input type="search" name="keyword" placeholder="Search...">
+							<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+						</div>
+					</form>
+					<ul class="breadcrumbs">
+						<li>
+							<a href="#">item</a>
+						</li>
+						<li><i class='bx bx-chevron-right'></i></li>
+						<li>
+							<a class="active" href="#">List</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="btn-download" onclick="showDiv()" style="cursor: pointer;">
+					<i class='bx bxs-cloud-download'></i>
+
+					<span th:if="${shop.getShopCategory() == electric}" class="text">Add Service</span>
+					<span th:if="${shop.getShopCategory() == doctor}" class="text">Add Section</span>
+
+				</div>
+
+			</div>
+
+			<script>
+				function showDiv() {
+					document.getElementById('show').style.display = "block";
+				}
+			</script>
+
+			<script>
+				document.addEventListener('mouseup', function (e) {
+					var container = document.getElementById('show');
+					if (!container.contains(e.target)) {
+						container.style.display = 'none';
+					}
+				});
+			</script>
+
+
+			<div class="table-data" th:if="${shop.getShopCategory() == electric}">
+				<div class="order">
+					<div class="head">
+						<h3>Service List</h3>
+						<i class='bx bx-search'></i>
+						<i class='bx bx-filter'></i>
 					</div>
-				</form>
-				<ul class="breadcrumbs">
-					<li>
-						<a href="#">Service</a>
+					<table>
+						<thead>
+							<tr>
+								<th>Service Name</th>
+								<th>Service Fee</th>
+								<th>Update</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr th:each="service : ${services}">
+								<td th:text="${service.serviceName}"></td>
+								<td th:text="${service.serviceFee}"></td>
+								<td><a th:href="@{/admin/update-service/{id} (id = ${service.id})}"
+										class="button-yellow">Update</a>
+								</td>
+								<td>
+									<a th:if="${service.active == false}"
+										th:href="@{/admin/enable-service/{id} (id = ${service.id})}"
+										class="button-green">Enable</a>
+									<a th:if="${service.active == true}"
+										th:href="@{/admin/delete-service/{id} (id = ${service.id})}"
+										class="button-red">Disable</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+
+
+			<div class="table-data" th:if="${shop.getShopCategory() == doctor}">
+				<div class="order">
+					<div class="head">
+						<h3>Section List</h3>
+						<i class='bx bx-search'></i>
+						<i class='bx bx-filter'></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>Section Title</th>
+								<th>Section Description</th>
+								<th>Update</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr th:each="service : ${services}">
+								<td th:text="${service.serviceName}"></td>
+								<td th:utext="${service.description}"></td>
+								<td><a th:href="@{/admin/update-service/{id} (id = ${service.id})}"
+										class="button-yellow">Update</a>
+								</td>
+								<td>
+									<a th:if="${service.active == false}"
+										th:href="@{/admin/enable-service/{id} (id = ${service.id})}"
+										class="button-green">Enable</a>
+									<a th:if="${service.active == true}"
+										th:href="@{/admin/delete-service/{id} (id = ${service.id})}"
+										class="button-red">Disable</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+
+			<div class="page">
+				<ul>
+					<li th:if="${currentPage != 0}">
+						<a th:href="@{${url} + ${currentPage - 1}}" href="#">Previous</a>
 					</li>
-					<li><i class='bx bx-chevron-right'></i></li>
-					<li>
-						<a class="active" href="#">List</a>
+					<li th:each="i : ${#numbers.sequence(1, totalPages)}"
+						th:classappend="${currentPage == i - 1 ? 'active' : ''}">
+						<a th:href="@{${url} + ${i - 1}}" href="#"><span th:text="${i}"></span></a>
+					</li>
+					<li th:if="${currentPage + 1 != totalPages}">
+						<a th:href="@{${url} + ${currentPage + 1}}" href="#">Next</a>
 					</li>
 				</ul>
 			</div>
 
-			<div class="btn-download" onclick="showDiv()" style="cursor: pointer;">
-				<i class='bx bxs-cloud-download'></i>
-				<span class="text">Add Service</span>
-			</div>
 
-		</div>
+		</main>
 
-		<script>
-			function showDiv() {
-				document.getElementById('show').style.display = "block";
-			}
-		</script>
 
-		<script>
-			document.addEventListener('mouseup', function (e) {
-				var container = document.getElementById('show');
-				if (!container.contains(e.target)) {
-					container.style.display = 'none';
-				}
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	<!-- Include Quill JavaScript -->
+	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var quill = new Quill('#editor-container', {
+				theme: 'snow',
+				modules: {
+					toolbar: [
+						['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+						['blockquote', 'code-block'],
+
+						[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+						[{ 'list': 'ordered' }, { 'list': 'bullet' }],
+						[{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+						[{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+						[{ 'direction': 'rtl' }],                         // text direction
+
+						[{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+						[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+						[{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+						[{ 'font': [] }],
+						[{ 'align': [] }],
+
+						['clean'],                                         // remove formatting button
+
+						['link', 'image', 'video']                         // link and image, video
+					]
+				},
+				placeholder: 'Compose an epic...',
+				readOnly: false // You can choose a different theme if needed
 			});
-		</script>
 
+			document.getElementById('captureContent').addEventListener('click', function() {
+                // Get the formatted content from the Quill editor
+                var quillContent = quill.root.innerHTML;
 
-		<div class="table-data">
-			<div class="order">
-				<div class="head">
-					<h3>Service List</h3>
-					<i class='bx bx-search'></i>
-					<i class='bx bx-filter'></i>
-				</div>
-				<table>
-					<thead>
-					<tr>
-						<th>Service Name</th>
-						<th>Service Fee</th>
-						<th>Update</th>
-						<th>Action</th>
-					</tr>
-					</thead>
-					<tbody>
+                // Set the content as the value of the hidden input
+                document.getElementById('hiddenInput').value = quillContent;
 
-					<tr th:each="service : ${services}">
-						<td th:text="${service.serviceName}"></td>
-						<td th:text="${service.serviceFee}"></td>
-						<td><a th:href="@{/update-service/{id} (id = ${service.id})}" class="button-yellow">Update</a>
-						</td>
-						<td>
-							<a th:if="${service.active == false}"
-							   th:href="@{/enable-service/{id} (id = ${service.id})}" class="button-green">Enable</a>
-							<a th:if="${service.active == true}"
-							   th:href="@{/delete-service/{id} (id = ${service.id})}" class="button-red">Disable</a>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
+                // Log the content to the console (for demonstration purposes)
+                console.log('Captured Content:', quillContent);
+            });
 
-		</div>
+		});
+	</script>
 
-		<div class="page">
-			<ul>
-				<li th:if = "${currentPage != 0}">
-					<a th:href="@{${url} + ${currentPage - 1}}" href="#">Previous</a>
-				</li>
-				<li th:each = "i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}">
-					<a th:href="@{${url} + ${i - 1}}" href="#"><span th:text = "${i}"></span></a>
-				</li>
-				<li th:if = "${currentPage + 1 != totalPages}" >
-					<a th:href="@{${url} + ${currentPage + 1}}" href="#">Next</a>
-				</li>
-			</ul>
-		</div>
-
-
-	</main>
-
-
-	<!-- MAIN -->
-</section>
-<!-- CONTENT -->
-
-<script th:src="@{/js/categories.js}"></script>
-<script th:src="@{/js/script_main.js}"></script>
+	<script th:src="@{/js/categories.js}"></script>
+	<script th:src="@{/js/script_main.js}"></script>
 </body>
 
 </html>

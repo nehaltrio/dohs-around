@@ -10,10 +10,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ecom.dohsaround.dto.ServiceDto;
 import com.ecom.dohsaround.model.Shop;
+import com.ecom.dohsaround.model.ShopCategories;
 import com.ecom.dohsaround.service.ShopService;
 import com.ecom.dohsaround.service.serviceService;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.security.Principal;
 
 @Controller
@@ -27,8 +29,8 @@ public class ServiceController {
     private ShopService shopService;
 
     @GetMapping("/services/{pageNo}")
-    public String productsPage(@PathVariable("pageNo") int pageNo, Model model, Principal principal){
-        if(principal == null){
+    public String productsPage(@PathVariable("pageNo") int pageNo, Model model, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
 
@@ -43,20 +45,20 @@ public class ServiceController {
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("services", serviceDtos);
 
+        model.addAttribute("electric", ShopCategories.Electric_And_Plumbing.toString());
+        model.addAttribute("doctor", ShopCategories.Doctors_and_chambers.toString());
+
         model.addAttribute("service", new ServiceDto());
 
-        model.addAttribute("url","/services/");
+        model.addAttribute("url", "/admin/services/");
 
         return "services_main";
     }
 
 
     @GetMapping("/search-service/{pageNo}")
-    public String searchProducts(@PathVariable("pageNo")int pageNo,
-                                 @RequestParam("keyword") String keyword,
-                                 Model model,
-                                 Principal principal){
-        if(principal == null){
+    public String searchProducts(@PathVariable("pageNo") int pageNo, @RequestParam("keyword") String keyword, Model model, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
         Shop shop = shopService.findByUsername(principal.getName());
@@ -71,21 +73,19 @@ public class ServiceController {
 
         model.addAttribute("service", new ServiceDto());
 
-        model.addAttribute("url","/search-service/");
+        model.addAttribute("url", "/admin/search-service/");
 
         return "services_main";
     }
 
 
-
     @PostMapping("/save-service")
-    public String saveProduct(@ModelAttribute("service")ServiceDto serviceDto,
-                              RedirectAttributes attributes, Principal principal){
+    public String saveProduct(@ModelAttribute("service") ServiceDto serviceDto, RedirectAttributes attributes, Principal principal) {
         try {
             Shop shop = shopService.findByUsername(principal.getName());
-            servService.save( serviceDto, shop);
+            servService.save(serviceDto, shop);
             attributes.addFlashAttribute("success", "Add successfully!");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to add!");
         }
@@ -94,8 +94,8 @@ public class ServiceController {
     }
 
     @GetMapping("/update-service/{id}")
-    public String updateProductForm(@PathVariable("id") Long id, Model model, Principal principal){
-        if(principal == null){
+    public String updateProductForm(@PathVariable("id") Long id, Model model, Principal principal) {
+        if (principal == null) {
             return "redirect:/login";
         }
         Shop shop = shopService.findByUsername(principal.getName());
@@ -104,20 +104,20 @@ public class ServiceController {
 
         ServiceDto serviceDto = servService.getById(id);
 
+        model.addAttribute("electric", ShopCategories.Electric_And_Plumbing.toString());
+        model.addAttribute("doctor", ShopCategories.Doctors_and_chambers.toString());
+
         model.addAttribute("serviceDto", serviceDto);
         return "update_service_main";
     }
 
 
     @PostMapping("/update-service/{id}")
-    public String processUpdate(@PathVariable("id") Long id,
-                                @ModelAttribute("serviceDto") ServiceDto serviceDto,
-                                RedirectAttributes attributes
-    ){
+    public String processUpdate(@PathVariable("id") Long id, @ModelAttribute("serviceDto") ServiceDto serviceDto, RedirectAttributes attributes) {
         try {
             servService.update(serviceDto);
             attributes.addFlashAttribute("success", "Update successfully!");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to update!");
         }
@@ -125,13 +125,12 @@ public class ServiceController {
 
     }
 
-    @RequestMapping(value = "/enable-service/{id}", method = {RequestMethod.PUT , RequestMethod.GET})
-    public String enabledProduct(@PathVariable("id")Long id, RedirectAttributes attributes,
-                                 HttpServletRequest httpServletRequest){
+    @RequestMapping(value = "/enable-service/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String enabledProduct(@PathVariable("id") Long id, RedirectAttributes attributes, HttpServletRequest httpServletRequest) {
         try {
             servService.enableById(id);
             attributes.addFlashAttribute("success", "Enabled successfully!");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to enabled!");
         }
@@ -139,12 +138,11 @@ public class ServiceController {
     }
 
     @RequestMapping(value = "/delete-service/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
-    public String deletedProduct(@PathVariable("id") Long id, RedirectAttributes attributes,
-                                 HttpServletRequest httpServletRequest){
+    public String deletedProduct(@PathVariable("id") Long id, RedirectAttributes attributes, HttpServletRequest httpServletRequest) {
         try {
             servService.deleteById(id);
             attributes.addFlashAttribute("success", "Deleted successfully!");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to deleted");
         }

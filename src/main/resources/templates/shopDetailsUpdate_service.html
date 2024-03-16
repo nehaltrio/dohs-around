@@ -32,7 +32,8 @@
             <li>
                 <a th:href="@{/admin/services/0}">
                     <i class='bx bxs-package'></i>
-                    <span class="text">Services</span>
+                    <span th:if="${shop.getShopCategory() == electric}" class="text">Services</span>
+                    <span th:if="${ shop.getShopCategory() == doctor}" class="text">Sections</span>
                 </a>
             </li>
            
@@ -78,7 +79,7 @@
             <span class="num">8</span>
         </a> -->
             <a href="#" class="profile">
-                <img th:src="@{/images/1.png}" alt="profile_img">
+                <img th:src="'data:image/jpeg;base64,' + ${shop.image}" alt="profile_img">
             </a>
             <p th:text="${shop.getFirstName()}"></p>
 

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-
 import com.ecom.dohsaround.dto.ServiceDto;
 import com.ecom.dohsaround.dto.ShopDto;
 import com.ecom.dohsaround.model.Order;
@@ -28,6 +27,7 @@ import com.ecom.dohsaround.service.ShopService;
 import com.ecom.dohsaround.service.serviceService;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class ShopController {
     @GetMapping("OrderList")
     public String showShopOrder(Principal principal, Model model) {
 
-        if(principal == null){
+        if (principal == null) {
             return "redirect:/login";
         }
 
@@ -83,7 +83,7 @@ public class ShopController {
         return "orders_main";
     }
 
-    @RequestMapping(value = "/accept-order/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
+    @RequestMapping(value = "/accept-order/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
     public String acceptOrder(@PathVariable("id") Long id) {
 
         orderService.acceptOrderById(id);
@@ -91,7 +91,7 @@ public class ShopController {
         return "redirect:/OrderList";
     }
 
-    @RequestMapping(value = "/decline-order/{id}", method = { RequestMethod.PUT, RequestMethod.GET })
+    @RequestMapping(value = "/decline-order/{id}", method = {RequestMethod.PUT, RequestMethod.GET})
     public String declineOrder(@PathVariable("id") Long id) {
 
         orderService.declineOrderById(id);
@@ -142,15 +142,20 @@ public class ShopController {
             model.addAttribute("numberOfCustomer", customerRepository.count());
             model.addAttribute("numberOfProduct", freeListProductRepository.count());
 
+
             // serviceRepo
 
             return "dashboard_main_super";
         }
 
-        if (shop.getShopCategory().equals(ShopCategories.Electric_And_Plumbing.toString())) {
+        model.addAttribute("electric", ShopCategories.Electric_And_Plumbing.toString());
+        model.addAttribute("doctor", ShopCategories.Doctors_and_chambers.toString());
+
+        if (shop.getShopCategory().equals(ShopCategories.Electric_And_Plumbing.toString())
+                || shop.getShopCategory().equals(ShopCategories.Doctors_and_chambers.toString())) {
             return "dashboard_main_service";
-        // } else if (shop.getShopCategory().equals(ShopCategories.Cloud_kitchen.toString())) {
-        //     return "dashboard_main_service";
+            // } else if (shop.getShopCategory().equals(ShopCategories.Cloud_kitchen.toString())) {
+            //     return "dashboard_main_service";
             // }else if (shop.getShopCategory().equals(ShopCategories.PET_SHOP.toString())){
             //
             // }else if (shop.getShopCategory().equals(ShopCategories.TUTOR.toString())){
@@ -166,8 +171,8 @@ public class ShopController {
     @RequestMapping("/setThemeColor")
     @Transactional
     public String setThemeColorForShop(HttpServletRequest httpServletRequest,
-            Principal principal,
-            @RequestParam("color") String color) {
+                                       Principal principal,
+                                       @RequestParam("color") String color) {
 
         Shop shop = shopService.findByUsername(principal.getName());
         shopRepository.setShopColorByShop(shop.getId(), color);
@@ -177,22 +182,28 @@ public class ShopController {
 
     @GetMapping("/update-shop/{shopName}")
     public String updateShopDetails(@PathVariable("shopName") String shopName,
-            Model model, Principal principal) {
+                                    Model model, Principal principal) {
 
         Shop shop = shopService.findByUsername(principal.getName());
         model.addAttribute("shop", shop);
         ShopDto shopDto = shopService.findAdminByShopName(shop.getShopName());
         model.addAttribute("shopDto", shopDto);
+        model.addAttribute("electric", ShopCategories.Electric_And_Plumbing.toString());
+        model.addAttribute("doctor", ShopCategories.Doctors_and_chambers.toString());
+        if (shop.getShopCategory().equals(ShopCategories.Electric_And_Plumbing.toString())
+                || shop.getShopCategory().equals(ShopCategories.Doctors_and_chambers.toString())) {
+            return "shopDetailsUpdate_service";
+        }
 
         return "shopDetailsUpdate";
     }
 
     @PostMapping("/update-shop/{shopName}")
     public String processUpdateShop(@PathVariable("shopName") String shopName,
-            @ModelAttribute("adminDto") ShopDto shopDto,
-            @RequestParam("imageShop") MultipartFile imageShop, Principal principal) {
+                                    @ModelAttribute("adminDto") ShopDto shopDto,
+                                    @RequestParam("imageShop") MultipartFile imageShop, Principal principal) {
         shopService.updateShop(imageShop, shopDto, principal);
-        return "redirect:/dashboard";
+        return "redirect:/admin/dashboard";
     }
 
     private boolean superAdmin(Principal principal) {

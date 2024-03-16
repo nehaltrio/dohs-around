@@ -17,6 +17,7 @@ import com.ecom.dohsaround.service.CustomerService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
@@ -29,19 +30,23 @@ public class HomeController {
     @Autowired
     private ShopRepository shopRepository;
 
-    @RequestMapping(value = { "/index", "/" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/index", "/"}, method = RequestMethod.GET)
     public String home(Model model, Principal principal, HttpSession session) {
         if (principal != null) {
             session.setAttribute("username", principal.getName());
             Customer customer = customerService.findByUsername(principal.getName());
-            ShoppingCart cart = customer.getShoppingCart();
-            if (cart != null) {
-                session.setAttribute("totalItems", cart.getTotalItems());
+            if (customer != null) {
+                ShoppingCart cart = customer.getShoppingCart();
+
+
+                if (cart != null) {
+                    session.setAttribute("totalItems", cart.getTotalItems());
+                } else {
+                    session.setAttribute("totalItems", null);
+                }
             } else {
-                session.setAttribute("totalItems", null);
+                session.removeAttribute("username");
             }
-        } else {
-            session.removeAttribute("username");
         }
         return "index_main";
     }
@@ -71,7 +76,6 @@ public class HomeController {
                 shoppingCart = null;
             }
 
-          
 
             model.addAttribute("customer", customer);
 
@@ -104,15 +108,15 @@ public class HomeController {
 
             Customer customer = customerService.findByUsername(username);
             if (customer != null) {
-            ShoppingCart shoppingCart = customer.getShoppingCart();
-            model.addAttribute("customer", customer);
+                ShoppingCart shoppingCart = customer.getShoppingCart();
+                model.addAttribute("customer", customer);
 
-            if (shoppingCart == null) {
-                model.addAttribute("check", "No item in your cart");
+                if (shoppingCart == null) {
+                    model.addAttribute("check", "No item in your cart");
+                }
+
+                model.addAttribute("shoppingCart", shoppingCart);
             }
-
-            model.addAttribute("shoppingCart", shoppingCart);
-        }
         }
 
         model.addAttribute("principal", principal);

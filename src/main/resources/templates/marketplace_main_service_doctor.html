@@ -124,9 +124,10 @@
             font-size: 1.5rem;
         }
 
-        span {
-            font-size: 1.5rem;
-        }
+       .section_doc ul{
+           margin-left: 5%;
+           font-size: 12px;
+       }
 
         .text-secondary {
             font-size: 1.5rem;
@@ -147,7 +148,7 @@
         }
 
         .section_doc {
-           
+
             padding-bottom: 5px;
         }
 
@@ -270,12 +271,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center" style="padding: 10px;">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                    class="rounded-circle" width="150">
+                                <img th:src="'data:image/jpeg;base64,' + ${shop.image}" alt="Admin"
+                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
-                                    <h4>John Doe</h4>
-                                    <p class="text-secondary mb-1">Full Stack Developer</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <h4 th:text="${shop.getFirstName()}"></h4>
+                                    <p class="text-secondary mb-1" th:text="${shop.getShopDesc()}">Bio/Designation</p>
+                                    <p class="text-muted font-size-sm" th:text="${shop.getShopAddress()}">Address</p>
                                     <button class="btn btn-primary">Take Appoinment</button>
 
                                 </div>
@@ -283,31 +284,31 @@
                         </div>
                     </div>
                     <div class="card mt-3">
-                        <ul class="list-group list-group-flush" style="padding: 10px;">
+                        <ul class="list-group list-group-flush">
 
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 pos"><i class="fab fa-whatsapp mr-2"
                                         style="font-size: 25px; width: 25px; color: #3c91e6;"></i>Whatsapp
                                 </h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary" th:text="${shop.getShopPhone()}"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 pos"><i class="fab fa-facebook-f mr-2"
                                         style="font-size: 25px;width: 25px;color: #3c91e6;"></i>Facebook
                                 </h6>
-                                <span class="text-secondary">@bootdey</span>
+                                <span class="text-secondary" th:text="${shop.getShopFbURL()}"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 pos"><i class="fab fa-instagram mr-2"
                                         style="font-size: 25px;width: 25px;color: #3c91e6;"></i>Instagram
                                 </h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary" th:text="${shop.getShopInstaURL()}"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 pos"><i class="fa fa-location-arrow mr-2"
                                         style="font-size: 22px;width: 25px;color: #3c91e6;"></i>Google Map
                                 </h6>
-                                <span class="text-secondary">bootdey</span>
+                                <span class="text-secondary" th:text="${shop.getShopGmapURL()}"></span>
                             </li>
                         </ul>
                     </div>
@@ -320,7 +321,7 @@
                                     <h6 class="mb-0">Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Kenneth Valdez
+                                    <span th:text="${shop.getFirstName()}"></span>
                                 </div>
                             </div>
                             <hr>
@@ -329,7 +330,7 @@
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    fip@jukmuh.al
+                                    <span th:text="${shop.getUsername()}"></span>
                                 </div>
                             </div>
                             <hr>
@@ -338,25 +339,17 @@
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    (239) 816-9029
+                                    <span th:text="${shop.getShopPhone()}"></span>
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Mobile</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    (320) 380-4539
-                                </div>
-                            </div>
-                            <hr>
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Address</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Bay Area, San Francisco, CA
+                                    <span th:text="${shop.getShopAddress()}"></span>
                                 </div>
                             </div>
                             <hr>
@@ -369,47 +362,21 @@
                         <div class="col-sm-12 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-
                                     <div class="sevice" style="padding: 10px;">
-                                        <div class="section_doc">
-                                            <h1>Section Title</h1>
-
-                                            <p>Section: Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                                Aliquam
-                                                est qui quas tenetur quod sint eaque. Qui explicabo corporis quisquam
-                                                earum,
-                                                dignissimos accusantium error debitis commodi iusto, quibusdam quos
-                                                quas.
-                                            </p>
+                                        <div class="section_doc" th:each="service : ${services}">
+                                            <h1 th:text="${service.serviceName}"></h1>
+                                            <p th:utext="${service.description}"></p>
                                         </div>
-
                                     </div>
-
-
-
-
-
-
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
 
         </div>
     </div>
-
-
-
-
-    <!-- products section ends -->
-
 
     <!-- footer section starts  -->
 

@@ -16,115 +16,141 @@
 <body>
 
 
-<!-- SIDEBAR -->
-<section id="sidebar">
-    <a href="#" class="brand">
-        <i class='bx bxs-cart-alt' ></i>
-        <span class="text" th:text="${shop.getShopName()}"></span>
-    </a>
-    <ul class="side-menu top">
-        <li >
-            <a th:href="@{/dashboard}">
-                <i class='bx bxs-dashboard'></i>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-        <li class="active">
-            <a th:href="@{/services/0}">
-                <i class='bx bxs-shopping-bag-alt'></i>
-                <span class="text">Services</span>
-            </a>
-        </li>
-
-    </ul>
-    <ul class="side-menu">
-        <li>
-            <a th:href="@{/logout}" class="logout">
-                <i class='bx bxs-log-out-circle'></i>
-                <span class="text">Logout</span>
-            </a>
-        </li>
-    </ul>
-</section>
-<!-- SIDEBAR -->
-
-
-
-<!-- CONTENT -->
-<section id="content">
-    <!-- NAVBAR -->
-    <nav>
-        <i class='bx bx-menu pos'></i>
-        <input type="checkbox" id="switch-mode" hidden>
-        <label for="switch-mode" class="switch-mode"></label>
-        <a href="#" class="profile">
-            <img th:src="@{/images/1.png}" alt="profile_img">
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-cart-alt'></i>
+            <span class="text" th:text="${shop.getShopName()}"></span>
         </a>
-        <p th:text="${shop.getFirstName()} + ' ' + ${shop.getLastName()}"></p>
+        <ul class="side-menu top">
+            <li>
+                <a th:href="@{/dashboard}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="active">
+                <a th:href="@{/services/0}">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <span th:if="${shop.getShopCategory() == electric}" class="text">Services</span>
+                    <span th:if="${shop.getShopCategory() == doctor}" class="text">Sections</span>
+                </a>
+            </li>
+
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a th:href="@{/logout}" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
 
 
-    </nav>
 
-    <main>
-        <div class="head-title">
-            <div class="left">
-                <h1>Update Service</h1>
-                <ul class="breadcrumbs">
-                    <li>
-                        <a href="#">Update</a>
-                    </li>
-                    <li><i class='bx bx-chevron-right'></i></li>
-                    <li>
-                        <a class="active" href="#">Service</a>
-                    </li>
-                </ul>
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu pos'></i>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="profile">
+                <img th:src="@{/images/1.png}" alt="profile_img">
+            </a>
+            <p th:text="${shop.getFirstName()}"></p>
+        </nav>
+
+        <main>
+            <div class="head-title">
+                <div class="left">
+
+                    <h1 th:if="${shop.getShopCategory() == electric}" class="text">Update Service</h1>
+                    <h1 th:if="${shop.getShopCategory() == doctor}" class="text">Update Section</h1>
+                    <ul class="breadcrumbs">
+                        <li>
+                            <a href="#">Update</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">item</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
-        </div>
 
 
+            <div class="formbold-main-wrapper">
 
-        <div class="formbold-main-wrapper">
+                <div class="update_form" th:if="${shop.getShopCategory() == electric}">
+                    <form th:action="@{/update-service/{id} (id = ${serviceDto.id})}" method="post"
+                        enctype="multipart/form-data" th:object="${serviceDto}">
+                        <div class="formbold-input-flex">
+                            <div>
+                                <input type="text" th:field="*{serviceName}" name="product_name" id="service_name"
+                                    placeholder="Service Name" class="formbold-form-input" />
+                                <label for="service_name" class="formbold-form-label"> Service Name </label>
+                            </div>
+                            <div>
+                                <input type="text" th:field="*{serviceFee}" name="product_name" id="service_fee"
+                                    placeholder="Service Fee" class="formbold-form-input" />
+                                <label for="service_fee" class="formbold-form-label"> Service Fee </label>
+                            </div>
 
-            <div class="update_form">
-                <form  th:action="@{/update-service/{id} (id = ${serviceDto.id})}" method="post" enctype="multipart/form-data" th:object = "${serviceDto}">
-                    <div class="formbold-input-flex">
-                        <div>
-                            <input type="text" th:field = "*{serviceName}" name="product_name" id="service_name" placeholder="Service Name"
-                                   class="formbold-form-input"/>
-                            <label for="service_name" class="formbold-form-label"> Service Name </label>
                         </div>
-                        <div>
-                            <input type="text" th:field = "*{serviceFee}" name="product_name" id="service_fee" placeholder="Service Fee"
-                                   class="formbold-form-input"/>
-                            <label for="service_fee" class="formbold-form-label"> Service Fee </label>
+
+                        <div class="formbold-textarea">
+                            <textarea rows="6" th:field="*{description}" name="description" id="message"
+                                placeholder="Write your service description" class="formbold-form-input"></textarea>
+                            <label for="message" class="formbold-form-label"> Service Description </label>
+                        </div>
+                        <button type="submit" class="formbold-btn">
+                            Update Service
+                        </button>
+                    </form>
+                </div>
+
+
+                <div class="update_form" th:if="${shop.getShopCategory() == doctor}">
+                    <form th:action="@{/update-service/{id} (id = ${serviceDto.id})}" method="post"
+                        enctype="multipart/form-data" th:object="${serviceDto}">
+                        <div class="formbold-input-flex">
+                            <div>
+                                <input type="text" th:field="*{serviceName}" name="product_name" id="service_name"
+                                    placeholder="Section Title" class="formbold-form-input" />
+                                <label for="service_name" class="formbold-form-label"> Section Title </label>
+                            </div>
                         </div>
 
-                    </div>
+                        <div class="formbold-textarea">
+                            <textarea rows="6" th:field="*{description}" name="description" id="message"
+                                placeholder="Write your section description" class="formbold-form-input"></textarea>
+                            <label for="message" class="formbold-form-label"> Section Description </label>
+                        </div>
+                        <button type="submit" class="formbold-btn">
+                            Update Section
+                        </button>
+                    </form>
+                </div>
 
-                    <div class="formbold-textarea">
-                        <textarea rows="6" th:field = "*{description}" name="description" id="message" placeholder="Write your service description"
-                                  class="formbold-form-input"></textarea>
-                        <label for="message" class="formbold-form-label"> Service Description </label>
-                    </div>
-                    <button type="submit" class="formbold-btn">
-                        Update Service
-                    </button>
-                </form>
             </div>
-        </div>
 
 
 
 
 
-    </main>
-    <!-- MAIN -->
-</section>
-<!-- CONTENT -->
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
 
 
-<script th:src="@{/js/script_main.js}"></script>
+    <script th:src="@{/js/script_main.js}"></script>
 </body>
 
 </html>
