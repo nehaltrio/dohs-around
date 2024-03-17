@@ -143,6 +143,10 @@
             align-items: center;
             justify-content: center;
         }
+
+        a{
+            text-decoration: none;
+        }
     </style>
 
 
@@ -263,7 +267,14 @@
                                     <h4 th:text="${shop.getFirstName()}"></h4>
                                     <p class="text-secondary mb-1" th:text="${shop.getShopDesc()}">Bio/Designation</p>
                                     <p class="text-muted font-size-sm" th:text="${shop.getShopAddress()}">Address</p>
-                                    <button class="btn btn-primary">Message On Whatsapp</button>
+                                    <a th:href="'https://api.whatsapp.com/send?phone=+88' + ${shop.getShopPhone()} + '&text=' + '*' + ${shop.getFirstName()} + '*'  + '%0a' + 'Are you available?' + '%0a' + '--------------------------------'
+    + '%0a' + 'Name : ' + ${customer.getFirstName() + ' ' + customer.getLastName()}
+    + '%0a' + 'Phone: ' + ${customer.getPhoneNumber()}
+    + '%0a' + '--------------------------------'
+    + '%0a' + '%0a' + '💼 I need your service!'"
+                                       class="btn btn-primary">
+                                        Message on Whatsapp
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -358,6 +369,7 @@
                                                 <tr>
                                                     <th>Service Name</th>
                                                     <th>Servcie Fee</th>
+
 
                                                 </tr>
                                             </thead>

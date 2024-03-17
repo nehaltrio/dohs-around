@@ -19,32 +19,38 @@
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="#" class="brand">
-        <i class='bx bxs-cart-alt' ></i>
+        <i class='bx bxs-cart-alt'></i>
         <span class="text" th:text="${shop.getShopName()}"></span>
     </a>
     <ul class="side-menu top">
-        <li >
-            <a th:href="@{/dashboard}">
+        <li>
+            <a th:href="@{/admin/dashboard}">
                 <i class='bx bxs-dashboard'></i>
                 <span class="text">Dashboard</span>
             </a>
         </li>
-        <li class="active">
-            <a th:href="@{/products/0}">
-                <i class='bx bxs-shopping-bag-alt'></i>
+        <li>
+            <a th:href="@{/admin/products/0}">
+                <i class='bx bxs-package'></i>
                 <span class="text">Products</span>
             </a>
         </li>
         <li>
-            <a th:href="@{/categories}">
-                <i class='bx bxs-doughnut-chart'></i>
+            <a th:href="@{/admin/categories}">
+                <i class='bx bxs-layout'></i>
                 <span class="text">Categories</span>
             </a>
         </li>
         <li>
-            <a th:href="@{/OrderList}">
-                <i class='bx bxs-message-dots'></i>
+            <a th:href="@{/admin/OrderList}">
+                <i class='bx bxs-basket'></i>
                 <span class="text">Orders</span>
+            </a>
+        </li>
+        <li class="active">
+            <a th:href="@{/admin/update-shop/{shopName} (shopName = ${shop.getShopName()})}">
+                <i class='bx bxs-edit'></i>
+                <span class="text">Update Shop</span>
             </a>
         </li>
     </ul>
@@ -56,6 +62,8 @@
             </a>
         </li>
     </ul>
+
+
 </section>
 <!-- SIDEBAR -->
 
@@ -71,7 +79,7 @@
         <a href="#" class="profile">
             <img th:src="@{/images/1.png}" alt="profile_img">
         </a>
-        <p th:text="${shop.getFirstName()} + ' ' + ${shop.getLastName()}"></p>
+        <p th:text="${shop.getFirstName()}"></p>
 
 
     </nav>
@@ -98,7 +106,7 @@
         <div class="formbold-main-wrapper">
 
             <div class="update_form">
-                <form  th:action="@{/update-product/{id} (id = ${productDto.id})}" method="post" enctype="multipart/form-data" th:object = "${productDto}">
+                <form  th:action="@{/admin/update-product/{id} (id = ${productDto.id})}" method="post" enctype="multipart/form-data" th:object = "${productDto}">
                     <div class="formbold-input-flex">
                         <div>
                             <input type="text" th:field = "*{name}" name="product_name" id="product_name" placeholder="Product Name"
@@ -209,7 +217,66 @@
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const darkModeCheckbox = document.getElementById('switch-mode');
+        const body = document.body;
 
+        // Check if the user has a preference stored in local storage
+        const darkMode = localStorage.getItem('darkMode');
+
+        // Function to enable dark mode
+        function enableDarkMode() {
+            body.classList.add('dark');
+            darkModeCheckbox.checked = true;
+            localStorage.setItem('darkMode', 'enabled');
+        }
+
+        // Function to disable dark mode
+        function disableDarkMode() {
+            body.classList.remove('dark');
+            darkModeCheckbox.checked = false;
+            localStorage.setItem('darkMode', 'disabled');
+        }
+
+        // Toggle dark mode based on the user's preference
+        if (darkMode === 'enabled') {
+            enableDarkMode();
+        }
+
+        // Set the initial state of the checkbox
+        darkModeCheckbox.checked = body.classList.contains('dark');
+
+        // Event listener for the dark mode checkbox change
+        darkModeCheckbox.addEventListener('change', function () {
+            if (darkModeCheckbox.checked) {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        });
+    });
+</script>
+
+<script>
+    // Function to check screen size and add/remove the "hide" class
+    function updateVisibility() {
+        const sidebar = document.getElementById('sidebar');
+        const isSmallScreen = window.innerWidth <= 768; // Adjust the breakpoint as needed
+
+        if (isSmallScreen) {
+            sidebar.classList.add('hide');
+        } else {
+            sidebar.classList.remove('hide');
+        }
+    }
+
+    // Initial check on page load
+    document.addEventListener('DOMContentLoaded', updateVisibility);
+
+    // Check on window resize
+    window.addEventListener('resize', updateVisibility);
+</script>
 
 <script th:src="@{/js/script_main.js}"></script>
 </body>

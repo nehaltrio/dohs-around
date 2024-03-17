@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text=" ${shopN}"></title>
 
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -38,13 +38,10 @@
         }
 
 
-
-
         .home .content h3 {
 
             font-size: 3rem;
         }
-
 
 
         .home .content p {
@@ -88,8 +85,8 @@
             margin-left: -8px;
         }
 
-        .gutters-sm>.col,
-        .gutters-sm>[class*=col-] {
+        .gutters-sm > .col,
+        .gutters-sm > [class*=col-] {
             padding-right: 8px;
             padding-left: 8px;
         }
@@ -124,10 +121,10 @@
             font-size: 1.5rem;
         }
 
-       .section_doc ul{
-           margin-left: 5%;
-           font-size: 12px;
-       }
+        .section_doc ul {
+            margin-left: 5%;
+            font-size: 12px;
+        }
 
         .text-secondary {
             font-size: 1.5rem;
@@ -160,213 +157,224 @@
         .section_doc p {
             text-align: justify;
         }
+
+        a{
+            text-decoration: none;
+        }
     </style>
 
 
 </head>
 
 <body>
-    <div th:data="${theme}" id="primaryColor" class="d-none"></div>
-    <!-- header section starts  -->
+<div th:data="${theme}" id="primaryColor" class="d-none"></div>
+<!-- header section starts  -->
 
-    <header class="header">
+<header class="header">
 
-        <a th:href="@{/{shopName}/products/0 (shopName = ${shopN})}" class="logo"> <i
-                class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
+    <a th:href="@{/{shopName}/products/0 (shopName = ${shopN})}" class="logo"> <i
+            class="fas fa-shopping-basket"></i> <span th:text=" ${shopN}"></span> </a>
 
-        <nav class="navbar">
-            <a href="#home">home</a>
-            <a th:href="@{/all_shop}">Marketplaces</a>
-            <a th:href="@{/products/0}">Freelist</a>
-            <a href="#">Contact</a>
-        </nav>
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a th:href="@{/all_shop}">Marketplaces</a>
+        <a th:href="@{/products/0}">Freelist</a>
+        <a href="#">Contact</a>
+    </nav>
 
-        <div class="icons">
-            <div class="fas fa-bars" id="menu-btn"></div>
-            <div class="fas fa-search" id="search-btn"></div>
-            <div class="fas fa-shopping-cart" id="cart-btn"></div>
-            <div class="fas fa-user" id="login-btn"></div>
-        </div>
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-user" id="login-btn"></div>
+    </div>
 
-        <form th:action="@{/{shopName}/search-result/0 (shopName=${shopN})}" method="get" class="search-form">
-            <input type="text" id="search-box" name="keyword" placeholder="search here...">
-            <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
-        </form>
+    <form th:action="@{/{shopName}/search-result/0 (shopName=${shopN})}" method="get" class="search-form">
+        <input type="text" id="search-box" name="keyword" placeholder="search here...">
+        <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
+    </form>
 
-        <div class="shopping-cart" th:if="${shoppingCart!=null}">
-            <form th:action="@{/update-cart}" method="post">
-                <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
-                    <input type="hidden" name="id" th:value="${cartItem.product.id}">
-                    <button type="submit" name="action" value="delete" style="background: none"><i
-                            class="fas fa-trash"></i>
-                    </button>
-                    <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
-                        alt="product_image">
-                    <div class="content">
-                        <h3 th:text="${cartItem.product.name}"></h3>
-                        <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
-                        <span class="quantity" th:text="${cartItem.quantity}"></span>
-                    </div>
-                </div>
-            </form>
-
-            <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
-            <a th:href="@{/cart}" class="btn">checkout</a>
-        </div>
-
-        <form th:action="@{/do-login}" th:if="${principal == null or customer == null} " method="post"
-            class="login-form">
-            <h3>login now</h3>
-            <input type="email" placeholder="your email" name="username" class="box">
-            <input type="password" placeholder="your password" name="password" class="box">
-            <p>forget your password <a href="#">click here</a></p>
-            <p>don't have an account <a th:href="@{/register}">create now</a></p>
-            <input type="submit" value="login now" class="btn">
-        </form>
-
-        <div class="login-form" th:if="${principal != null and customer != null}">
-
-            <div class="head_content" style="text-align: left;">
-                <img th:src="@{/images/profile.png}" alt="" class="profile-image">
-                <div class="name_cont">
-                    <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
-                    <p th:text="${customer.getUsername()}"></p>
+    <div class="shopping-cart" th:if="${shoppingCart!=null}">
+        <form th:action="@{/update-cart}" method="post">
+            <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
+                <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                <button type="submit" name="action" value="delete" style="background: none"><i
+                        class="fas fa-trash"></i>
+                </button>
+                <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                     alt="product_image">
+                <div class="content">
+                    <h3 th:text="${cartItem.product.name}"></h3>
+                    <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
+                    <span class="quantity" th:text="${cartItem.quantity}"></span>
                 </div>
             </div>
+        </form>
 
-            <div class="middle-container">
-                <div class="dollar-div">
-                    <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
-                </div>
-                <div class="contact_cont">
-                    <span class="current-balance">Contact Number</span>
-                    <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
-                </div>
-                <div class="recent-border" style="text-align: left;">
-                    <span class="recent-orders" th:text="${customer.getAddress()}"></span>
-                </div>
-                <div class="wishlist-border" style="text-align: left;">
-                    <a th:href="@{/account}">
-                        <h3 class="box">Update Account Details</h3>
-                    </a>
-                </div>
+        <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
+        <a th:href="@{/cart}" class="btn">checkout</a>
+    </div>
 
-                <div class="wishlist-border" style="text-align: left;">
-                    <a th:href="@{/customerProductList}">
-                        <h3 class="box">Uploaded Ads</h3>
-                    </a>
-                </div>
+    <form th:action="@{/do-login}" th:if="${principal == null or customer == null} " method="post"
+          class="login-form">
+        <h3>login now</h3>
+        <input type="email" placeholder="your email" name="username" class="box">
+        <input type="password" placeholder="your password" name="password" class="box">
+        <p>forget your password <a href="#">click here</a></p>
+        <p>don't have an account <a th:href="@{/register}">create now</a></p>
+        <input type="submit" value="login now" class="btn">
+    </form>
 
-                <a th:href="@{/logout}" class="btn">Log out</a>
+    <div class="login-form" th:if="${principal != null and customer != null}">
 
+        <div class="head_content" style="text-align: left;">
+            <img th:src="@{/images/profile.png}" alt="" class="profile-image">
+            <div class="name_cont">
+                <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
+                <p th:text="${customer.getUsername()}"></p>
+            </div>
+        </div>
+
+        <div class="middle-container">
+            <div class="dollar-div">
+                <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+            </div>
+            <div class="contact_cont">
+                <span class="current-balance">Contact Number</span>
+                <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+            </div>
+            <div class="recent-border" style="text-align: left;">
+                <span class="recent-orders" th:text="${customer.getAddress()}"></span>
+            </div>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/account}">
+                    <h3 class="box">Update Account Details</h3>
+                </a>
             </div>
 
-    </header>
+            <div class="wishlist-border" style="text-align: left;">
+                <a th:href="@{/customerProductList}">
+                    <h3 class="box">Uploaded Ads</h3>
+                </a>
+            </div>
+
+            <a th:href="@{/logout}" class="btn">Log out</a>
+
+        </div>
+
+</header>
 
 
-    <div class="container">
-        <div class="main-body">
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center" style="padding: 10px;">
-                                <img th:src="'data:image/jpeg;base64,' + ${shop.image}" alt="Admin"
-                                     class="rounded-circle" width="150">
-                                <div class="mt-3">
-                                    <h4 th:text="${shop.getFirstName()}"></h4>
-                                    <p class="text-secondary mb-1" th:text="${shop.getShopDesc()}">Bio/Designation</p>
-                                    <p class="text-muted font-size-sm" th:text="${shop.getShopAddress()}">Address</p>
-                                    <button class="btn btn-primary">Take Appoinment</button>
+<div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center" style="padding: 10px;">
+                            <img th:src="'data:image/jpeg;base64,' + ${shop.image}" alt="Admin"
+                                 class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4 th:text="${shop.getFirstName()}"></h4>
+                                <p class="text-secondary mb-1" th:text="${shop.getShopDesc()}">Bio/Designation</p>
+                                <p class="text-muted font-size-sm" th:text="${shop.getShopAddress()}">Address</p>
+                                <a th:href="'https://api.whatsapp.com/send?phone=+88' + ${shop.getShopPhone()} + '&text=' + '*' + ${shop.getFirstName()} + '*'  + '%0a' + 'Appointment Details' + '%0a' + '--------------------------------'
+    + '%0a' + 'Patient Name : ' + ${customer.getFirstName() + ' ' + customer.getLastName()}
+    + '%0a' + 'Patient Phone: ' + ${customer.getPhoneNumber()}
+    + '%0a' + '--------------------------------'
+    + '%0a' + '%0a' + '💼 Appointment Confirmation'"
+                                   class="btn btn-primary">
+                                    Take Appointment
+                                </a>
 
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="card mt-3">
-                        <ul class="list-group list-group-flush">
+                </div>
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 pos"><i class="fab fa-whatsapp mr-2"
-                                        style="font-size: 25px; width: 25px; color: #3c91e6;"></i>Whatsapp
-                                </h6>
-                                <span class="text-secondary" th:text="${shop.getShopPhone()}"></span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 pos"><i class="fab fa-facebook-f mr-2"
-                                        style="font-size: 25px;width: 25px;color: #3c91e6;"></i>Facebook
-                                </h6>
-                                <span class="text-secondary" th:text="${shop.getShopFbURL()}"></span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 pos"><i class="fab fa-instagram mr-2"
-                                        style="font-size: 25px;width: 25px;color: #3c91e6;"></i>Instagram
-                                </h6>
-                                <span class="text-secondary" th:text="${shop.getShopInstaURL()}"></span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 pos"><i class="fa fa-location-arrow mr-2"
-                                        style="font-size: 22px;width: 25px;color: #3c91e6;"></i>Google Map
-                                </h6>
-                                <span class="text-secondary" th:text="${shop.getShopGmapURL()}"></span>
-                            </li>
-                        </ul>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0 pos"><i class="fab fa-whatsapp mr-2"
+                                                    style="font-size: 25px; width: 25px; color: #3c91e6;"></i>Whatsapp
+                            </h6>
+                            <span class="text-secondary" th:text="${shop.getShopPhone()}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0 pos"><i class="fab fa-facebook-f mr-2"
+                                                    style="font-size: 25px;width: 25px;color: #3c91e6;"></i>Facebook
+                            </h6>
+                            <span class="text-secondary" th:text="${shop.getShopFbURL()}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0 pos"><i class="fab fa-instagram mr-2"
+                                                    style="font-size: 25px;width: 25px;color: #3c91e6;"></i>Instagram
+                            </h6>
+                            <span class="text-secondary" th:text="${shop.getShopInstaURL()}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0 pos"><i class="fa fa-location-arrow mr-2"
+                                                    style="font-size: 22px;width: 25px;color: #3c91e6;"></i>Google Map
+                            </h6>
+                            <span class="text-secondary" th:text="${shop.getShopGmapURL()}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3" style="padding: 10px;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span th:text="${shop.getFirstName()}"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span th:text="${shop.getUsername()}"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span th:text="${shop.getShopPhone()}"></span>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Address</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <span th:text="${shop.getShopAddress()}"></span>
+                            </div>
+                        </div>
+                        <hr>
+
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="card mb-3" style="padding: 10px;">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <span th:text="${shop.getFirstName()}"></span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <span th:text="${shop.getUsername()}"></span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <span th:text="${shop.getShopPhone()}"></span>
-                                </div>
-                            </div>
-                            <hr>
 
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <span th:text="${shop.getShopAddress()}"></span>
-                                </div>
-                            </div>
-                            <hr>
+                <div class="row gutters-sm">
 
-                        </div>
-                    </div>
-
-                    <div class="row gutters-sm">
-
-                        <div class="col-sm-12 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <div class="sevice" style="padding: 10px;">
-                                        <div class="section_doc" th:each="service : ${services}">
-                                            <h1 th:text="${service.serviceName}"></h1>
-                                            <p th:utext="${service.description}"></p>
-                                        </div>
+                    <div class="col-sm-12 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="sevice" style="padding: 10px;">
+                                    <div class="section_doc" th:each="service : ${services}">
+                                        <h1 th:text="${service.serviceName}"></h1>
+                                        <p th:utext="${service.description}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -374,89 +382,87 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3><span th:text="${shop.getShopName()}"></span> <i class="fas fa-shopping-basket"></i></h3>
+            <p th:text="${shop.getShopDesc()}"></p>
+            <div class="share">
+                <a th:if="${shop.getShopFbURL()} != null" th:href="@{${shop.getShopFbURL()}}"
+                   class="fab fa-facebook-f"></a>
+                <a th:if="${shop.getShopInstaURL()} != null" th:href="@{${shop.getShopInstaURL()}}"
+                   class="fab fa-instagram"></a>
+                <a th:if="${shop.getShopGmapURL()} != null" th:href="@{${shop.getShopGmapURL()}}"
+                   class="fa fa-location-arrow" aria-hidden="true"></a>
+
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a th:if="${shop.getShopPhone()} != null" href="#" class="links"> <i class="fas fa-phone"></i> <span
+                    th:text="${shop.getShopPhone()}"></span> </a>
+            <a href="#" class="links"> <i class="fas fa-envelope"></i> <span th:text="${shop.getUsername()}"></span>
+            </a>
+            <a th:if="${shop.getShopAddress()} != null" href="#" class="links"> <i
+                    class="fas fa-map-marker-alt"></i> <span th:text="${shop.getShopAddress()}"></span> </a>
+        </div>
+
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+            <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
+            <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
+        </div>
+
+        <div class="box">
+            <img th:src="@{/images/logo.png}" width="300px" alt="">
+            <p>Contact us to build your shop!</p>
+            <input type="email" placeholder="Your email" class="email">
+            <input type="submit" value="Contact" class="btn">
 
         </div>
+
     </div>
 
-    <!-- footer section starts  -->
 
-    <section class="footer">
-
-        <div class="box-container">
-
-            <div class="box">
-                <h3> <span th:text="${shop.getShopName()}"></span> <i class="fas fa-shopping-basket"></i></h3>
-                <p th:text="${shop.getShopDesc()}"></p>
-                <div class="share">
-                    <a th:if="${shop.getShopFbURL()} != null" th:href="@{${shop.getShopFbURL()}}"
-                        class="fab fa-facebook-f"></a>
-                    <a th:if="${shop.getShopInstaURL()} != null" th:href="@{${shop.getShopInstaURL()}}"
-                        class="fab fa-instagram"></a>
-                    <a th:if="${shop.getShopGmapURL()} != null" th:href="@{${shop.getShopGmapURL()}}"
-                        class="fa fa-location-arrow" aria-hidden="true"></a>
-
-                </div>
-            </div>
-
-            <div class="box">
-                <h3>contact info</h3>
-                <a th:if="${shop.getShopPhone()} != null" href="#" class="links"> <i class="fas fa-phone"></i> <span
-                        th:text="${shop.getShopPhone()}"></span> </a>
-                <a href="#" class="links"> <i class="fas fa-envelope"></i> <span th:text="${shop.getUsername()}"></span>
-                </a>
-                <a th:if="${shop.getShopAddress()} != null" href="#" class="links"> <i
-                        class="fas fa-map-marker-alt"></i> <span th:text="${shop.getShopAddress()}"></span> </a>
-            </div>
+</section>
 
 
+<!-- Text color change according to background -->
 
-            <div class="box">
-                <h3>quick links</h3>
-                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
-                <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
-                <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
-                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
-            </div>
+<script>
+    let contrast = new Contrast({
+        // Set to true if you want to prebuild light/dark colors
+        isCustomColors: true,
+        // dark color HEX if isCustomColors is set to true
+        customLight: "#ffffff",
+        // light color HEX if isCustomColors is set to true
+        customDark: "#000000",
+    });
+    contrast.launch();
+</script>
 
-            <div class="box">
-                <img th:src="@{/images/logo.png}" width="300px" alt="">
-                <p>Contact us to build your shop!</p>
-                <input type="email" placeholder="Your email" class="email">
-                <input type="submit" value="Contact" class="btn">
+<!-- custom js file link  -->
+<script th:src="@{/js/script.js}"></script>
 
-            </div>
+<script>
+    var primaryColor = document.getElementById("primaryColor").getAttribute("data");
 
-        </div>
+    document.documentElement.style.setProperty('--orange', primaryColor);
 
-
-
-    </section>
-
-
-
-    <!-- Text color change according to background -->
-
-    <script>
-        let contrast = new Contrast({
-            // Set to true if you want to prebuild light/dark colors
-            isCustomColors: true,
-            // dark color HEX if isCustomColors is set to true
-            customLight: "#ffffff",
-            // light color HEX if isCustomColors is set to true
-            customDark: "#000000",
-        });
-        contrast.launch();
-    </script>
-
-    <!-- custom js file link  -->
-    <script th:src="@{/js/script.js}"></script>
-
-    <script>
-        var primaryColor = document.getElementById("primaryColor").getAttribute("data");
-
-        document.documentElement.style.setProperty('--orange', primaryColor);
-
-    </script>
+</script>
 
 </body>
 

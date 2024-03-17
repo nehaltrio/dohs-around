@@ -96,6 +96,10 @@ public class CustomerProductController {
             return "marketplace_main_service_elect_plum";
         }else if (shop.getShopCategory().equals(ShopCategories.Doctors_and_chambers.toString())) {
             return "marketplace_main_service_doctor";
+        }else if (shop.getShopCategory().equals(ShopCategories.Retailer.toString())){
+            return "marketplace_main";
+        } else if (shop.getShopCategory().equals(ShopCategories.Fashion_and_Clothing.toString())) {
+            return "marketplace_main";
         }
 
         return "marketplace_main";

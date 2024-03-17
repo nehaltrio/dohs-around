@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace | ShopName</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -18,7 +18,6 @@
 
     <!-- custom css file link  -->
     <link rel="stylesheet" th:href="@{/css/cart_main.css}">
-
 
 
     <style>
@@ -42,292 +41,296 @@
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
             vertical-align: middle;
         }
-        
+
     </style>
 
 </head>
 
 <body>
 
-    <!-- header section starts  -->
+<!-- header section starts  -->
 
-    <header class="header">
+<header class="header">
 
-        <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span>DOHS Around</span> </a>
+    <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> <span>DOHS Around</span> </a>
 
-        <nav class="navbar">
-            <a href="#home">home</a>
-            <a th:href="@{/all_shop}">Marketplaces</a>
-            <a th:href="@{/products/0}">Freelist</a>
-            <a href="#">Contact</a>
-        </nav>
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a th:href="@{/all_shop}">Marketplaces</a>
+        <a th:href="@{/products/0}">Freelist</a>
+        <a href="#">Contact</a>
+    </nav>
 
-        <div class="icons">
-            <div class="fas fa-bars" id="menu-btn"></div>
-            <a th:href="@{/post_add}">
-                <div class="fas fa-plus" id="list-btn"></div>
+    <div class="icons">
+        <div class="fas fa-bars" id="menu-btn"></div>
+        <a th:href="@{/post_add}">
+            <div class="fas fa-plus" id="list-btn"></div>
+        </a>
+        <div class="fas fa-search" id="search-btn"></div>
+        <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        <div class="fas fa-user" id="login-btn"></div>
+    </div>
+
+    <form th:action="@{/search-result/0}" method="get" class="search-form">
+        <input type="text" id="search-box" name="keyword" placeholder="search here...">
+        <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
+    </form>
+
+    <div class="shopping-cart" th:if="${shoppingCart!=null}">
+        <form th:action="@{/update-cart}" method="post">
+            <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
+                <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                <button type="submit" name="action" value="delete" style="background: none"><i
+                        class="fas fa-trash"></i>
+                </button>
+
+                <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                     alt="product_image">
+                <div class="content">
+                    <h3 th:text="${cartItem.product.name}"></h3>
+                    <span class="price" th:text="'BDT' + ${cartItem.product.costPrice}"></span>
+                    <span class="quantity" th:text="${cartItem.quantity}"></span>
+                </div>
+            </div>
+        </form>
+
+        <div class="total" th:text=" 'BDT' + ${shoppingCart.getTotalPrices()}"></div>
+        <a th:href="@{/cart}" class="btn">checkout</a>
+    </div>
+
+    <form th:action="@{/do-login}" th:if="${principal == null or customer == null} " method="post" class="login-form">
+        <h3>login now</h3>
+        <input type="email" placeholder="your email" name="username" class="box">
+        <input type="password" placeholder="your password" name="password" class="box">
+        <p>forget your password <a href="#">click here</a></p>
+        <p>don't have an account <a th:href="@{/register}">create now</a></p>
+        <input type="submit" value="login now" class="btn">
+    </form>
+
+    <div class="login-form" th:if="${principal != null and customer != null}">
+
+        <div class="head_content" style="text-align: left;">
+            <img th:src="@{/images/profile.png}" alt="" class="profile-image">
+            <div class="name_cont">
+                <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
+                <p th:text="${customer.getUsername()}"></p>
+            </div>
+        </div>
+
+        <div class="middle-container">
+            <div class="dollar-div">
+                <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
+            </div>
+            <div class="contact_cont">
+                <span class="current-balance">Contact Number</span>
+                <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
+            </div>
+        </div>
+        <div class="recent-border" style="text-align: left;">
+            <span class="recent-orders" th:text="${customer.getAddress()}"></span>
+        </div>
+        <div class="wishlist-border" style="text-align: left;">
+            <a th:href="@{/account}">
+                <h3 class="box">Update Account Details</h3>
             </a>
-            <div class="fas fa-search" id="search-btn"></div>
-            <div class="fas fa-shopping-cart" id="cart-btn"></div>
-            <div class="fas fa-user" id="login-btn"></div>
         </div>
 
-        <form th:action="@{/search-result/0}" method="get" class="search-form">
-            <input type="text" id="search-box" name="keyword" placeholder="search here...">
-            <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
-        </form>
-
-        <div class="shopping-cart" th:if="${shoppingCart!=null}">
-            <form th:action="@{/update-cart}" method="post">
-                <div class="box" th:each="cartItem : ${shoppingCart.cartItem}">
-                    <input type="hidden" name="id" th:value="${cartItem.product.id}">
-                    <button type="submit" name="action" value="delete" style="background: none"><i
-                            class="fas fa-trash"></i>
-                    </button>
-
-                    <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
-                        alt="product_image">
-                    <div class="content">
-                        <h3 th:text="${cartItem.product.name}"></h3>
-                        <span class="price" th:text="'$' + ${cartItem.product.costPrice}"></span>
-                        <span class="quantity" th:text="${cartItem.quantity}"></span>
-                    </div>
-                </div>
-            </form>
-
-            <div class="total" th:text=" '$' + ${shoppingCart.getTotalPrices()}"></div>
-            <a th:href="@{/cart}" class="btn">checkout</a>
+        <div class="wishlist-border" style="text-align: left;">
+            <a th:href="@{/customerProductList}">
+                <h3 class="box">Uploaded Ads</h3>
+            </a>
         </div>
 
-        <form th:action="@{/do-login}" th:if="${principal == null or customer == null} " method="post" class="login-form">
-            <h3>login now</h3>
-            <input type="email" placeholder="your email" name="username" class="box">
-            <input type="password" placeholder="your password" name="password" class="box">
-            <p>forget your password <a href="#">click here</a></p>
-            <p>don't have an account <a th:href="@{/register}">create now</a></p>
-            <input type="submit" value="login now" class="btn">
-        </form>
+        <a th:href="@{/logout}" class="btn">Log out</a>
 
-        <div class="login-form" th:if="${principal != null and customer != null}">
+    </div>
 
-            <div class="head_content" style="text-align: left;">
-                <img th:src="@{/images/profile.png}" alt="" class="profile-image">
-                <div class="name_cont">
-                    <h5 th:text="${customer.getFirstName()+' '+customer.getLastName()}"></h5>
-                    <p th:text="${customer.getUsername()}"></p>
-                </div>
-            </div>
+</header>
 
-            <div class="middle-container">
-                <div class="dollar-div">
-                    <div class="round-div"><i class="fa fa-phone" aria-hidden="true"></i></div>
-                </div>
-                <div class="contact_cont">
-                    <span class="current-balance">Contact Number</span>
-                    <span class="amount" th:text="${customer.getPhoneNumber()}"></span>
-                </div>
-            </div>
-            <div class="recent-border" style="text-align: left;">
-                <span class="recent-orders" th:text="${customer.getAddress()}"></span>
-            </div>
-            <div class="wishlist-border" style="text-align: left;">
-                <a th:href="@{/account}">
-                    <h3 class="box">Update Account Details</h3>
-                </a>
-            </div>
+<!-- header section ends -->
 
-            <div class="wishlist-border" style="text-align: left;">
-                <a th:href="@{/customerProductList}">
-                    <h3 class="box">Uploaded Ads</h3>
-                </a>
-            </div>
+<!-- home section starts  -->
 
-            <a th:href="@{/logout}" class="btn">Log out</a>
+<div class="mar" style="margin-top: 8%;"></div>
 
+<div class="container px-3 my-5 clearfix">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Shopping Cart</h2>
         </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered m-0">
+                    <thead>
+                    <tr>
+                        <!-- Set columns width -->
+                        <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details
+                        </th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">Price</th>
+                        <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                        <th class="text-center py-3 px-4" style="width: 120px;">Update</th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">Total</th>
+                        <th class="text-center py-3 px-4" style="width: 100px;">Contact Seller</th>
+                        <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#"
+                                                                                               class="shop-tooltip float-none text-light"
+                                                                                               title=""
+                                                                                               data-original-title="Clear cart"><i
+                                class="ino ion-md-trash"></i></a></th>
+                    </tr>
+                    </thead>
 
-    </header>
 
-    <!-- header section ends -->
+                    <tbody th:if="${shoppingCart!=null}">
 
-    <!-- home section starts  -->
+                    <tr th:each="cartItem : ${shoppingCart.cartItem}">
+                        <td class="p-4">
+                            <div class="media align-items-center">
 
-    <div class="mar" style="margin-top: 8%;"></div>
+                                <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
+                                     class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                                <div class="media-body">
+                                    <a th:href="@{/find-product/{id}(id = ${cartItem.product.id})}"
+                                       data-toggle="tooltip"
+                                       data-placement="right" class="d-block text-dark">
+                                        <p th:text="${cartItem.product.name}"></p>
+                                    </a>
+                                    <small>
+                                        <span class="text-muted">Seller: </span>
+                                        <span class="text-muted"
+                                              th:text="${cartItem.product.getShop().getShopName()}"> </span>
+                                    </small>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center font-weight-semibold align-middle p-4">
+                            <p th:text="'BDT ' + ${cartItem.product.costPrice}"></p>
+                        </td>
+                        <form th:action="@{/update-cart}" method="post">
+                            <input type="hidden" name="id" th:value="${cartItem.product.id}">
+                            <td class="align-middle p-4"><input class="form-control text-center" type="number"
+                                                                size="4" th:value="${cartItem.quantity}" name="quantity"
+                                                                min="0" step="1">
+                            </td>
+                            <td class="text-center font-weight-semibold align-middle p-4">
+                                <button
+                                        type="submit" name="action" value="update" title="Update"
+                                        class="btn btn-primary">Update
+                                </button>
+                            </td>
+                            <td class="text-center font-weight-semibold align-middle p-4">
+                                <p th:text="'BDT' + ${cartItem.totalPrice}"></p>
+                            </td>
+                            <td class="text-center font-weight-semibold align-middle p-4">
+                                <a th:href="'https://api.whatsapp.com/send?phone=+88' + ${cartItem.product.getShop().getShopPhone()}  + '&text=' + '**'+ ${cartItem.product.getShop().getShopName()} + '**' + '%0a'  + '%0a' + '--------------------------------'
+    + '%0a' + '➭ '+ ${cartItem.getQuantity()} +' X ' + ${cartItem.product.name} + ' = ৳' + ${cartItem.product.getCostPrice()} + '.00'
+    + '%0a' + '%0a' + 'Total:          ৳' + ${cartItem.totalPrice} + '.00'
+    + '%0a' + '%0a' + '🏡 Customer Details :'
+    + '%0a' + 'Name : ' + ${customer.getFirstName() + ' ' + customer.getLastName()}
+    + '%0a' + 'Mobile no : ' + ${customer.getPhoneNumber()}
 
-    <div class="container px-3 my-5 clearfix">
-        <!-- Shopping cart table -->
-        <div class="card">
-            <div class="card-header">
-                <h2>Shopping Cart</h2>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered m-0">
-                        <thead>
-                            <tr>
-                                <!-- Set columns width -->
-                                <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details
-                                </th>
-                                <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
-                                <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
-                                <th class="text-center py-3 px-4" style="width: 120px;">Update</th>
-                                <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
-                                <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#"
-                                        class="shop-tooltip float-none text-light" title=""
-                                        data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
-                            </tr>
-                        </thead>
 
-                       
+    + '%0a' + '--------------------------------'"
+                                   class="btn btn-primary">
+                                    Send Whatsapp
+                                </a>
 
-                        <tbody th:if="${shoppingCart!=null}">
+                            </td>
+                            <td class="text-center align-middle px-0">
+                                <!-- <a href="#"
+                                    class="shop-tooltip close float-none text-danger" title=""
+                                    data-original-title="Remove">×</a>
+                                 -->
 
-                            <tr th:each="cartItem : ${shoppingCart.cartItem}">
-                                <td class="p-4">
-                                    <div class="media align-items-center">
-                                        
-                                        <img th:src="'data:image/jpeg;base64,' + ${cartItem.product.listOfAttachedFiles.get(0).getFile()}"
-                                            class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                        <div class="media-body">
-                                            <a th:href="@{/find-product/{id}(id = ${cartItem.product.id})}" data-toggle="tooltip"
-                                            data-placement="right" class="d-block text-dark">
-                                                <p th:text="${cartItem.product.name}"></p>
-                                            </a>
-                                            <small>
-                                                <span class="text-muted">Seller: </span> 
-                                                <span class="text-muted" th:text="${cartItem.product.getShop().getShopName()}"> </span> 
-                                            </small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">
-                                    <p th:text="'BDT ' + ${cartItem.product.costPrice}"></p>
-                                </td>
-                                <form th:action="@{/update-cart}" method="post">
-                                    <input type="hidden" name="id" th:value="${cartItem.product.id}">
-                                    <td class="align-middle p-4"><input class="form-control text-center" type="number"
-                                            size="4" th:value="${cartItem.quantity}" name="quantity" min="0" step="1">
-                                    </td>
-                                    <td class="text-right font-weight-semibold align-middle p-4"> <button 
-                                            type="submit" name="action" value="update" title="Update"
-                                            class="btn btn-primary">Update
-                                        </button> </td>
-                                    <td class="text-right font-weight-semibold align-middle p-4">
-                                        <p th:text="'$' + ${cartItem.totalPrice}"></p>
-                                    </td>
-                                    <td class="text-center align-middle px-0">
-                                        <!-- <a href="#"
-                                            class="shop-tooltip close float-none text-danger" title=""
-                                            data-original-title="Remove">×</a>
-                                         -->
-
-                                        <button type="submit" name="action" value="delete" title="Delete"
+                                <button type="submit" name="action" value="delete" title="Delete"
                                         class="shop-tooltip close float-none text-danger">×
-                                        </button>
-                                    </td>
-                                </form>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </button>
+                            </td>
+                        </form>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- / Shopping cart table -->
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+                <div class="mt-4">
+
                 </div>
-                <!-- / Shopping cart table -->
-
-                <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                    <div class="mt-4">
-
+                <div class="d-flex">
+                    <div class="text-right mt-4 mr-5">
                     </div>
-                    <div class="d-flex">
-                        <div class="text-right mt-4 mr-5">
-                        </div>
-                        <div class="text-right mt-4"  th:if="${shoppingCart!=null}">
-                            <label class="text-muted font-weight-normal m-0">Total price</label>
-                            <div class="text-large" ><strong> <p th:text = " 'BDT ' + ${shoppingCart.getTotalPrices()}"></p></strong></div>
-                        </div>
+                    <div class="text-right mt-4" th:if="${shoppingCart!=null}">
+                        <label class="text-muted font-weight-normal m-0">Total price</label>
+                        <div class="text-large"><strong><p th:text=" 'BDT ' + ${shoppingCart.getTotalPrices()}"></p>
+                        </strong></div>
                     </div>
                 </div>
+            </div>
 
-                <div class="float-right">
-                    <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
-                    <a th:href="@{/request_order}" class="btn btn-lg btn-primary mt-2">Checkout</a>
-                </div>
+            <div class="float-right">
+                <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
+                <a th:href="@{/request_order}" class="btn btn-lg btn-primary mt-2">Checkout</a>
+            </div>
 
+        </div>
+    </div>
+</div>
+
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3> DOHS Around <i class="fas fa-shopping-basket"></i></h3>
+            <p>A place where you can create your own shop.</p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
             </div>
         </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
+            <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
+            <a href="#" class="links"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
+            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
+            <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
+            <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
+            <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
+        </div>
+
+        <div class="box">
+            <img th:src="@{/images/logo.png}" width="300px" alt="">
+            <p>Contact us to build your shop!</p>
+            <input type="email" placeholder="Your email" class="email">
+            <input type="submit" value="Contact" class="btn">
+        </div>
+
     </div>
 
 
+</section>
+
+<!-- footer section ends -->
 
 
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-
-
-
-    <!-- footer section starts  -->
-
-    <section class="footer">
-
-        <div class="box-container">
-
-            <div class="box">
-                <h3> DOHS Around <i class="fas fa-shopping-basket"></i> </h3>
-                <p>A place where you can create your own shop.</p>
-                <div class="share">
-                    <a href="#" class="fab fa-facebook-f"></a>
-                    <a href="#" class="fab fa-twitter"></a>
-                    <a href="#" class="fab fa-instagram"></a>
-                    <a href="#" class="fab fa-linkedin"></a>
-                </div>
-            </div>
-
-            <div class="box">
-                <h3>contact info</h3>
-                <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-                <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-                <a href="#" class="links"> <i class="fas fa-envelope"></i> shaikhanas@gmail.com </a>
-                <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> mumbai, india - 400104 </a>
-            </div>
-
-            <div class="box">
-                <h3>quick links</h3>
-                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> home </a>
-                <a th:href="@{/all_shop}" class="links"> <i class="fas fa-arrow-right"></i> Marketplaces </a>
-                <a th:href="@{/products/0}" class="links"> <i class="fas fa-arrow-right"></i> Freelist </a>
-                <a href="#" class="links"> <i class="fas fa-arrow-right"></i> Contact </a>
-            </div>
-
-            <div class="box">
-                <img th:src="@{/images/logo.png}" width="300px" alt="">
-                <p>Contact us to build your shop!</p>
-                <input type="email" placeholder="Your email" class="email">
-                <input type="submit" value="Contact" class="btn">
-            </div>
-
-        </div>
-
-       
-
-    </section>
-
-    <!-- footer section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
-    <!-- custom js file link  -->
-    <script src="js/script.js"></script>
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
 
 </body>
 
