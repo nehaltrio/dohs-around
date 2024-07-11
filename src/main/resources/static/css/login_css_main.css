@@ -15,7 +15,6 @@ input {
 }
 
 
-
 main {
     width: 100%;
     min-height: 100vh;
@@ -28,15 +27,15 @@ main {
 }
 
 .box {
-    position: relative;
+    position: absolute;
     width: 100%;
     max-width: 1020px;
     height: 640px;
     background-color: #fff;
     border-radius: 3.3rem;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
-    scale: 0.8;
-    margin-top: -2.5%;
+    scale: 1;
+    zoom: 0.8;
 }
 
 .inner-box {
@@ -268,7 +267,7 @@ main.sign-up-mode .carousel {
 }
 
 .text-group {
-   
+
     flex-direction: column;
     text-align: center;
     transform: translateY(0);
@@ -281,7 +280,6 @@ main.sign-up-mode .carousel {
     font-size: 1.6rem;
     color: white
 }
-
 
 
 .bullets {

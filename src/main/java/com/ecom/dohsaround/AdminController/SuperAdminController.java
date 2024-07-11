@@ -25,6 +25,7 @@ import com.ecom.dohsaround.service.ShopService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -282,16 +283,24 @@ public class SuperAdminController {
         return "redirect:/categoriesFreeList";
     }
 
-    @RequestMapping("/create_super")
-    private String createSuperAdmin() {
 
-        if (shopRepository.findByUsername("ahmed@gmail.com") == null) {
+    @GetMapping("/create_super")
+    public String showCreateSuperAdminForm() {
+        if (shopRepository.findByUsername("admin@gmail.com") == null) {
+            return "super_admin_password_reset";
+        }
+        return "redirect:/login";
+    }
+
+    @PostMapping("/create_super")
+    public String createSuperAdmin(@RequestParam("password") String password) {
+        if (shopRepository.findByUsername("admin@gmail.com") == null) {
             Shop shop = new Shop();
             shop.setFirstName("Super");
             shop.setLastName("Admin");
-            shop.setUsername("ahmed@gmail.com");
-            shop.setPassword(passwordEncoder.encode("12345"));
-            shop.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
+            shop.setUsername("admin@gmail.com");
+            shop.setPassword(passwordEncoder.encode(password));
+            shop.setRoles(Collections.singletonList(roleRepository.findByName("ADMIN")));
             shop.setShopName("SUPER");
             shop.setActive(false);
             shop.setShopCategory(null);
@@ -301,12 +310,11 @@ public class SuperAdminController {
 
             System.out.println("superadmin created successfully");
         }
-
         return "redirect:/login";
     }
 
     private boolean validation(Principal principal) {
-        return principal.getName().equals("ahmed@gmail.com");
+        return principal.getName().equals("admin@gmail.com");
     }
 
 }

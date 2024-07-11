@@ -207,7 +207,7 @@ public class ShopController {
     }
 
     private boolean superAdmin(Principal principal) {
-        return principal.getName().equals("ahmed@gmail.com");
+        return principal.getName().equals("admin@gmail.com");
     }
 
 }
