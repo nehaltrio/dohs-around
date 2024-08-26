@@ -194,4 +194,6 @@ public class AdminProductController {
         }
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
+
+
 }
