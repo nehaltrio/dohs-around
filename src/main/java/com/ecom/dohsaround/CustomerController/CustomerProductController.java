@@ -46,17 +46,20 @@ public class CustomerProductController {
     @Autowired
     private ShopRepository shopRepository;
 
-    @GetMapping("/{shopName}/products/{pageNo}")
+    @GetMapping("/products/{pageNo}")
     public String products(Model model, @PathVariable("pageNo") int pageNo,
             Principal principal, HttpServletRequest request) {
 
         String host = request.getServerName();
         String shopName = extractSubdomain(host);
+        System.out.println(shopName);
 
         Shop shop = shopRepository.getAdminByShopName(shopName);
         if (shop == null) {
             return "shopnotexist"; // Or handle this case as appropriate
         }
+        System.out.println(shop.getShopName());
+
         List<CategoryDto> categoryDtoList = categoryService.getCategoryAndProduct(shopName);
 
         
