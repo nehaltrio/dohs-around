@@ -91,7 +91,7 @@ public class FreeListController {
         return "freelistPost";
     }
 
-    @GetMapping("/products/{pageNo}")
+//    @GetMapping("/products/{pageNo}")
     public String showFreeList(Model model, @PathVariable("pageNo") int pageNo, Principal principal) {
         Page<FreeListProductDto> freeListProducts = freeListService.freeListProductPage(pageNo);
 
