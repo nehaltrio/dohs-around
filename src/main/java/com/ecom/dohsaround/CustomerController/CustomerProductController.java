@@ -1,5 +1,6 @@
 package com.ecom.dohsaround.CustomerController;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -47,9 +48,15 @@ public class CustomerProductController {
 
     @GetMapping("/{shopName}/products/{pageNo}")
     public String products(Model model, @PathVariable("pageNo") int pageNo,
-            Principal principal, @PathVariable("shopName") String shopName) {
+            Principal principal, HttpServletRequest request) {
+
+        String host = request.getServerName();
+        String shopName = extractSubdomain(host);
 
         Shop shop = shopRepository.getAdminByShopName(shopName);
+        if (shop == null) {
+            return "shopnotexist"; // Or handle this case as appropriate
+        }
         List<CategoryDto> categoryDtoList = categoryService.getCategoryAndProduct(shopName);
 
         
@@ -105,6 +112,10 @@ public class CustomerProductController {
         return "marketplace_main";
     }
 
+    private String extractSubdomain(String host) {
+        String[] parts = host.split("\\.");
+        return (parts.length > 2) ? parts[0] : null;
+    }
     @GetMapping("{shopName}/search-result/{pageNo}")
     public String SearchProducts(Model model, @PathVariable("pageNo") int pageNo,
             @RequestParam("keyword") String keyword,
